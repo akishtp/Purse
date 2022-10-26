@@ -1,15 +1,31 @@
-.record {
+.record-wrapper-two {
+  display: flex;
   width: clamp(70%, 669px, 98%);
+  margin: 8px 0;
+}
+.record {
+  width: 100%;
   background-color: #303030;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 8px 0;
   padding: 14px 8px;
   color: #cfcfcf;
 }
 .record-left-side {
   display: flex;
+}
+.edit-button,
+.delete-button {
+  padding: 2px 14px;
+  margin: 0 2px;
+  border: none;
+}
+.edit-button {
+  background-color: #f2bbbb;
+}
+.delete-button {
+  background-color: #f67280;
 }
 
 .add-record {

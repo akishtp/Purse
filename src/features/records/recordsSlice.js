@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getRecords } from "./recordsActions";
+import { addRecord, getRecords } from "./recordsActions";
 
 const initialState = {
   records: [],
@@ -29,6 +29,17 @@ const recordSlice = createSlice({
       state.records = payload;
     },
     [getRecords.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+    },
+    [addRecord.pending]: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    [addRecord.fulfilled]: (state) => {
+      state.loading = false;
+    },
+    [addRecord.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
     },

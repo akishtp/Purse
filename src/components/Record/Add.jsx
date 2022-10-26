@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addRecord } from "../../features/records/recordsActions";
 import { closeAddRecord } from "../../features/records/recordsSlice";
@@ -10,8 +10,8 @@ const Add = () => {
   const [time, setTime] = useState("");
   const [calDate, setCalDate] = useState("");
   const [category, setCategory] = useState("");
-  const [payee, setPayee] = useState("");
-  const [note, setNote] = useState("");
+  const [payee, setPayee] = useState();
+  const [note, setNote] = useState();
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {

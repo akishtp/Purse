@@ -37,3 +37,21 @@ export const addRecord = createAsyncThunk(
     }
   }
 );
+
+export const deleteRecord = createAsyncThunk(
+  "record/delete",
+  async (_id, { rejectWithValue }) => {
+    console.log(_id);
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const { data } = await axios.delete(`/api/records/${_id}`, config);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.error);
+    }
+  }
+);
