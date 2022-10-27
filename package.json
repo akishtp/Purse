@@ -1,7 +1,7 @@
 {
   "name": "purse",
   "version": "1.0.0",
-  "proxy": "http://127.0.0.1:6699",
+  "proxy": "https://verlow-server.up.railway.app",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.6",
