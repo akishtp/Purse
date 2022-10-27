@@ -5,7 +5,9 @@ export const getRecords = createAsyncThunk(
   "record/get",
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get("/api/records/");
+      const { data } = await axios.get(
+        "https://verlow-server.up.railway.app/api/records/"
+      );
       // console.log(data);
       return data;
     } catch (error) {
@@ -27,7 +29,7 @@ export const addRecord = createAsyncThunk(
     };
     try {
       const { data } = await axios.post(
-        "/api/records/",
+        "https://verlow-server.up.railway.app/api/records/",
         { type, account, amount, category, date, payee, note },
         config
       );
@@ -48,7 +50,10 @@ export const deleteRecord = createAsyncThunk(
       },
     };
     try {
-      const { data } = await axios.delete(`/api/records/${_id}`, config);
+      const { data } = await axios.delete(
+        `https://verlow-server.up.railway.app/api/records/${_id}`,
+        config
+      );
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.error);
