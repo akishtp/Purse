@@ -11,7 +11,7 @@ export const signup = createAsyncThunk(
     };
     try {
       const { data } = await axios.post(
-        "https://verlow-server.up.railway.app/api/user/signup",
+        "https://cors-anywhere.herokuapp.com/https://verlow-server.up.railway.app/api/user/signup",
         { name, password, email },
         config
       );
@@ -32,7 +32,7 @@ export const login = createAsyncThunk(
     };
     try {
       const { data } = await axios.post(
-        "https://verlow-server.up.railway.app/api/user/login",
+        "https://cors-anywhere.herokuapp.com/https://verlow-server.up.railway.app/api/user/login",
         { name, password },
         config
       );
