@@ -1,6 +1,7 @@
 {
   "name": "purse",
   "version": "1.0.0",
+  "proxy": "https://verlow-purse.vercel.app",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.6",
