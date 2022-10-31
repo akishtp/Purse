@@ -20,7 +20,7 @@ const Records = () => {
           ))}
         </div>
       ) : (
-        <div>no recors to show</div>
+        <div>no records to show</div>
       )}
     </div>
   );
