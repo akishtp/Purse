@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addRecord } from "../../features/records/recordsActions";
 import { closeAddRecord } from "../../features/records/recordsSlice";
+import { SlClose } from "react-icons/sl";
 
 const AddRecord = () => {
   const [type, setType] = useState("Expense");
@@ -26,15 +27,15 @@ const AddRecord = () => {
       <nav className="nav">
         <div className="left-side">Add Record</div>
         <div className="right-side" onClick={() => dispatch(closeAddRecord())}>
-          #
+          <SlClose size={20} />
         </div>
       </nav>
       <form className="form" onSubmit={(e) => handleSubmit(e)}>
         <div className="top">
           <div className="left">
             <div className="type">
-              <div className="expense">Expense</div>
-              <div className="income">Income</div>
+              <div className="expense item">Expense</div>
+              <div className="income item">Income</div>
             </div>
             <div className="account-amount-wrapper">
               <label className="amount-label">

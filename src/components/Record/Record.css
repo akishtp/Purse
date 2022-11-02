@@ -50,6 +50,9 @@
   background-color: #303030;
   padding: 16px;
 }
+.add-record .nav .right-side {
+  color: #cfcfcf;
+}
 .add-record .form {
   display: flex;
   flex-direction: column;
@@ -95,6 +98,9 @@
   font-size: 1.1rem;
   font-weight: 600;
 }
+.add-record .type .item {
+  cursor: pointer;
+}
 .add-record .form .bottom {
   display: flex;
   align-items: center;
@@ -114,4 +120,26 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.amount-label {
+  width: 66%;
+}
+.account-label {
+  width: 33%;
+}
+.date-label,
+.time-label {
+  width: 49%;
+}
+@media (max-width: 669px) {
+  .add-record .form .top {
+    flex-direction: column;
+  }
+  .add-record .form .top .left,
+  .add-record .form .top .right {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0.5rem 2rem;
+  }
 }
