@@ -49,8 +49,6 @@
   justify-content: space-between;
   background-color: #303030;
   padding: 16px;
-}
-.add-record .nav .right-side {
   color: #cfcfcf;
 }
 .add-record .form {
@@ -70,6 +68,9 @@
 }
 .add-record .form .top .left {
   background-image: linear-gradient(69deg, #ed93cb, #ca82f8, #a1d9ff);
+}
+.add-record .form .top .right {
+  color: #cfcfcf;
 }
 .add-record label {
   display: flex;
@@ -92,6 +93,7 @@
   background-color: #303030;
 }
 .add-record .type {
+  padding: 10px 0;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -100,6 +102,10 @@
 }
 .add-record .type .item {
   cursor: pointer;
+}
+.add-record .type .active {
+  color: #cdeff3;
+  background-color: #000;
 }
 .add-record .form .bottom {
   display: flex;

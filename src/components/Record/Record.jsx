@@ -9,7 +9,7 @@ const Record = ({ record }) => {
   const dispatch = useDispatch();
   return (
     <div className="record-wrapper-two">
-      <div className="record">
+      <div className="record" onClick={() => setRecordDD(!recordDD)}>
         <div className="record-left-side">
           <span className="record-category">{record.category}</span>
           <span className="record-account">{record.account}</span>
@@ -20,9 +20,6 @@ const Record = ({ record }) => {
         </div>
         <div className="record-right-side">
           <span className={`record.type ${record.type}`}>{record.amount}</span>
-          <button className="three-dot" onClick={() => setRecordDD(!recordDD)}>
-            ...
-          </button>
         </div>
       </div>
       {recordDD && (

@@ -33,10 +33,14 @@ const AddRecord = () => {
       <form className="form" onSubmit={(e) => handleSubmit(e)}>
         <div className="top">
           <div className="left">
-            <div className="type">
-              <div className="expense item">Expense</div>
-              <div className="income item">Income</div>
-            </div>
+            <nav className="type">
+              <div className={type === "Expense" ? "item active" : "item"}>
+                Expense
+              </div>
+              <div className={type === "Income" ? "item active" : "item"}>
+                Income
+              </div>
+            </nav>
             <div className="account-amount-wrapper">
               <label className="amount-label">
                 Amount :
