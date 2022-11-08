@@ -34,21 +34,35 @@ const AddRecord = () => {
         <div className="top">
           <div className="left">
             <nav className="type">
-              <div className={type === "Expense" ? "item active" : "item"}>
+              <div
+                className={type === "Expense" ? "item active" : "item"}
+                onClick={() => setType("Expense")}
+              >
                 Expense
               </div>
-              <div className={type === "Income" ? "item active" : "item"}>
+              <div
+                className={type === "Income" ? "item active" : "item"}
+                onClick={() => setType("Income")}
+              >
                 Income
               </div>
             </nav>
             <div className="account-amount-wrapper">
               <label className="amount-label">
                 Amount :
-                <input type="number" className="amount" />
+                <input
+                  type="number"
+                  className="amount"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                />
               </label>
               <label className="account-label">
                 Account :
-                <select className="account">
+                <select
+                  className="account"
+                  onChange={(e) => setAccount(e.target.value)}
+                >
                   <option value="option1">Option1</option>
                   <option value="option2">Option2</option>
                 </select>
@@ -57,28 +71,52 @@ const AddRecord = () => {
             <div className="date-time-wrapper">
               <label className="date-label">
                 Date :
-                <input type="date" className="date" />
+                <input
+                  type="date"
+                  className="date"
+                  value={calDate}
+                  onChange={(e) => setCalDate(e.target.value)}
+                />
               </label>
               <label className="time-label">
                 Time :
-                <input type="time" className="time" />
+                <input
+                  type="time"
+                  className="time"
+                  value={time}
+                  onChange={(e) => setTime(e.target.value)}
+                />
               </label>
             </div>
           </div>
           <div className="right">
             <label className="category-label">
               Category :
-              <select className="category">
+              <select
+                className="category"
+                onChange={(e) => setCategory(e.target.value)}
+              >
                 <option value="option1">Option1</option>
                 <option value="option2">Option2</option>
               </select>
             </label>
             <label className="payee-label">
-              Payee : <input type="text" className="payee" />
+              Payee :
+              <input
+                type="text"
+                className="payee"
+                value={payee}
+                onChange={(e) => setPayee(e.target.value)}
+              />
             </label>
             <label className="note-label">
               Note :
-              <input type="text" className="note" />
+              <input
+                type="text"
+                className="note"
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+              />
             </label>
           </div>
         </div>
