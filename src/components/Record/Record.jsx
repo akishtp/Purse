@@ -3,13 +3,17 @@ import "./Record.css";
 import { useState } from "react";
 import { deleteRecord } from "../../features/records/recordsActions";
 import { useDispatch } from "react-redux";
+import Delayed from "../Delayed";
 
 const Record = ({ record }) => {
   const [recordDD, setRecordDD] = useState(false);
   const dispatch = useDispatch();
   return (
     <div className="record-wrapper-two">
-      <div className="record" onClick={() => setRecordDD(!recordDD)}>
+      <div
+        className={recordDD ? "record small" : "record"}
+        onClick={() => setRecordDD(!recordDD)}
+      >
         <div className="record-left-side">
           <span className="record-category">{record.category}</span>
           <span className="record-account">{record.account}</span>
@@ -23,7 +27,7 @@ const Record = ({ record }) => {
         </div>
       </div>
       {recordDD && (
-        <>
+        <Delayed waitBeforeShow={1000}>
           <button className="edit-button">
             <MdIcons.MdEdit size={20} />
           </button>
@@ -33,7 +37,7 @@ const Record = ({ record }) => {
           >
             <MdIcons.MdDelete size={20} />
           </button>
-        </>
+        </Delayed>
       )}
     </div>
   );
