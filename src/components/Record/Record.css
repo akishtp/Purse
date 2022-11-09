@@ -35,7 +35,7 @@
 }
 
 .add-record {
-  width: clamp(80%, 669px, 98%);
+  width: clamp(60%, 669px, 98%);
   display: flex;
   flex-direction: column;
   background-color: #424242;
@@ -97,6 +97,7 @@
 }
 .add-record .right input {
   background-color: #303030;
+  color: #cfcfcf;
 }
 .add-record .type {
   padding: 10px 0;

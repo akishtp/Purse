@@ -5,11 +5,13 @@ import { closeAddRecord } from "../../features/records/recordsSlice";
 import { SlClose } from "react-icons/sl";
 
 const AddRecord = () => {
+  var date = new Date();
+
   const [type, setType] = useState("Expense");
   const [account, setAccount] = useState("");
-  const [amount, setAmount] = useState(0);
-  const [time, setTime] = useState("");
-  const [calDate, setCalDate] = useState("");
+  const [amount, setAmount] = useState("");
+  const [time, setTime] = useState(date.getHours() + ":" + date.getMinutes());
+  const [calDate, setCalDate] = useState(date.toISOString().slice(0, 10));
   const [category, setCategory] = useState("");
   const [payee, setPayee] = useState("");
   const [note, setNote] = useState("");
@@ -19,7 +21,9 @@ const AddRecord = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const date = `${calDate}T${time}:00.000+00:00`;
-    dispatch(addRecord({ type, account, amount, category, date, payee, note }));
+    dispatch(
+      addRecord({ type, account, amount, category, date, payee, note })
+    ).then(dispatch(closeAddRecord()));
   };
 
   return (
