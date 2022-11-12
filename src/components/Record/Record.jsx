@@ -26,7 +26,10 @@ const Record = ({ record }) => {
           )}
         </div>
         <div className="record-right-side">
-          <span className={`record.type ${record.type}`}>{record.amount}</span>
+          <span className={`amount ${record.type}`}>
+            {record.type === "Expense" ? "-" : "+"}
+            {record.amount}
+          </span>
         </div>
       </div>
       {recordDD && (

@@ -6,18 +6,19 @@ import { SlClose } from "react-icons/sl";
 
 const AddRecord = () => {
   var date = new Date();
+  const { records } = useSelector((state) => state.records);
 
   const [type, setType] = useState("Expense");
-  const [account, setAccount] = useState("");
+  const [account, setAccount] = useState(records[0].account);
   const [amount, setAmount] = useState("");
   const [time, setTime] = useState(date.getHours() + ":" + date.getMinutes());
   const [calDate, setCalDate] = useState(date.toISOString().slice(0, 10));
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState(records[0].category);
   const [payee, setPayee] = useState("");
   const [note, setNote] = useState("");
 
   const dispatch = useDispatch();
-  const { error } = useSelector((state) => state.records);
+  const { addError } = useSelector((state) => state.records);
   const { userDetails } = useSelector((state) => state.user);
 
   const handleSubmit = (e) => {
@@ -52,19 +53,20 @@ const AddRecord = () => {
           <div className="left">
             <nav className="type">
               <div
-                className={type === "Expense" ? "item active" : "item"}
+                className={type === "Expense" ? "item expense active" : "item"}
                 onClick={() => setType("Expense")}
               >
                 Expense
               </div>
               <div
-                className={type === "Income" ? "item active" : "item"}
+                className={type === "Income" ? "item income active" : "item"}
                 onClick={() => setType("Income")}
               >
                 Income
               </div>
             </nav>
             <div className="top-left-bottom">
+              {addError}
               <div className="account-amount-wrapper">
                 <label className="amount-label">
                   Amount :
@@ -80,9 +82,10 @@ const AddRecord = () => {
                   <select
                     className="account"
                     onChange={(e) => setAccount(e.target.value)}
+                    value={account}
                   >
-                    <option value="option1">CASH</option>
-                    <option value="option2">SBI</option>
+                    <option value="CASH">CASH</option>
+                    <option value="SBI">SBI</option>
                   </select>
                 </label>
               </div>
@@ -114,9 +117,21 @@ const AddRecord = () => {
               <select
                 className="category"
                 onChange={(e) => setCategory(e.target.value)}
+                value={category}
               >
-                <option value="option1">Groceries</option>
-                <option value="option2">Restaurant</option>
+                <option value="Food & Drinks">Food & Drinks</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Housing">Housing</option>
+                <option value="Transportation">Transportation</option>
+                <option value="Vehicle">Vehicle</option>
+                <option value="Life & Entertainmnet">
+                  Life & Entertainmnet
+                </option>
+                <option value="Electronics">Electronics</option>
+                <option value="Financial Expenses">Financial Expenses</option>
+                <option value="Investment">Investment</option>
+                <option value="Income">Income</option>
+                <option value="Others">Others</option>
               </select>
             </label>
             <label className="payee-label">

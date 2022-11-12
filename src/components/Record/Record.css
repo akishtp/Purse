@@ -124,6 +124,17 @@
 }
 .add-record .type .item.active {
   background-color: #f4cff3;
+  border-inline: 1px solid #000;
+}
+.add-record .type .expense.active {
+  -webkit-box-shadow: 4px 1px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 4px 1px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 4px 1px 5px 0px rgba(0, 0, 0, 0.75);
+}
+.add-record .type .income.active {
+  -webkit-box-shadow: -4px 1px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -4px 1px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: -4px 1px 5px 0px rgba(0, 0, 0, 0.75);
 }
 .add-record .form .bottom {
   display: flex;
@@ -154,6 +165,12 @@
 .date-label,
 .time-label {
   width: 49%;
+}
+.Expense {
+  color: #f00;
+}
+.Income {
+  color: green;
 }
 @media (max-width: 669px) {
   .add-record .form .top {
