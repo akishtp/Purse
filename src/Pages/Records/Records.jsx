@@ -5,12 +5,15 @@ import { getRecords } from "../../features/records/recordsActions";
 import "./Records.css";
 
 const Records = () => {
-  const { records } = useSelector((state) => state.records);
+  const { records, error } = useSelector((state) => state.records);
+  const { userDetails } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getRecords());
-  }, [dispatch, records]);
+    if (userDetails) {
+      dispatch(getRecords(userDetails.token));
+    }
+  }, [dispatch, records, userDetails]);
   return (
     <div className="records">
       {records.length > 0 ? (
@@ -20,7 +23,7 @@ const Records = () => {
           ))}
         </div>
       ) : (
-        <div>no records to show</div>
+        <div>no records to show {error}</div>
       )}
     </div>
   );

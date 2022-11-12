@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addRecord } from "../../features/records/recordsActions";
 import { closeAddRecord } from "../../features/records/recordsSlice";
 import { SlClose } from "react-icons/sl";
@@ -18,12 +18,26 @@ const AddRecord = () => {
 
   const dispatch = useDispatch();
 
+  const { userDetails } = useSelector((state) => state.user);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const date = `${calDate}T${time}:00.000+00:00`;
-    dispatch(
-      addRecord({ type, account, amount, category, date, payee, note })
-    ).then(dispatch(closeAddRecord()));
+    if (userDetails) {
+      const token = userDetails.token;
+      dispatch(
+        addRecord({
+          type,
+          account,
+          amount,
+          category,
+          date,
+          payee,
+          note,
+          token,
+        })
+      ).then(dispatch(closeAddRecord()));
+    }
   };
 
   return (
@@ -51,46 +65,48 @@ const AddRecord = () => {
                 Income
               </div>
             </nav>
-            <div className="account-amount-wrapper">
-              <label className="amount-label">
-                Amount :
-                <input
-                  type="number"
-                  className="amount"
-                  value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
-                />
-              </label>
-              <label className="account-label">
-                Account :
-                <select
-                  className="account"
-                  onChange={(e) => setAccount(e.target.value)}
-                >
-                  <option value="option1">Option1</option>
-                  <option value="option2">Option2</option>
-                </select>
-              </label>
-            </div>
-            <div className="date-time-wrapper">
-              <label className="date-label">
-                Date :
-                <input
-                  type="date"
-                  className="date"
-                  value={calDate}
-                  onChange={(e) => setCalDate(e.target.value)}
-                />
-              </label>
-              <label className="time-label">
-                Time :
-                <input
-                  type="time"
-                  className="time"
-                  value={time}
-                  onChange={(e) => setTime(e.target.value)}
-                />
-              </label>
+            <div className="top-left-bottom">
+              <div className="account-amount-wrapper">
+                <label className="amount-label">
+                  Amount :
+                  <input
+                    type="number"
+                    className="amount"
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                  />
+                </label>
+                <label className="account-label">
+                  Account :
+                  <select
+                    className="account"
+                    onChange={(e) => setAccount(e.target.value)}
+                  >
+                    <option value="option1">Option1</option>
+                    <option value="option2">Option2</option>
+                  </select>
+                </label>
+              </div>
+              <div className="date-time-wrapper">
+                <label className="date-label">
+                  Date :
+                  <input
+                    type="date"
+                    className="date"
+                    value={calDate}
+                    onChange={(e) => setCalDate(e.target.value)}
+                  />
+                </label>
+                <label className="time-label">
+                  Time :
+                  <input
+                    type="time"
+                    className="time"
+                    value={time}
+                    onChange={(e) => setTime(e.target.value)}
+                  />
+                </label>
+              </div>
             </div>
           </div>
           <div className="right">

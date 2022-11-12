@@ -70,13 +70,16 @@
   display: flex;
   flex-direction: column;
   width: 50%;
-  padding: 1rem 4rem;
 }
 .add-record .form .top .left {
   background-image: linear-gradient(69deg, #ed93cb, #ca82f8, #a1d9ff);
 }
 .add-record .form .top .right {
   color: #cfcfcf;
+  padding: 0 4rem;
+}
+.add-record .top-left-bottom {
+  padding: 1rem 4rem;
 }
 .add-record label {
   display: flex;
@@ -100,17 +103,22 @@
   color: #cfcfcf;
 }
 .add-record .type {
-  padding: 10px 0;
   display: flex;
   align-items: center;
   justify-content: space-around;
   font-size: 1.1rem;
   font-weight: 600;
+  width: 100%;
+  border-bottom: 1px solid #000;
 }
 .add-record .type .item {
+  padding: 10px 0;
+  text-align: center;
+  width: 100%;
   cursor: pointer;
+  height: 100%;
 }
-.add-record .type .active {
+.add-record .type .item.active {
   background-color: #f4cff3;
 }
 .add-record .form .bottom {

@@ -3,10 +3,16 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getRecords = createAsyncThunk(
   "record/get",
-  async (_, { rejectWithValue }) => {
+  async (token, { rejectWithValue }) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
     try {
       const { data } = await axios.get(
-        "https://verlow-server.up.railway.app/api/records"
+        "https://verlow-server.up.railway.app/api/records",
+        config
       );
       return data;
     } catch (error) {
@@ -18,12 +24,13 @@ export const getRecords = createAsyncThunk(
 export const addRecord = createAsyncThunk(
   "record/add",
   async (
-    { type, account, amount, category, date, payee, note },
+    { type, account, amount, category, date, payee, note, token },
     { rejectWithValue }
   ) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     };
     try {
@@ -41,10 +48,11 @@ export const addRecord = createAsyncThunk(
 
 export const deleteRecord = createAsyncThunk(
   "record/delete",
-  async (_id, { rejectWithValue }) => {
+  async ({ _id, token }, { rejectWithValue }) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     };
     try {
