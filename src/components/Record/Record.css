@@ -35,7 +35,7 @@
 }
 
 .add-record {
-  width: clamp(60%, 669px, 98%);
+  width: clamp(50%, 669px, 98%);
   display: flex;
   flex-direction: column;
   background-color: #424242;
@@ -48,6 +48,7 @@
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   border: 1px solid #212121;
   border-radius: 2px;
+  min-height: 40%;
 }
 .add-record .nav {
   display: flex;
@@ -76,10 +77,10 @@
 }
 .add-record .form .top .right {
   color: #cfcfcf;
-  padding: 0 4rem;
+  padding: 0 2rem;
 }
 .add-record .top-left-bottom {
-  padding: 1rem 4rem;
+  padding: 1rem 2rem;
 }
 .add-record label {
   display: flex;
@@ -87,7 +88,8 @@
   font-size: 1rem;
   margin: 0.6rem 0;
 }
-.add-record input {
+.add-record input,
+.add-record select {
   height: 40px;
   font-size: large;
   color: #0d0d0d;
@@ -95,10 +97,12 @@
   width: 100%;
   padding: 2px 12px;
 }
-.add-record .left input {
+.add-record .left input,
+.add-record .left select {
   background-color: #f4cff3;
 }
-.add-record .right input {
+.add-record .right input,
+.add-record .right select {
   background-color: #303030;
   color: #cfcfcf;
 }
@@ -160,6 +164,9 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 0.5rem 2rem;
+  }
+  .add-record .form .top .right,
+  .add-record .form .top-left-bottom {
+    padding: 0.5rem 1rem;
   }
 }

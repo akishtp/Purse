@@ -17,7 +17,7 @@ const AddRecord = () => {
   const [note, setNote] = useState("");
 
   const dispatch = useDispatch();
-
+  const { error } = useSelector((state) => state.records);
   const { userDetails } = useSelector((state) => state.user);
 
   const handleSubmit = (e) => {
@@ -36,10 +36,9 @@ const AddRecord = () => {
           note,
           token,
         })
-      ).then(dispatch(closeAddRecord()));
+      );
     }
   };
-
   return (
     <div className="add-record">
       <nav className="nav">
@@ -82,8 +81,8 @@ const AddRecord = () => {
                     className="account"
                     onChange={(e) => setAccount(e.target.value)}
                   >
-                    <option value="option1">Option1</option>
-                    <option value="option2">Option2</option>
+                    <option value="option1">CASH</option>
+                    <option value="option2">SBI</option>
                   </select>
                 </label>
               </div>
@@ -116,8 +115,8 @@ const AddRecord = () => {
                 className="category"
                 onChange={(e) => setCategory(e.target.value)}
               >
-                <option value="option1">Option1</option>
-                <option value="option2">Option2</option>
+                <option value="option1">Groceries</option>
+                <option value="option2">Restaurant</option>
               </select>
             </label>
             <label className="payee-label">
