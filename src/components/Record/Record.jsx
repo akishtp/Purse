@@ -18,11 +18,11 @@ const Record = ({ record }) => {
         onClick={() => setRecordDD(!recordDD)}
       >
         <div className="record-left-side">
-          <span className="record-category">{record.category}</span>
-          <span className="record-account">{record.account}</span>
-          {record.note && <span className="record-note">{record.note}</span>}
+          <span className="record-category"> {record.category} </span>
+          <span className="record-account"> {record.account} </span>
+          {record.note && <span className="record-note"> {record.note} </span>}
           {record.payee && (
-            <span className="record-payee">-{record.payee}</span>
+            <span className="record-payee"> - {record.payee} </span>
           )}
         </div>
         <div className="record-right-side">
