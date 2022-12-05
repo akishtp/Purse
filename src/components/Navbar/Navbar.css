@@ -5,6 +5,7 @@
   align-items: center;
   justify-content: center;
   height: 48px;
+  color: #212121;
 }
 .nav-wrapper {
   width: clamp(70%, 669px, 98%);

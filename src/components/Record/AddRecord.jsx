@@ -37,7 +37,7 @@ const AddRecord = () => {
           note,
           token,
         })
-      );
+      ).then(dispatch(closeAddRecord()));
     }
   };
   return (
@@ -125,10 +125,8 @@ const AddRecord = () => {
                 <option value="Transportation">Transportation</option>
                 <option value="Vehicle">Vehicle</option>
                 <option value="Life & Entertainmnet">
-                  Life & Entertainmnet
+                  Life & Entertainment
                 </option>
-                <option value="Electronics">Electronics</option>
-                <option value="Financial Expenses">Financial Expenses</option>
                 <option value="Investment">Investment</option>
                 <option value="Income">Income</option>
                 <option value="Others">Others</option>

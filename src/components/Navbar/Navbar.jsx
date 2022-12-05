@@ -13,7 +13,7 @@ const Navbar = () => {
       <div className="nav-wrapper">
         <ul className="nav-left-side">
           <li>
-            <Link to="/">Purse</Link>
+            <Link to="/home">Purse</Link>
           </li>
           <li>
             <Link to="records">Records</Link>

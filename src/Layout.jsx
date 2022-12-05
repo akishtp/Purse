@@ -19,14 +19,16 @@ const Layout = () => {
   return (
     <>
       <Navbar />
-      {records && <Outlet />}
+      <Outlet />
       {addRecord && <AddRecord />}
-      <button
-        className="add-records-toggle-button"
-        onClick={() => dispatch(openAddRecord())}
-      >
-        +
-      </button>
+      {records && (
+        <button
+          className="add-records-toggle-button"
+          onClick={() => dispatch(openAddRecord())}
+        >
+          +
+        </button>
+      )}
     </>
   );
 };
