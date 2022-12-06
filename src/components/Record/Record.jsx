@@ -4,6 +4,8 @@ import { useState } from "react";
 import { deleteRecord } from "../../features/records/recordsActions";
 import { useDispatch, useSelector } from "react-redux";
 
+// import Other from "../../Assets/icons/Other.png";
+
 const Record = ({ record }) => {
   const { userDetails } = useSelector((state) => state.user);
   const token = userDetails.token;
@@ -18,7 +20,13 @@ const Record = ({ record }) => {
         onClick={() => setRecordDD(!recordDD)}
       >
         <div className="record-left-side">
-          <span className="record-category"> {record.category} </span>
+          <span className="record-category">
+            <img
+              src={require(`../../Assets/icons/${record.category}.png`)}
+              alt="category-icon"
+              className="category-icon"
+            />
+          </span>
           <span className="record-account"> {record.account} </span>
           {record.note && <span className="record-note"> {record.note} </span>}
           {record.payee && (

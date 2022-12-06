@@ -14,11 +14,13 @@
   color: #cfcfcf;
   transition: width 1s;
   position: relative;
+  height: 64px;
 }
 .record.small {
   width: 89%;
 }
 .record-left-side {
+  align-items: center;
   display: flex;
 }
 .edit-button,
@@ -186,4 +188,9 @@
   .add-record .form .top-left-bottom {
     padding: 0.5rem 1rem;
   }
+}
+
+.category-icon {
+  width: 48px;
+  margin: 0 1rem;
 }

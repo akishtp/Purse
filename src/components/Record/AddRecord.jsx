@@ -9,11 +9,11 @@ const AddRecord = () => {
   const { records } = useSelector((state) => state.records);
 
   const [type, setType] = useState("Expense");
-  const [account, setAccount] = useState(records[0].account);
+  const [account, setAccount] = useState(records[0].account || "SBI");
   const [amount, setAmount] = useState("");
   const [time, setTime] = useState(date.getHours() + ":" + date.getMinutes());
   const [calDate, setCalDate] = useState(date.toISOString().slice(0, 10));
-  const [category, setCategory] = useState(records[0].category);
+  const [category, setCategory] = useState(records[0].category || null);
   const [payee, setPayee] = useState("");
   const [note, setNote] = useState("");
 
