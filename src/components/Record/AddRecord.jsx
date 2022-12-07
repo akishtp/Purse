@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addRecord } from "../../features/records/recordsActions";
 import { closeAddRecord } from "../../features/records/recordsSlice";
@@ -9,11 +9,11 @@ const AddRecord = () => {
   const { records } = useSelector((state) => state.records);
 
   const [type, setType] = useState("Expense");
-  const [account, setAccount] = useState(records[0].account || "SBI");
+  const [account, setAccount] = useState("SBI");
   const [amount, setAmount] = useState("");
   const [time, setTime] = useState(date.getHours() + ":" + date.getMinutes());
   const [calDate, setCalDate] = useState(date.toISOString().slice(0, 10));
-  const [category, setCategory] = useState(records[0].category || null);
+  const [category, setCategory] = useState("Other");
   const [payee, setPayee] = useState("");
   const [note, setNote] = useState("");
 
@@ -40,6 +40,15 @@ const AddRecord = () => {
       ).then(dispatch(closeAddRecord()));
     }
   };
+  useEffect(() => {
+    try {
+      setCategory(records[0].category);
+    } catch {
+      // null
+    }
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <div className="add-record">
       <nav className="nav">

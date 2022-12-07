@@ -10,11 +10,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 8px;
+  padding: 0 1rem;
   color: #cfcfcf;
   transition: width 1s;
   position: relative;
   height: 64px;
+  border-radius: 0.4rem;
 }
 .record.small {
   width: 89%;
@@ -22,6 +23,10 @@
 .record-left-side {
   align-items: center;
   display: flex;
+}
+.record-category {
+  display: flex;
+  align-items: center;
 }
 .edit-button,
 .delete-button {
@@ -192,5 +197,5 @@
 
 .category-icon {
   width: 48px;
-  margin: 0 1rem;
+  margin: 0 1rem 0 0;
 }
