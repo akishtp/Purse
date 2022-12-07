@@ -24,6 +24,9 @@
   align-items: center;
   display: flex;
 }
+.record-right-side {
+  font-size: 1.2rem;
+}
 .record-category {
   display: flex;
   align-items: center;
@@ -174,7 +177,7 @@
   width: 49%;
 }
 .Expense {
-  color: #f00;
+  color: red;
 }
 .Income {
   color: green;
