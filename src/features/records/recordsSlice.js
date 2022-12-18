@@ -4,7 +4,7 @@ import { addRecord, getRecords } from "./recordsActions";
 const initialState = {
   records: [],
   loading: false,
-  getError: null,
+  recordError: null,
   addError: null,
   addRecord: false,
 };
@@ -24,7 +24,7 @@ const recordSlice = createSlice({
   extraReducers: {
     [getRecords.pending]: (state) => {
       state.loading = true;
-      state.getError = null;
+      state.recordError = null;
     },
     [getRecords.fulfilled]: (state, { payload }) => {
       state.loading = false;
@@ -32,7 +32,7 @@ const recordSlice = createSlice({
     },
     [getRecords.rejected]: (state, { payload }) => {
       state.loading = false;
-      state.getError = payload;
+      state.recordError = payload;
     },
     [addRecord.pending]: (state) => {
       state.loading = true;
