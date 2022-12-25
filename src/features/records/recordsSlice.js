@@ -21,30 +21,31 @@ const recordSlice = createSlice({
       state.addError = null;
     },
   },
-  extraReducers: {
-    [getRecords.pending]: (state) => {
-      state.loading = true;
-      state.recordError = null;
-    },
-    [getRecords.fulfilled]: (state, { payload }) => {
-      state.loading = false;
-      state.records = payload;
-    },
-    [getRecords.rejected]: (state, { payload }) => {
-      state.loading = false;
-      state.recordError = payload;
-    },
-    [addRecord.pending]: (state) => {
-      state.loading = true;
-      state.addError = null;
-    },
-    [addRecord.fulfilled]: (state) => {
-      state.loading = false;
-    },
-    [addRecord.rejected]: (state, { payload }) => {
-      state.loading = false;
-      state.addError = payload;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getRecords.pending, (state) => {
+        state.loading = true;
+        state.recordError = null;
+      })
+      .addCase(getRecords.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.records = payload;
+      })
+      .addCase(getRecords.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.recordError = payload;
+      })
+      .addCase(addRecord.pending, (state) => {
+        state.loading = true;
+        state.addError = null;
+      })
+      .addCase(addRecord.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(addRecord.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.addError = payload;
+      });
   },
 });
 

@@ -15,7 +15,7 @@ const Layout = () => {
     if (userDetails) {
       dispatch(getRecords(userDetails.token));
     }
-  }, [dispatch, records, userDetails]);
+  }, [dispatch, userDetails]);
   return (
     <>
       <Navbar />

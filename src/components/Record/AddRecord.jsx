@@ -13,7 +13,7 @@ const AddRecord = () => {
   const [amount, setAmount] = useState("");
   const [time, setTime] = useState(date.getHours() + ":" + date.getMinutes());
   const [calDate, setCalDate] = useState(date.toISOString().slice(0, 10));
-  const [category, setCategory] = useState("Other");
+  const [category, setCategory] = useState("Others");
   const [payee, setPayee] = useState("");
   const [note, setNote] = useState("");
 

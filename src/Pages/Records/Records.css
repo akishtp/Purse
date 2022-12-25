@@ -1,0 +1,5 @@
+.records {
+  display: flex;
+  justify-content: center;
+  margin: 4px 0;
+}

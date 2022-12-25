@@ -22,31 +22,32 @@ const userSlice = createSlice({
       state.error = null;
     },
   },
-  extraReducers: {
-    [signup.pending]: (state) => {
-      state.loading = true;
-      state.error = null;
-    },
-    [signup.fulfilled]: (state, { payload }) => {
-      state.loading = false;
-      state.userDetails = payload;
-    },
-    [signup.rejected]: (state, { payload }) => {
-      state.loading = false;
-      state.error = payload;
-    },
-    [login.pending]: (state) => {
-      state.loading = true;
-      state.error = null;
-    },
-    [login.fulfilled]: (state, { payload }) => {
-      state.loading = false;
-      state.userDetails = payload;
-    },
-    [login.rejected]: (state, { payload }) => {
-      state.loading = false;
-      state.error = payload;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(signup.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(signup.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.userDetails = payload;
+      })
+      .addCase(signup.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      })
+      .addCase(login.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(login.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.userDetails = payload;
+      })
+      .addCase(login.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      });
   },
 });
 

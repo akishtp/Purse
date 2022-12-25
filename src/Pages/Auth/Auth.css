@@ -4,6 +4,7 @@
   justify-content: center;
   min-height: 100vh;
   background-image: linear-gradient(69deg, #ed93cb, #ca82f8, #a1d9ff);
+  color: #000;
 }
 .auth-wrapper {
   display: flex;
