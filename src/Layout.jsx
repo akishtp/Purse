@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { getRecords } from "./features/records/recordsActions";
 
 const Layout = () => {
-  const { records, addRecord } = useSelector((state) => state.records);
+  const { addRecord } = useSelector((state) => state.records);
   const { userDetails } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -21,14 +21,12 @@ const Layout = () => {
       <Navbar />
       <Outlet />
       {addRecord && <AddRecord />}
-      {records && (
-        <button
-          className="add-records-toggle-button"
-          onClick={() => dispatch(openAddRecord())}
-        >
-          +
-        </button>
-      )}
+      <button
+        className="add-records-toggle-button"
+        onClick={() => dispatch(openAddRecord())}
+      >
+        +
+      </button>
     </>
   );
 };

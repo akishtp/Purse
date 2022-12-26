@@ -2,17 +2,19 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addRecord } from "../../features/records/recordsActions";
 import { closeAddRecord } from "../../features/records/recordsSlice";
-import { SlClose } from "react-icons/sl";
 
 const AddRecord = () => {
-  var date = new Date();
+  var localDate = new Date();
+
   const { records } = useSelector((state) => state.records);
 
-  const [type, setType] = useState("Expense");
-  const [account, setAccount] = useState("SBI");
-  const [amount, setAmount] = useState("");
-  const [time, setTime] = useState(date.getHours() + ":" + date.getMinutes());
-  const [calDate, setCalDate] = useState(date.toISOString().slice(0, 10));
+  const [type, setType] = useState("expense");
+  const [account, setAccount] = useState("CASH");
+  const [amount, setAmount] = useState(0);
+  const [time, setTime] = useState(
+    localDate.getHours() + ":" + localDate.getMinutes()
+  );
+  const [date, setDate] = useState(localDate.toString().slice(0, 10));
   const [category, setCategory] = useState("Others");
   const [payee, setPayee] = useState("");
   const [note, setNote] = useState("");
@@ -21,9 +23,14 @@ const AddRecord = () => {
   const { addError } = useSelector((state) => state.records);
   const { userDetails } = useSelector((state) => state.user);
 
+  const closeModal = (e) => {
+    e.stopPropagation();
+    closeAddRecord();
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const date = `${calDate}T${time}:00.000+00:00`;
+    const dateTime = `${date}T${time}:00.000+00:00`;
     if (userDetails) {
       const token = userDetails.token;
       dispatch(
@@ -32,7 +39,7 @@ const AddRecord = () => {
           account,
           amount,
           category,
-          date,
+          dateTime,
           payee,
           note,
           token,
@@ -46,85 +53,75 @@ const AddRecord = () => {
     } catch {
       // null
     }
-    // eslint-disable-next-line
-  }, []);
-
+  }, [records]);
   return (
-    <div className="add-record">
-      <nav className="nav">
-        <div className="left-side">Add Record</div>
-        <div className="right-side" onClick={() => dispatch(closeAddRecord())}>
-          <SlClose size={20} />
-        </div>
-      </nav>
-      <form className="form" onSubmit={(e) => handleSubmit(e)}>
-        <div className="top">
-          <div className="left">
-            <nav className="type">
-              <div
-                className={type === "Expense" ? "item expense active" : "item"}
-                onClick={() => setType("Expense")}
-              >
-                Expense
-              </div>
-              <div
-                className={type === "Income" ? "item income active" : "item"}
-                onClick={() => setType("Income")}
-              >
-                Income
-              </div>
-            </nav>
-            <div className="top-left-bottom">
-              {addError}
-              <div className="account-amount-wrapper">
-                <label className="amount-label">
-                  Amount :
-                  <input
-                    type="number"
-                    className="amount"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                  />
-                </label>
-                <label className="account-label">
-                  Account :
-                  <select
-                    className="account"
-                    onChange={(e) => setAccount(e.target.value)}
-                    value={account}
-                  >
-                    <option value="CASH">CASH</option>
-                    <option value="SBI">SBI</option>
-                  </select>
-                </label>
-              </div>
-              <div className="date-time-wrapper">
-                <label className="date-label">
-                  Date :
-                  <input
-                    type="date"
-                    className="date"
-                    value={calDate}
-                    onChange={(e) => setCalDate(e.target.value)}
-                  />
-                </label>
-                <label className="time-label">
-                  Time :
-                  <input
-                    type="time"
-                    className="time"
-                    value={time}
-                    onChange={(e) => setTime(e.target.value)}
-                  />
-                </label>
-              </div>
+    <div className="backdrop" onClick={(e) => closeModal(e)}>
+      <div className="add-record">
+        <nav className="type-selector">
+          <div
+            className={type === "expense" ? "expense active" : "income"}
+            onClick={() => setType("expense")}
+          >
+            Expense
+          </div>
+          <div
+            className={type === "income" ? "income active" : "expense"}
+            onClick={() => setType("income")}
+          >
+            Income
+          </div>
+        </nav>
+        <form onSubmit={(e) => handleSubmit(e)} className="add-record-details">
+          {addError && <div className="error">{addError}</div>}
+          <div className="part1">
+            <div className="amount-account-wrapper">
+              <label htmlFor="" className="amount-label">
+                Amount :
+                <input
+                  type="number"
+                  className="amount-input"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                />
+              </label>
+              <label htmlFor="" className="account-label">
+                Account :
+                <select
+                  className="account-input"
+                  onChange={(e) => setAccount(e.target.value)}
+                  value={account}
+                >
+                  <option value="CASH">CASH</option>
+                  <option value="SBI">SBI</option>
+                </select>
+              </label>
+            </div>
+            <div className="date-time-wrapper">
+              <label htmlFor="" className="date-label">
+                Date :
+                <input
+                  type="date"
+                  className="date-input"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
+                />
+              </label>
+              <label htmlFor="" className="time-label">
+                Time :
+                <input
+                  type="time"
+                  className="time-input"
+                  value={time}
+                  onChange={(e) => setTime(e.target.value)}
+                />
+              </label>
             </div>
           </div>
-          <div className="right">
-            <label className="category-label">
+          <div className="part2">
+            <label htmlFor="" className="category-label">
               Category :
               <select
-                className="category"
+                className="category-input"
                 onChange={(e) => setCategory(e.target.value)}
                 value={category}
               >
@@ -141,30 +138,28 @@ const AddRecord = () => {
                 <option value="Others">Others</option>
               </select>
             </label>
-            <label className="payee-label">
+            <label htmlFor="" className="payee-label">
               Payee :
               <input
                 type="text"
-                className="payee"
+                className="payee-input"
                 value={payee}
                 onChange={(e) => setPayee(e.target.value)}
               />
             </label>
-            <label className="note-label">
+            <label
+              htmlFor=""
+              className="note-label"
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+            >
               Note :
-              <input
-                type="text"
-                className="note"
-                value={note}
-                onChange={(e) => setNote(e.target.value)}
-              />
+              <textarea />
             </label>
           </div>
-        </div>
-        <div className="bottom">
-          <button className="button">Add Record</button>
-        </div>
-      </form>
+          <button type="submit">Add Record</button>
+        </form>
+      </div>
     </div>
   );
 };

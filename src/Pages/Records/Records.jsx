@@ -1,10 +1,8 @@
 import { useSelector } from "react-redux";
 import Record from "../../components/Record/Record";
-import "./Records.css";
 
 const Records = () => {
   const { records } = useSelector((state) => state.records);
-
   return (
     <div className="records">
       {records.length > 0 ? (
