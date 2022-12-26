@@ -16,6 +16,7 @@ const Login = () => {
   return (
     <form className="auth-form" onSubmit={(e) => handleSubmit(e)}>
       <div className="form-header">Welcome Back 🙏</div>
+      {error && <div className="error">{error}</div>}
       <label className="auth-label">
         Name :
         <input
@@ -37,7 +38,6 @@ const Login = () => {
       <button className="auth-button" disabled={loading} type="submit">
         Login
       </button>
-      {error && <span>{error}</span>}
     </form>
   );
 };

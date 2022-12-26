@@ -16,6 +16,7 @@ const Signup = () => {
   return (
     <form className="auth-form" onSubmit={(e) => handleSubmit(e)}>
       <div className="form-header">Hello there 👋</div>
+      {error && <div className="error">{error}</div>}
       <label className="auth-label">
         Name :
         <input
@@ -46,7 +47,6 @@ const Signup = () => {
       <button className="auth-button" disabled={loading} type="submit">
         Signup
       </button>
-      {error && <span>{error}</span>}
     </form>
   );
 };

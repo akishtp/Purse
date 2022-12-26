@@ -3,3 +3,6 @@
   justify-content: center;
   margin: 4px 0;
 }
+.record-wrapper {
+  display: flex;
+}
