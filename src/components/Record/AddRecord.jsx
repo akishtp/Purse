@@ -6,8 +6,6 @@ import { closeAddRecord } from "../../features/records/recordsSlice";
 const AddRecord = () => {
   var localDate = new Date();
 
-  const { records } = useSelector((state) => state.records);
-
   const [type, setType] = useState("expense");
   const [account, setAccount] = useState("CASH");
   const [amount, setAmount] = useState("");
@@ -22,7 +20,7 @@ const AddRecord = () => {
   const [note, setNote] = useState("");
 
   const dispatch = useDispatch();
-  const { addError } = useSelector((state) => state.records);
+  const { addError, records } = useSelector((state) => state.records);
   const { userDetails } = useSelector((state) => state.user);
 
   const handleSubmit = (e) => {
@@ -41,7 +39,7 @@ const AddRecord = () => {
           note,
           token,
         })
-      ).then(dispatch(closeAddRecord()));
+      );
     }
   };
   useEffect(() => {

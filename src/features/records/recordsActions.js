@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { closeAddRecord } from "./recordsSlice";
 
 export const getRecords = createAsyncThunk(
   "record/get",
@@ -25,7 +26,7 @@ export const addRecord = createAsyncThunk(
   "record/add",
   async (
     { type, account, amount, category, date, payee, note, token },
-    { rejectWithValue }
+    { rejectWithValue, dispatch }
   ) => {
     const config = {
       headers: {
@@ -39,6 +40,10 @@ export const addRecord = createAsyncThunk(
         { type, account, amount, category, date, payee, note },
         config
       );
+
+      dispatch(closeAddRecord());
+
+      console.log("close ayyittindavanam");
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.error);

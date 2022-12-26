@@ -7,17 +7,23 @@ import { useEffect } from "react";
 import { getRecords } from "./features/records/recordsActions";
 
 const Layout = () => {
-  const { addRecord } = useSelector((state) => state.records);
+  const {
+    addRecord,
+    // records
+  } = useSelector((state) => state.records);
+  const navigate = useNavigate();
+
   const { userDetails } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
-    if (userDetails) {
+    try {
       dispatch(getRecords(userDetails.token));
+    } catch {
+      navigate("/auth");
     }
-  }, [userDetails, dispatch, navigate]);
+  }, [dispatch, navigate, userDetails]);
   return (
     <>
       <Navbar />
