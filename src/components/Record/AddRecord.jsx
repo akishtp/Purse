@@ -4,16 +4,19 @@ import { addRecord } from "../../features/records/recordsActions";
 import { closeAddRecord } from "../../features/records/recordsSlice";
 
 const AddRecord = () => {
-  var localDate = new Date();
+  var currentDate = new Date();
 
   const [type, setType] = useState("expense");
   const [account, setAccount] = useState("CASH");
   const [amount, setAmount] = useState("");
   const [time, setTime] = useState(
-    localDate.getHours() + ":" + localDate.getMinutes()
+    currentDate.getHours() +
+      ":" +
+      (currentDate.getMinutes() < 10 ? "0" : "") +
+      currentDate.getMinutes()
   );
   const [constDate, setConstDate] = useState(
-    localDate.toISOString().slice(0, 10)
+    currentDate.toISOString().slice(0, 10)
   );
   const [category, setCategory] = useState("Others");
   const [payee, setPayee] = useState("");
@@ -75,8 +78,9 @@ const AddRecord = () => {
         </div>
       </nav>
       <form onSubmit={(e) => handleSubmit(e)} className="add-record-details">
-        {addError && <div className="error">{addError}</div>}
         <div className="part1">
+          {addError && <div className="error">{addError}</div>}
+
           <div className="amount-account-wrapper">
             <label className="amount-label">
               Amount :
