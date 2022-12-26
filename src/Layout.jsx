@@ -1,6 +1,6 @@
 import { openAddRecord } from "./features/records/recordsSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import AddRecord from "./components/Record/AddRecord";
 import { useEffect } from "react";
@@ -11,22 +11,26 @@ const Layout = () => {
   const { userDetails } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (userDetails) {
       dispatch(getRecords(userDetails.token));
     }
-  }, [dispatch, userDetails]);
+  }, [userDetails, dispatch, navigate]);
   return (
     <>
       <Navbar />
       <Outlet />
       {addRecord && <AddRecord />}
-      <button
-        className="add-records-toggle-button"
-        onClick={() => dispatch(openAddRecord())}
-      >
-        +
-      </button>
+      {addRecord || (
+        <button
+          className="add-records-toggle-button"
+          onClick={() => dispatch(openAddRecord())}
+        >
+          +
+        </button>
+      )}
     </>
   );
 };

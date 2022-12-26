@@ -13,7 +13,7 @@ const Record = ({ record }) => {
           <p className="account">{record.account}</p>
           <div className="extras">
             {record.note && <p className="payee">{record.note}</p>}
-            {record.note & record.payee && <>nbsp;-&nbsp;</>}
+            {record.note && record.payee && <>&nbsp;-&nbsp;</>}
             {record.payee && <p className="note">{record.payee}</p>}
           </div>
         </div>
