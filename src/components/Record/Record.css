@@ -201,7 +201,7 @@
 
 @media screen and (min-width: 767px) {
   .record .left-side {
-    width: 800%;
+    width: 80%;
   }
   .record .right-side {
     width: 20%;
@@ -211,7 +211,7 @@
   .record .record-details {
     flex-direction: row;
     align-items: center;
-    width: 100%;
+    width: calc(100% - 64px);
   }
   .record-details .category {
     width: 30%;
@@ -223,7 +223,7 @@
     width: 40%;
   }
   .record {
-    width: calc(99% - 138px);
+    width: calc(100% - 152px);
   }
   .record-actions {
     width: 132px;
