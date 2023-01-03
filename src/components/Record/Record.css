@@ -222,4 +222,14 @@
   .record-details .extras {
     width: 40%;
   }
+  .record {
+    width: calc(99% - 138px);
+  }
+  .record-actions {
+    width: 132px;
+  }
+  .record-actions .edit,
+  .record-actions .delete {
+    width: 64px;
+  }
 }
