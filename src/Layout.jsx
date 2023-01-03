@@ -7,14 +7,9 @@ import { useEffect } from "react";
 import { getRecords } from "./features/records/recordsActions";
 
 const Layout = () => {
-  const {
-    addRecord,
-    // records
-  } = useSelector((state) => state.records);
-  const navigate = useNavigate();
-
+  const { addRecord } = useSelector((state) => state.records);
   const { userDetails } = useSelector((state) => state.user);
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {

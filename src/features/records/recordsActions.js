@@ -5,6 +5,7 @@ import { closeAddRecord } from "./recordsSlice";
 export const getRecords = createAsyncThunk(
   "record/get",
   async (token, { rejectWithValue }) => {
+    console.log(token);
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -51,9 +52,13 @@ export const addRecord = createAsyncThunk(
   }
 );
 
+// export const deleteRecord = createAsyncThunk(
+//   "record/delete",
+//   async ({ _id, token }, { rejectWithValue }) => {
 export const deleteRecord = createAsyncThunk(
   "record/delete",
   async ({ _id, token }, { rejectWithValue }) => {
+    console.log(`called ${_id} ${token}`);
     const config = {
       headers: {
         "Content-Type": "application/json",

@@ -1,8 +1,22 @@
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import {
+  deleteRecord,
+  getRecords,
+} from "../../features/records/recordsActions";
 import "./Record.css";
 
 const Record = ({ record }) => {
   const [recordSmall, setRecordSmall] = useState(false);
+  const { userDetails } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const handleDelete = () => {
+    const token = userDetails.token;
+    const _id = record._id;
+    dispatch(deleteRecord({ _id, token }));
+  };
+
   return (
     <div className="record-inner-wrapper">
       <div
@@ -30,8 +44,22 @@ const Record = ({ record }) => {
         </div>
       </div>
       <div className={recordSmall ? "record-actions" : "record-actions small"}>
-        <div className="edit">✍️</div>
-        <div className="delete">🗑️</div>
+        <div
+          className="edit"
+          onClick={() => {
+            dispatch(getRecords(userDetails.token));
+          }}
+        >
+          ✍️
+        </div>
+        <div
+          className="delete"
+          onClick={() => {
+            handleDelete();
+          }}
+        >
+          🗑️
+        </div>
       </div>
     </div>
   );
