@@ -18,7 +18,7 @@ const Record = ({ record }) => {
   };
 
   return (
-    <div className="record-inner-wrapper">
+    <div className="record-wrapper">
       <div
         className={recordSmall ? "record" : "record big"}
         onClick={() => setRecordSmall(!recordSmall)}
@@ -39,7 +39,7 @@ const Record = ({ record }) => {
           </div>
         </div>
         <div className={`right-side ${record.type}`}>
-          {record.type === "Expense" ? "-" : "+"}
+          {record.type === "expense" ? "-" : "+"}
           {record.amount}
         </div>
       </div>

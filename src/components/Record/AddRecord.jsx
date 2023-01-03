@@ -99,7 +99,7 @@ const AddRecord = () => {
                 value={account}
               >
                 <option value="CASH">CASH</option>
-                <option value="SBI">SBI</option>
+                <option value="BANK">BANK</option>
               </select>
             </label>
           </div>

@@ -1,4 +1,4 @@
-.record-inner-wrapper {
+.record-wrapper {
   width: 100%;
   display: flex;
   align-items: center;
@@ -11,7 +11,7 @@
   justify-content: space-between;
   padding: 0 10px;
   width: calc(72% - 10px);
-  transition: 1s ease-in-out;
+  transition: 500ms ease-in-out;
 }
 .record.big {
   width: calc(100% - 20px);
@@ -46,11 +46,17 @@
 .records .right-side {
   display: flex;
   align-items: center;
-  color: #1bce3e;
+}
+.record .expense {
+  color: #ff4949;
+}
+.record .income {
+  color: #7dff49;
 }
 .record-actions {
   width: calc(28% - 10px);
   display: flex;
+  transition: 500ms ease-in-out;
 }
 .record-actions.small {
   width: 0;
@@ -191,4 +197,29 @@
 }
 .add-record-close {
   cursor: pointer;
+}
+
+@media screen and (min-width: 767px) {
+  .record .left-side {
+    width: 800%;
+  }
+  .record .right-side {
+    width: 20%;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .record .record-details {
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+  }
+  .record-details .category {
+    width: 30%;
+  }
+  .record-details .account {
+    width: 30%;
+  }
+  .record-details .extras {
+    width: 40%;
+  }
 }
