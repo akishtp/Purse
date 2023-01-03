@@ -11,6 +11,7 @@
   justify-content: space-between;
   padding: 0 10px;
   width: calc(72% - 10px);
+  transition: 1s ease-in-out;
 }
 .record.big {
   width: calc(100% - 20px);

@@ -1,8 +1,10 @@
-.records {
+.no-records {
+  font-weight: 900;
+  align-items: center;
+  font-size: 16vh;
+  line-height: 12vh;
+  height: 80vh;
   display: flex;
+  align-items: center;
   justify-content: center;
-  margin: 4px 0;
-}
-.record-wrapper {
-  display: flex;
 }
