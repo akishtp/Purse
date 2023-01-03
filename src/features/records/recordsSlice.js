@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addRecord, getRecords } from "./recordsActions";
+import { addRecord, deleteRecord, getRecords } from "./recordsActions";
 
 const initialState = {
   records: [],
@@ -45,6 +45,18 @@ const recordSlice = createSlice({
       .addCase(addRecord.rejected, (state, { payload }) => {
         state.loading = false;
         state.addError = payload;
+      })
+      .addCase(deleteRecord.pending, (state) => {
+        state.loading = true;
+        state.recordError = null;
+      })
+      .addCase(deleteRecord.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.records = payload;
+      })
+      .addCase(deleteRecord.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.recordError = payload;
       });
   },
 });
