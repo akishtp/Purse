@@ -1,10 +1,16 @@
+.record-inner-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 10px;
+}
 .record {
   height: 64px;
   background-color: #282828;
-  margin: 10px;
   display: flex;
   justify-content: space-between;
   padding: 0 10px;
+  width: calc(72% - 10px);
 }
 .record .left-side {
   display: flex;
@@ -37,6 +43,21 @@
   display: flex;
   align-items: center;
   color: #1bce3e;
+}
+.record-actions {
+  width: calc(28% - 10px);
+}
+.record-actions button {
+  width: calc(50% - 2px);
+  height: 64px;
+  border: none;
+  margin: 0 0 0 2px;
+}
+.record-actions .edit {
+  background-color: #ffab35;
+}
+.record-actions .delete {
+  background-color: #ff4949;
 }
 
 /* add-record */
@@ -155,4 +176,7 @@
   background-color: #a1d9ff;
   width: 33%;
   border: none;
+}
+.add-record-close {
+  cursor: pointer;
 }
