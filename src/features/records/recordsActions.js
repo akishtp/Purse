@@ -40,7 +40,7 @@ export const addRecord = createAsyncThunk(
         { type, account, amount, category, date, payee, note },
         config
       );
-
+      dispatch(getRecords(token));
       dispatch(closeAddRecord());
       return data;
     } catch (error) {
@@ -54,7 +54,7 @@ export const addRecord = createAsyncThunk(
 //   async ({ _id, token }, { rejectWithValue }) => {
 export const deleteRecord = createAsyncThunk(
   "record/delete",
-  async ({ _id, token }, { rejectWithValue }) => {
+  async ({ _id, token }, { rejectWithValue, dispatch }) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -66,6 +66,7 @@ export const deleteRecord = createAsyncThunk(
         `https://verlow-server.up.railway.app/api/records/${_id}`,
         config
       );
+      dispatch(getRecords(token));
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.error);
