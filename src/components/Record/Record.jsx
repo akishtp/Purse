@@ -1,9 +1,14 @@
+import { useState } from "react";
 import "./Record.css";
 
 const Record = ({ record }) => {
+  const [recordSmall, setRecordSmall] = useState(false);
   return (
     <div className="record-inner-wrapper">
-      <div className="record">
+      <div
+        className={recordSmall ? "record" : "record big"}
+        onClick={() => setRecordSmall(!recordSmall)}
+      >
         <div className="left-side">
           <img
             src={require(`../../Assets/${record.category}.png`)}
@@ -24,9 +29,9 @@ const Record = ({ record }) => {
           {record.amount}
         </div>
       </div>
-      <div className="record-actions">
-        <button className="edit">✍️</button>
-        <button className="delete">🗑️</button>
+      <div className={recordSmall ? "record-actions" : "record-actions small"}>
+        <div className="edit">✍️</div>
+        <div className="delete">🗑️</div>
       </div>
     </div>
   );

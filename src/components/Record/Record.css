@@ -12,6 +12,9 @@
   padding: 0 10px;
   width: calc(72% - 10px);
 }
+.record.big {
+  width: calc(100% - 20px);
+}
 .record .left-side {
   display: flex;
   align-items: center;
@@ -46,12 +49,20 @@
 }
 .record-actions {
   width: calc(28% - 10px);
+  display: flex;
 }
-.record-actions button {
+.record-actions.small {
+  width: 0;
+}
+.record-actions .edit,
+.record-actions .delete {
   width: calc(50% - 2px);
   height: 64px;
   border: none;
   margin: 0 0 0 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .record-actions .edit {
   background-color: #ffab35;
