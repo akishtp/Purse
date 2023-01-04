@@ -1,10 +1,17 @@
 import { useSelector } from "react-redux";
+import "./AccountsView.css";
 
 const AccountsView = () => {
-  const { userDetails, accounts } = useSelector((state) => state.user);
+  const { accounts } = useSelector((state) => state.user);
 
   return (
-    <div className="accounts-view">{accounts.toString() + userDetails}</div>
+    <div className="accounts-view">
+      {Object.entries(accounts).map(([key, value], i) => (
+        <div key={i} className="account-details">
+          {key} : {value}
+        </div>
+      ))}
+    </div>
   );
 };
 

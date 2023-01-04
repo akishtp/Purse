@@ -1,0 +1,16 @@
+.accounts-view {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 54px;
+  background-color: aquamarine;
+}
+.accounts-view .account-details {
+  height: 36px;
+  background-color: burlywood;
+  margin: 0 0 0 10px;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  padding: 0 12px;
+}

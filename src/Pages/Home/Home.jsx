@@ -1,7 +1,11 @@
-import React from "react";
+import AccountsView from "../../components/AccountsView/AccountsView";
 
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <div className="home">
+      <AccountsView />
+    </div>
+  );
 };
 
 export default Home;
