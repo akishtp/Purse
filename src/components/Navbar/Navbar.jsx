@@ -1,9 +1,11 @@
 import { logout } from "../../features/user/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = () => {
+  const { userDetails } = useSelector((state) => state.user);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -17,7 +19,7 @@ const Navbar = () => {
         <Link to="/records">Records</Link>
       </div>
       <div className="right-side" onClick={() => handleLogout()}>
-        User
+        {userDetails.name}
       </div>
     </nav>
   );

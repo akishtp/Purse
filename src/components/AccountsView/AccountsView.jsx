@@ -11,6 +11,7 @@ const AccountsView = () => {
           {key} : {value}
         </div>
       ))}
+      <div className="account-details add-accounts">+ Add Accounts</div>
     </div>
   );
 };
