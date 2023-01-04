@@ -15,6 +15,7 @@ export const signup = createAsyncThunk(
         { name, password, email },
         config
       );
+      localStorage.setItem("userDetails", JSON.stringify(data));
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.error);

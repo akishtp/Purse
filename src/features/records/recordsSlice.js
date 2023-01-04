@@ -33,7 +33,7 @@ const recordSlice = createSlice({
       })
       .addCase(getRecords.rejected, (state, { payload }) => {
         state.loading = false;
-        state.recordError = payload.toString();
+        state.recordError = payload;
       })
       .addCase(addRecord.pending, (state) => {
         state.loading = true;

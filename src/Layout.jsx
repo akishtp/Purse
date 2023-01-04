@@ -8,7 +8,7 @@ import { getRecords } from "./features/records/recordsActions";
 
 const Layout = () => {
   const { addRecord } = useSelector((state) => state.records);
-  const { userDetails } = useSelector((state) => state.user);
+  const { userDetails, accounts } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -24,6 +24,7 @@ const Layout = () => {
       <Navbar />
       <Outlet />
       {addRecord && <AddRecord />}
+      {accounts.toString()}
       {addRecord || (
         <button
           className="add-records-toggle-button"

@@ -9,6 +9,7 @@ const initialState = {
   userDetails,
   loading: false,
   error: null,
+  accounts: userDetails.accounts,
 };
 
 const userSlice = createSlice({
@@ -43,6 +44,7 @@ const userSlice = createSlice({
       .addCase(login.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.userDetails = payload;
+        // state.accounts = payload.accounts;
       })
       .addCase(login.rejected, (state, { payload }) => {
         state.loading = false;
