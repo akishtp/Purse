@@ -1,0 +1,23 @@
+.accounts-view {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 54px;
+  border-bottom: 1px solid #d0d0d0;
+  overflow-x: scroll;
+  scrollbar-color: transparent;
+}
+.accounts-view .account-details {
+  height: 36px;
+  background-color: #ca82f8;
+  margin: 0 0 0 10px;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  padding: 0 12px;
+  min-width: max-content;
+}
+.accounts-view .add-accounts {
+  background-color: transparent;
+  border: 2px solid #d0d0d0;
+}
