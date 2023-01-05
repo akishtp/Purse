@@ -21,6 +21,7 @@ const userSlice = createSlice({
       state.loading = false;
       state.userDetails = null;
       state.error = null;
+      state.accounts = {};
     },
   },
   extraReducers: (builder) => {
@@ -32,6 +33,7 @@ const userSlice = createSlice({
       .addCase(signup.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.userDetails = payload;
+        state.accounts = payload.accounts;
       })
       .addCase(signup.rejected, (state, { payload }) => {
         state.loading = false;
@@ -44,7 +46,7 @@ const userSlice = createSlice({
       .addCase(login.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.userDetails = payload;
-        // state.accounts = payload.accounts;
+        state.accounts = payload.accounts;
       })
       .addCase(login.rejected, (state, { payload }) => {
         state.loading = false;
