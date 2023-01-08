@@ -1,8 +1,16 @@
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { closeAddAccount } from "../../features/user/userSlice";
 
 function AddAccount() {
+  const [accName, setAccName] = useState("");
+  const [accValue, setAccValue] = useState(0);
   const dispatch = useDispatch();
+
+  const handleAddAccount = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="add-account">
       <div className="add-account-top">
@@ -14,14 +22,22 @@ function AddAccount() {
           x
         </div>
       </div>
-      <form className="get-details">
+      <form className="get-details" onSubmit={(e) => handleAddAccount(e)}>
         <label>
           Account Name
-          <input type="text" />
+          <input
+            type="text"
+            value={accName}
+            onChange={(e) => setAccName(e.target.value)}
+          />
         </label>
         <label>
           Initial Value
-          <input type="number" />
+          <input
+            type="number"
+            value={accValue}
+            onChange={(e) => setAccValue(e.target.value)}
+          />
         </label>
       </form>
       <div className="submit-details">
