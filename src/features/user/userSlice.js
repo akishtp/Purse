@@ -28,11 +28,13 @@ const userSlice = createSlice({
       state.accounts = {};
     },
     closeAddAccount: (state) => {
+      console.log("closed");
       state.addAccount = false;
     },
     openAddAccount: (state) => {
       state.addAccount = true;
       state.addError = null;
+      console.log("opened");
     },
   },
   extraReducers: (builder) => {

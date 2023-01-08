@@ -21,3 +21,59 @@
   background-color: transparent;
   border: 2px solid #d0d0d0;
 }
+
+/* add-account */
+.add-account {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  width: 94%;
+  background-color: #3c3c3c;
+  border: 2px solid #000;
+}
+.add-account .add-account-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  padding: 0 10px;
+}
+.add-account .get-details {
+  background-image: linear-gradient(69deg, #ed93cb, #ca82f8, #a1d9ff);
+  padding: 20px 0px;
+  display: flex;
+  align-items: center;
+}
+.add-account label {
+  margin: 0 10px;
+  width: 50%;
+}
+.add-account input {
+  height: 36px;
+  padding: 0 10px;
+  width: 100%;
+  margin: 4px 0;
+  border: none;
+  background-color: #f4cff3;
+}
+.add-account input:active {
+  border: none;
+}
+.add-account .submit-details {
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.add-account button {
+  height: 42px;
+  align-self: center;
+  margin: 8px 0;
+  background-color: #a1d9ff;
+  width: 33%;
+  border: none;
+}

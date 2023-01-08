@@ -1,19 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addAccount } from "../../features/user/accountActions";
+// import { addAccount } from "../../features/user/accountActions";
 import { openAddAccount } from "../../features/user/userSlice";
 import "./AccountsView.css";
 
 const AccountsView = () => {
   const { accounts } = useSelector((state) => state.user);
-  const { userDetails } = useSelector((state) => state.user);
+  // const { userDetails } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
 
-  const addAccountHandler = () => {
-    let newAcc = { cashuandi: 120.22, fedrorrogerrer: 123.22 };
-    dispatch(addAccount({ accounts: newAcc, token: userDetails.token }));
-    dispatch(openAddAccount());
-  };
+  // const addAccountHandler = () => {
+  //   // let newAcc = { cashuandi: 120.22, fedrorrogerrer: 123.22 };
+  //   // dispatch(addAccount({ accounts: newAcc, token: userDetails.token }));
+  // };
 
   return (
     <div className="accounts-view">
@@ -24,7 +23,7 @@ const AccountsView = () => {
       ))}
       <div
         className="account-details add-accounts"
-        onClick={() => addAccountHandler()}
+        onClick={() => dispatch(openAddAccount())}
       >
         + Add Accounts
       </div>
