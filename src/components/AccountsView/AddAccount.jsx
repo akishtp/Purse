@@ -1,14 +1,19 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addAccount } from "../../features/user/accountActions";
 import { closeAddAccount } from "../../features/user/userSlice";
 
 function AddAccount() {
   const [accName, setAccName] = useState("");
   const [accValue, setAccValue] = useState(0);
+  const { userDetails, accounts } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const handleAddAccount = (e) => {
     e.preventDefault();
+    let new_accounts = [...accounts, { name: accName, money: accValue }];
+    console.log(new_accounts);
+    dispatch(addAccount({ accounts: new_accounts, token: userDetails.token }));
   };
 
   return (
@@ -39,10 +44,12 @@ function AddAccount() {
             onChange={(e) => setAccValue(e.target.value)}
           />
         </label>
+        <div className="submit-details">
+          <button type="submit" className="submit">
+            Add Account
+          </button>
+        </div>
       </form>
-      <div className="submit-details">
-        <button className="submit">Add Account</button>
-      </div>
     </div>
   );
 }
