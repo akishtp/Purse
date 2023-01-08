@@ -1,6 +1,6 @@
 .nav {
   height: 56px;
-  background-image: linear-gradient(69deg, #ed93cb, #ca82f8, #a1d9ff);
+  background-color: #8664ff;
   display: flex;
   align-items: center;
   justify-content: space-between;

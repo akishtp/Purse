@@ -13,6 +13,7 @@ const initialState = {
   loading: false,
   error: null,
   accounts,
+  addAccount: false,
 };
 
 const userSlice = createSlice({
@@ -25,6 +26,13 @@ const userSlice = createSlice({
       state.userDetails = null;
       state.error = null;
       state.accounts = {};
+    },
+    closeAddAccount: (state) => {
+      state.addAccount = false;
+    },
+    openAddAccount: (state) => {
+      state.addAccount = true;
+      state.addError = null;
     },
   },
   extraReducers: (builder) => {
@@ -71,6 +79,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { logout } = userSlice.actions;
+export const { logout, openAddAccount, closeAddAccount } = userSlice.actions;
 
 export default userSlice.reducer;

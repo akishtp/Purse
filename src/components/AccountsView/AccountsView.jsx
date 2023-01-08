@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addAccount } from "../../features/user/accountActions";
+import { openAddAccount } from "../../features/user/userSlice";
 import "./AccountsView.css";
 
 const AccountsView = () => {
@@ -11,6 +12,7 @@ const AccountsView = () => {
   const addAccountHandler = () => {
     let newAcc = { cashuandi: 120.22, fedrorrogerrer: 123.22 };
     dispatch(addAccount({ accounts: newAcc, token: userDetails.token }));
+    dispatch(openAddAccount());
   };
 
   return (
