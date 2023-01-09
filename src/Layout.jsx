@@ -33,11 +33,7 @@ const Layout = () => {
       )}
     </>
   ) : (
-    <Navigate
-      to="/login"
-      replace
-      // state={{ from: location }} // pass current location to redirect back
-    />
+    <Navigate to="/login" replace />
   );
 };
 

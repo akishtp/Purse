@@ -1,9 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { closeAddAccount } from "./userSlice";
 
 export const addAccount = createAsyncThunk(
   "accounts/add",
-  async ({ accounts, token }, { rejectWithValue }) => {
+  async ({ accounts, token }, { rejectWithValue, dispatch }) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -17,6 +18,7 @@ export const addAccount = createAsyncThunk(
         config
       );
       localStorage.setItem("userDetails", JSON.stringify(data));
+      dispatch(closeAddAccount());
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.error);

@@ -49,10 +49,10 @@ function AddAccount() {
               />
             </label>
           </div>
-          <label>
+          <label className="color-selector-label">
             Color:
             <select
-              className="category-input"
+              className="color-selector"
               onChange={(e) => setColor(e.target.value)}
               value={color}
             >

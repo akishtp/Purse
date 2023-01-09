@@ -5,6 +5,12 @@
   height: 54px;
   border-bottom: 1px solid #d0d0d0;
   overflow-x: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.accounts-view::-webkit-scrollbar {
+  display: none;
 }
 .accounts-view .account-details {
   height: 36px;
@@ -66,6 +72,10 @@
 }
 .add-account input:active {
   border: none;
+}
+.color-selector-label {
+  margin: 0 10px;
+  width: 50%;
 }
 .add-account .submit-details {
   height: 54px;
