@@ -101,8 +101,10 @@ const AddRecord = () => {
                 onChange={(e) => setAccount(e.target.value)}
                 value={account}
               >
-                {accounts.map((account) => (
-                  <option value={account.name}>{account.name}</option>
+                {accounts.map((account, i) => (
+                  <option key={i} value={account.name}>
+                    {account.name}
+                  </option>
                 ))}
               </select>
             </label>
