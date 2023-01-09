@@ -1,6 +1,6 @@
 import { openAddRecord } from "./features/records/recordsSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import AddRecord from "./components/Record/AddRecord";
 import { useEffect } from "react";
@@ -13,16 +13,12 @@ const Layout = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (userDetails === null) {
+    if (userDetails == null) {
       navigate("/auth");
     }
-    // try {
-    //   dispatch(getRecords(userDetails.token));
-    // } catch {
-    //   navigate("/auth");
-    // }
-  }, [dispatch, navigate, userDetails]);
-  return (
+  }, [navigate, userDetails]);
+
+  return userDetails ? (
     <>
       <Navbar />
       <Outlet />
@@ -36,6 +32,12 @@ const Layout = () => {
         </button>
       )}
     </>
+  ) : (
+    <Navigate
+      to="/login"
+      replace
+      // state={{ from: location }} // pass current location to redirect back
+    />
   );
 };
 
