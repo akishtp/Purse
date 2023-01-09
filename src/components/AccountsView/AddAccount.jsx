@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addAccount } from "../../features/user/accountActions";
 import { closeAddAccount } from "../../features/user/userSlice";
@@ -15,9 +15,6 @@ function AddAccount() {
     let new_accounts = [...accounts, { name: accName, money: accValue, color }];
     dispatch(addAccount({ accounts: new_accounts, token: userDetails.token }));
   };
-  useEffect(() => {
-    // nothing
-  }, [color]);
 
   return (
     <div className="add-account">

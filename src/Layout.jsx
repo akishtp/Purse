@@ -4,7 +4,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import AddRecord from "./components/Record/AddRecord";
 import { useEffect } from "react";
-import { getRecords } from "./features/records/recordsActions";
+// import { getRecords } from "./features/records/recordsActions";
 
 const Layout = () => {
   const { addRecord } = useSelector((state) => state.records);
@@ -13,11 +13,14 @@ const Layout = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    try {
-      dispatch(getRecords(userDetails.token));
-    } catch {
+    if (userDetails === null) {
       navigate("/auth");
     }
+    // try {
+    //   dispatch(getRecords(userDetails.token));
+    // } catch {
+    //   navigate("/auth");
+    // }
   }, [dispatch, navigate, userDetails]);
   return (
     <>

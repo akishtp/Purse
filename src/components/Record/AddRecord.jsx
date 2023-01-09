@@ -24,7 +24,7 @@ const AddRecord = () => {
 
   const dispatch = useDispatch();
   const { addError, records } = useSelector((state) => state.records);
-  const { userDetails } = useSelector((state) => state.user);
+  const { userDetails, accounts } = useSelector((state) => state.user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -101,8 +101,9 @@ const AddRecord = () => {
                 onChange={(e) => setAccount(e.target.value)}
                 value={account}
               >
-                <option value="CASH">CASH</option>
-                <option value="BANK">BANK</option>
+                {accounts.map((account) => (
+                  <option value={account.name}>{account.name}</option>
+                ))}
               </select>
             </label>
           </div>
