@@ -8,7 +8,7 @@ const AddRecord = () => {
 
   const [type, setType] = useState("expense");
   const [account, setAccount] = useState("CASH");
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState(0);
   const [time, setTime] = useState(
     currentDate.getHours() +
       ":" +
@@ -89,6 +89,9 @@ const AddRecord = () => {
                 className="amount-input"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
+                onClick={() => {
+                  setAmount("");
+                }}
               />
             </label>
             <label className="account-label">

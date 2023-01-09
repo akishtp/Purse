@@ -16,7 +16,7 @@
   padding: 0 12px;
   min-width: max-content;
 }
-.accounts-view .add-accounts {
+.accounts-view .add-account-button {
   background-color: transparent;
   border: 2px solid #d0d0d0;
 }
@@ -46,12 +46,17 @@
   padding: 20px 0px;
   display: flex;
   align-items: center;
+  flex-direction: column;
 }
-.add-account label {
+.add-account .name-value {
+  display: flex;
+}
+.add-account .name-value label {
   margin: 0 10px;
   width: 50%;
 }
-.add-account input {
+.add-account input,
+.add-account select {
   height: 36px;
   padding: 0 10px;
   width: 100%;

@@ -18,7 +18,7 @@ const AccountsView = () => {
         </div>
       ))}
       <div
-        className="account-details add-accounts"
+        className="account-details add-account-button"
         onClick={() => dispatch(openAddAccount())}
       >
         + Add Accounts

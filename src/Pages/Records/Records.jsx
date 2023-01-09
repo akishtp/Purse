@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Record from "../../components/Record/Record";
 import "./Records.css";
@@ -7,11 +6,6 @@ const Records = () => {
   const { records, loading, recordError } = useSelector(
     (state) => state.records
   );
-  useEffect(() => {
-    console.log("records:", records);
-    console.log("loading:", loading);
-    console.log("error:", recordError);
-  }, [recordError, records, loading]);
 
   if (recordError) {
     return <>{recordError}</>;
