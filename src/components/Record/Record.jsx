@@ -64,7 +64,9 @@ const Record = ({ record }) => {
           </div>
         </div>
       </div>
-      {editRecord && <EditRecord record={record} />}
+      {editRecord && (
+        <EditRecord record={record} setEditRecord={setEditRecord} />
+      )}
     </>
   );
 };
