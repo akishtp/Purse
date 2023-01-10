@@ -23,7 +23,7 @@ const AddRecord = () => {
   const [note, setNote] = useState("");
 
   const dispatch = useDispatch();
-  const { addError, records } = useSelector((state) => state.records);
+  const { addError, records, loading } = useSelector((state) => state.records);
   const { userDetails, accounts } = useSelector((state) => state.user);
 
   const handleSubmit = (e) => {
@@ -171,7 +171,9 @@ const AddRecord = () => {
             <textarea />
           </label>
         </div>
-        <button type="submit">Add Record</button>
+        <button type="submit" disabled={loading}>
+          Add Record
+        </button>
       </form>
     </div>
   );

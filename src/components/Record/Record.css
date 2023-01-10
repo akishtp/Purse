@@ -196,6 +196,10 @@
   width: 33%;
   border: none;
 }
+.add-record button:disabled {
+  background-color: brown;
+  color: #f0f0f0;
+}
 .add-record-close {
   cursor: pointer;
 }

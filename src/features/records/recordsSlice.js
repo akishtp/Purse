@@ -57,7 +57,6 @@ const recordSlice = createSlice({
       })
       .addCase(deleteRecord.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.records = payload;
       })
       .addCase(deleteRecord.rejected, (state, { payload }) => {
         state.loading = false;
