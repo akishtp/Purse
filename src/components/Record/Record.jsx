@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { deleteRecord } from "../../features/records/recordsActions";
 import "./Record.css";
-import EditRecord from "./EditRecord";
+import UpdateRecord from "./UpdateRecord";
 
 const Record = ({ record }) => {
   const [editRecord, setEditRecord] = useState(false);
@@ -65,7 +65,7 @@ const Record = ({ record }) => {
         </div>
       </div>
       {editRecord && (
-        <EditRecord record={record} setEditRecord={setEditRecord} />
+        <UpdateRecord record={record} setEditRecord={setEditRecord} />
       )}
     </>
   );

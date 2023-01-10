@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateRecord } from "../../features/records/recordsActions";
 
-const EditRecord = ({ record, setEditRecord }) => {
+const UpdateRecord = ({ record, setEditRecord }) => {
   const [type, setType] = useState(record.type);
   const [amount, setAmount] = useState(record.amount);
   const [account, setAccount] = useState(record.account);
@@ -12,11 +13,28 @@ const EditRecord = ({ record, setEditRecord }) => {
   const [note, setNote] = useState(record.note);
 
   const { addError } = useSelector((state) => state.records);
-  const { accounts } = useSelector((state) => state.user);
+  const { accounts, userDetails } = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // submit i guess
+    const date = `${constDate}T${time}:00.000+00:00`;
+    if (userDetails) {
+      dispatch(
+        updateRecord({
+          _id: record._id,
+          type,
+          account,
+          amount,
+          category,
+          date,
+          payee,
+          note,
+          token: userDetails.token,
+        })
+      );
+    }
   };
   return (
     <div className="add-record">
@@ -137,4 +155,4 @@ const EditRecord = ({ record, setEditRecord }) => {
   );
 };
 
-export default EditRecord;
+export default UpdateRecord;

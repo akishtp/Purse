@@ -25,6 +25,7 @@
 .accounts-view .add-account-button {
   background-color: transparent;
   border: 2px solid #d0d0d0;
+  cursor: pointer;
 }
 
 /* add-account */

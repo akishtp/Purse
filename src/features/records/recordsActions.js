@@ -49,9 +49,6 @@ export const addRecord = createAsyncThunk(
   }
 );
 
-// export const deleteRecord = createAsyncThunk(
-//   "record/delete",
-//   async ({ _id, token }, { rejectWithValue }) => {
 export const deleteRecord = createAsyncThunk(
   "record/delete",
   async ({ _id, token }, { rejectWithValue, dispatch }) => {
@@ -92,6 +89,7 @@ export const updateRecord = createAsyncThunk(
         { type, account, amount, category, date, payee, note },
         config
       );
+      dispatch(getRecords(token));
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.error);
