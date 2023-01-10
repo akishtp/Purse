@@ -8,7 +8,7 @@ const AddRecord = () => {
 
   const [type, setType] = useState("expense");
   const [account, setAccount] = useState("CASH");
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState("0");
   const [time, setTime] = useState(
     currentDate.getHours() +
       ":" +
@@ -31,6 +31,7 @@ const AddRecord = () => {
     const date = `${constDate}T${time}:00.000+00:00`;
     if (userDetails) {
       const token = userDetails.token;
+      console.log(account);
       dispatch(
         addRecord({
           type,
@@ -48,6 +49,7 @@ const AddRecord = () => {
   useEffect(() => {
     try {
       setCategory(records[0].category);
+      setAccount(records[0].account);
     } catch {
       // null
     }
