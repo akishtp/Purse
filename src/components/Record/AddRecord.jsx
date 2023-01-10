@@ -94,6 +94,7 @@ const AddRecord = () => {
                 onClick={() => {
                   setAmount("");
                 }}
+                min="0"
               />
             </label>
             <label className="account-label">
