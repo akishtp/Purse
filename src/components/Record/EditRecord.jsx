@@ -5,8 +5,8 @@ const EditRecord = ({ record, setEditRecord }) => {
   const [type, setType] = useState(record.type);
   const [amount, setAmount] = useState(record.amount);
   const [account, setAccount] = useState(record.account);
-  const [constDate, setConstDate] = useState(12 / 11 / 2022);
-  const [time, setTime] = useState("11 : 30");
+  const [constDate, setConstDate] = useState(record.date.slice(0, 10));
+  const [time, setTime] = useState(record.date.slice(11, 16));
   const [category, setCategory] = useState(record.category);
   const [payee, setPayee] = useState(record.payee);
   const [note, setNote] = useState(record.note);
@@ -14,7 +14,8 @@ const EditRecord = ({ record, setEditRecord }) => {
   const { addError } = useSelector((state) => state.records);
   const { accounts } = useSelector((state) => state.user);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     // submit i guess
   };
   return (
