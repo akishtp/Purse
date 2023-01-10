@@ -10,8 +10,8 @@ const EditRecord = ({ record, setEditRecord }) => {
   const [category, setCategory] = useState(record.category);
   const [payee, setPayee] = useState(record.payee);
   const [note, setNote] = useState(record.note);
-  let addError = "lol";
 
+  const { addError } = useSelector((state) => state.records);
   const { accounts } = useSelector((state) => state.user);
 
   const handleSubmit = () => {
@@ -130,7 +130,7 @@ const EditRecord = ({ record, setEditRecord }) => {
             <textarea />
           </label>
         </div>
-        <button type="submit">Add Record</button>
+        <button type="submit">Edit Record</button>
       </form>
     </div>
   );

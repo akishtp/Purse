@@ -95,6 +95,7 @@ const AddRecord = () => {
                   setAmount("");
                 }}
                 min="0"
+                max="999999999999"
               />
             </label>
             <label className="account-label">
