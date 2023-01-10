@@ -89,6 +89,7 @@ export const updateRecord = createAsyncThunk(
     try {
       const { data } = await axios.put(
         `https://verlow-server.up.railway.app/api/records/${_id}`,
+        { type, account, amount, category, date, payee, note },
         config
       );
       return data;
