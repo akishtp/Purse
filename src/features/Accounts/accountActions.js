@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { closeAddAccount } from "./userSlice";
+import { closeAddAccount } from "../user/userSlice";
 
 export const addAccount = createAsyncThunk(
   "accounts/add",
