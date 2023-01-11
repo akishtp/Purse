@@ -1,6 +1,7 @@
 .accounts-carousel {
   border-bottom: 1px solid #8f8f8f;
   background-color: #1f1f1f;
+  transition: 1s ease;
 }
 .accounts-view {
   width: 100%;

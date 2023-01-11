@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { addAccount } from "../../features/user/accountActions";
 import { openAddAccount } from "../../features/user/userSlice";
 import "./AccountsView.css";
+import UpdateAccount from "./UpdateAccount";
 
 const AccountsView = () => {
   const { accounts, userDetails } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [selected, setSelected] = useState(false);
+  const [updateAccount, setUpdateAccount] = useState(false);
 
   const handleSelect = (i) => {
     if (selected === i) {
@@ -60,7 +62,12 @@ const AccountsView = () => {
       </div>
       {(selected === 0 || selected) && (
         <div className="adjust-delete-accounts">
-          <button className="adjust-balance">edit balance</button>
+          <button
+            className="adjust-balance"
+            onClick={() => setUpdateAccount(selected)}
+          >
+            edit balance
+          </button>
           <button
             className="delete-account"
             disabled={selected === 0}
@@ -71,6 +78,9 @@ const AccountsView = () => {
             delete
           </button>
         </div>
+      )}
+      {updateAccount && (
+        <UpdateAccount i={selected} setUpdateAccount={setUpdateAccount} />
       )}
     </div>
   );
