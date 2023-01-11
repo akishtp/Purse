@@ -1,24 +1,19 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { closeAddAccount } from "../user/userSlice";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const addAccount = createAsyncThunk(
-  "accounts/add",
-  async ({ accounts, token }, { rejectWithValue, dispatch }) => {
+export const getAccounts = createAsyncThunk(
+  "accounts/get",
+  async (token, { rejectWithValue }) => {
     const config = {
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     };
     try {
-      const { data } = await axios.post(
-        "https://verlow-server.up.railway.app/api/user/profile",
-        { accounts },
+      const { data } = await axios.get(
+        "https://verlow-server.up.railway.app/api/accounts",
         config
       );
-      localStorage.setItem("userDetails", JSON.stringify(data));
-      dispatch(closeAddAccount());
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.error);
