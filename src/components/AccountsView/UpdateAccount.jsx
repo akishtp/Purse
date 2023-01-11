@@ -32,7 +32,7 @@ const UpdateAccount = ({ i, setUpdateAccount }) => {
   return (
     <div className="add-account">
       <div className="add-account-top">
-        <div className="add-account-read">Add Account</div>
+        <div className="add-account-read">Edit Account</div>
         <div
           className="add-account-close"
           onClick={() => setUpdateAccount(false)}
@@ -80,7 +80,7 @@ const UpdateAccount = ({ i, setUpdateAccount }) => {
           </label>
         </div>
         <div className="submit-details">
-          <button type="submit">Add Account</button>
+          <button type="submit">Edit Account</button>
         </div>
       </form>
     </div>

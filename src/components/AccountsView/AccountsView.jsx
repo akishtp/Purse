@@ -66,7 +66,7 @@ const AccountsView = () => {
             className="adjust-balance"
             onClick={() => setUpdateAccount(selected)}
           >
-            edit balance
+            edit account
           </button>
           <button
             className="delete-account"
@@ -79,7 +79,7 @@ const AccountsView = () => {
           </button>
         </div>
       )}
-      {updateAccount && (
+      {(updateAccount === 0 || updateAccount) && (
         <UpdateAccount i={selected} setUpdateAccount={setUpdateAccount} />
       )}
     </div>
