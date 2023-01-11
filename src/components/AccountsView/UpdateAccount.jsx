@@ -1,15 +1,32 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addAccount } from "../../features/user/accountActions";
 
 const UpdateAccount = ({ i, setUpdateAccount }) => {
-  const { accounts } = useSelector((state) => state.user);
+  const { accounts, userDetails } = useSelector((state) => state.user);
 
   const [accName, setAccName] = useState(accounts[i].name);
   const [accValue, setAccValue] = useState(accounts[i].money);
   const [color, setColor] = useState(accounts[i].color);
 
-  const handleAddAccount = () => {
+  const dispatch = useDispatch();
+
+  const handleAddAccount = (e) => {
+    e.preventDefault();
     let new_accounts = [];
+    for (let j = 0; j < accounts.length; j++) {
+      if (j !== i) {
+        new_accounts.push(accounts[j]);
+      } else {
+        new_accounts.push({
+          name: accName,
+          money: accValue,
+          color: color,
+        });
+      }
+    }
+    dispatch(addAccount({ accounts: new_accounts, token: userDetails.token }));
+    setUpdateAccount(false);
   };
 
   return (
