@@ -74,6 +74,7 @@ const UpdateRecord = ({ record, setEditRecord }) => {
                   setAmount("");
                 }}
                 min="0"
+                max="999999999999"
               />
             </label>
             <label className="account-label">
@@ -140,13 +141,13 @@ const UpdateRecord = ({ record, setEditRecord }) => {
               onChange={(e) => setPayee(e.target.value)}
             />
           </label>
-          <label
-            className="note-label"
-            value={note}
-            onChange={(e) => setNote(e.target.value)}
-          >
+          <label>
             Note :
-            <textarea />
+            <textarea
+              className="note-label"
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+            />
           </label>
         </div>
         <button type="submit">Edit Record</button>

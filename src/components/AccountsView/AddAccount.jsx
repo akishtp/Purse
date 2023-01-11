@@ -46,6 +46,8 @@ function AddAccount() {
                 value={accValue}
                 onChange={(e) => setAccValue(e.target.value)}
                 onClick={() => setAccValue("")}
+                min="0"
+                max="999999999999"
               />
             </label>
           </div>

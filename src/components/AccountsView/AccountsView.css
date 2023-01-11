@@ -1,9 +1,12 @@
+.accounts-carousel {
+  border-bottom: 1px solid #8f8f8f;
+  background-color: #1f1f1f;
+}
 .accounts-view {
   width: 100%;
   display: flex;
   align-items: center;
   height: 54px;
-  border-bottom: 1px solid #d0d0d0;
   overflow-x: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
@@ -21,11 +24,42 @@
   border-radius: 6px;
   padding: 0 12px;
   min-width: max-content;
+  cursor: pointer;
 }
 .accounts-view .add-account-button {
   background-color: transparent;
   border: 2px solid #d0d0d0;
-  cursor: pointer;
+}
+.adjust-delete-accounts {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.adjust-delete-accounts button {
+  height: 28px;
+  margin: 6px 10px 10px 10px;
+  border-radius: 12px;
+  padding: 0 12px;
+}
+.adjust-delete-accounts .adjust-balance {
+  background-color: transparent;
+  color: #f0f0f0;
+  border: 2px solid #f0f0f0;
+  /* border: none;
+  text-decoration: underline;
+  letter-spacing: 1.5px; */
+}
+.adjust-delete-accounts .delete-account {
+  height: 24px;
+  color: #f0f0f0;
+  background-color: #ff4949;
+  border: 2px solid #ff0000;
+  /* width: 24px; */
+}
+.adjust-delete-accounts .delete-account:disabled {
+  background-color: #762828;
+  border: 2px solid #a84141;
 }
 
 /* add-account */
