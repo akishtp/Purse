@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addAccount } from "../../features/user/accountActions";
+import { addAccount } from "../../features/accounts/accountActions";
 
 const UpdateAccount = ({ i, setUpdateAccount }) => {
-  const { accounts, userDetails } = useSelector((state) => state.user);
+  const { userDetails } = useSelector((state) => state.user);
+  const { accounts } = useSelector((state) => state.accounts);
 
   const [accName, setAccName] = useState(accounts[i].name);
-  const [accValue, setAccValue] = useState(accounts[i].money);
+  const [accValue, setAccValue] = useState(accounts[i].balance);
   const [color, setColor] = useState(accounts[i].color);
 
   const dispatch = useDispatch();

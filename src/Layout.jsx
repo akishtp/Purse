@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 import AddRecord from "./components/Record/AddRecord";
 import { useEffect } from "react";
 import { getRecords } from "./features/records/recordsActions";
+import { getAccounts } from "./features/accounts/accountActions";
 
 const Layout = () => {
   const { addRecord } = useSelector((state) => state.records);
@@ -15,6 +16,7 @@ const Layout = () => {
   useEffect(() => {
     try {
       dispatch(getRecords(userDetails.token));
+      dispatch(getAccounts(userDetails.token));
     } catch {
       navigate("/auth");
     }

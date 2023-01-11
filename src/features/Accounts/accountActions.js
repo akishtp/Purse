@@ -20,3 +20,5 @@ export const getAccounts = createAsyncThunk(
     }
   }
 );
+
+export const addAccount = createAsyncThunk("account/add", () => {});

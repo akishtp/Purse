@@ -5,12 +5,21 @@ const initialState = {
   accounts: [],
   loading: false,
   accountsError: null,
+  addAccount: false,
 };
 
 const accountSlice = createSlice({
   name: "accounts",
   initialState,
-  reducers: {},
+  reducers: {
+    closeAddAccount: (state) => {
+      state.addAccount = false;
+    },
+    openAddAccount: (state) => {
+      state.addAccount = true;
+      state.accountsError = null;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getAccounts.pending, (state) => {
       state.loading = true;
@@ -26,5 +35,7 @@ const accountSlice = createSlice({
     });
   },
 });
+
+export const { openAddAccount, closeAddAccount } = accountSlice.actions;
 
 export default accountSlice.reducer;

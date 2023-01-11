@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addAccount } from "../../features/user/accountActions";
-import { closeAddAccount } from "../../features/user/userSlice";
+import { addAccount } from "../../features/accounts/accountActions";
+import { closeAddAccount } from "../../features/accounts/accountSlice";
 
 function AddAccount() {
   const [accName, setAccName] = useState("");
   const [accValue, setAccValue] = useState(0);
   const [color, setColor] = useState("Default");
-  const { userDetails, accounts } = useSelector((state) => state.user);
+  const { userDetails } = useSelector((state) => state.user);
+  const { accounts } = useSelector((state) => state.accounts);
+
   const dispatch = useDispatch();
 
   const handleAddAccount = (e) => {
