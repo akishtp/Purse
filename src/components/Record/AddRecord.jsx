@@ -6,11 +6,16 @@ import { closeAddRecord } from "../../features/records/recordsSlice";
 const AddRecord = () => {
   var currentDate = new Date();
 
+  const { addError, records, loading } = useSelector((state) => state.records);
+  const { userDetails } = useSelector((state) => state.user);
+  const { accounts } = useSelector((state) => state.accounts);
+
   const [type, setType] = useState("expense");
-  const [account, setAccount] = useState("CASH");
+  const [account, setAccount] = useState(accounts[0].name);
   const [amount, setAmount] = useState("0");
   const [time, setTime] = useState(
-    currentDate.getHours() +
+    (currentDate.getHours() < 10 ? "0" : "") +
+      currentDate.getHours() +
       ":" +
       (currentDate.getMinutes() < 10 ? "0" : "") +
       currentDate.getMinutes()
@@ -23,15 +28,12 @@ const AddRecord = () => {
   const [note, setNote] = useState("");
 
   const dispatch = useDispatch();
-  const { addError, records, loading } = useSelector((state) => state.records);
-  const { userDetails, accounts } = useSelector((state) => state.user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const date = `${constDate}T${time}:00.000+00:00`;
     if (userDetails) {
       const token = userDetails.token;
-      console.log(account);
       dispatch(
         addRecord({
           type,

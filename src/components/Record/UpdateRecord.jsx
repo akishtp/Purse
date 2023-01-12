@@ -13,7 +13,8 @@ const UpdateRecord = ({ record, setEditRecord }) => {
   const [note, setNote] = useState(record.note);
 
   const { addError } = useSelector((state) => state.records);
-  const { accounts, userDetails } = useSelector((state) => state.user);
+  const { userDetails } = useSelector((state) => state.user);
+  const { accounts } = useSelector((state) => state.accounts);
 
   const dispatch = useDispatch();
 
