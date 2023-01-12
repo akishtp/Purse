@@ -7,7 +7,7 @@ const UpdateAccount = ({ i, setUpdateAccount }) => {
   const { accounts } = useSelector((state) => state.accounts);
 
   const [accName, setAccName] = useState(accounts[i].name);
-  const [accValue, setAccValue] = useState(accounts[i].balance);
+  const [balance, setbalance] = useState(accounts[i].balance);
   const [color, setColor] = useState(accounts[i].color);
 
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const UpdateAccount = ({ i, setUpdateAccount }) => {
       } else {
         new_accounts.push({
           name: accName,
-          money: accValue,
+          money: balance,
           color: color,
         });
       }
@@ -57,9 +57,9 @@ const UpdateAccount = ({ i, setUpdateAccount }) => {
               Initial Value
               <input
                 type="number"
-                value={accValue}
-                onChange={(e) => setAccValue(e.target.value)}
-                onClick={() => setAccValue("")}
+                value={balance}
+                onChange={(e) => setbalance(e.target.value)}
+                onClick={() => setbalance("")}
                 min="0"
                 max="999999999999"
               />

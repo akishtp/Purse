@@ -5,17 +5,17 @@ import { closeAddAccount } from "../../features/accounts/accountSlice";
 
 function AddAccount() {
   const [accName, setAccName] = useState("");
-  const [accValue, setAccValue] = useState(0);
+  const [balance, setbalance] = useState(0);
   const [color, setColor] = useState("Default");
   const { userDetails } = useSelector((state) => state.user);
-  const { accounts } = useSelector((state) => state.accounts);
 
   const dispatch = useDispatch();
 
   const handleAddAccount = (e) => {
     e.preventDefault();
-    let new_accounts = [...accounts, { name: accName, money: accValue, color }];
-    dispatch(addAccount({ accounts: new_accounts, token: userDetails.token }));
+    dispatch(
+      addAccount({ name: accName, balance, color, token: userDetails.token })
+    );
   };
 
   return (
@@ -45,9 +45,9 @@ function AddAccount() {
               Initial Value
               <input
                 type="number"
-                value={accValue}
-                onChange={(e) => setAccValue(e.target.value)}
-                onClick={() => setAccValue("")}
+                value={balance}
+                onChange={(e) => setbalance(e.target.value)}
+                onClick={() => setbalance("")}
                 min="0"
                 max="999999999999"
               />
