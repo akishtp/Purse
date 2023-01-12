@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateAccount } from "../../features/accounts/accountActions";
 import { addRecord } from "../../features/records/recordsActions";
 import { closeAddRecord } from "../../features/records/recordsSlice";
 
@@ -12,7 +11,7 @@ const AddRecord = () => {
   const { accounts } = useSelector((state) => state.accounts);
 
   const [type, setType] = useState("expense");
-  const [account, setAccount] = useState(accounts[0].name);
+  const [account, setAccount] = useState(accounts[0]._id);
   const [amount, setAmount] = useState("0");
   const [time, setTime] = useState(
     (currentDate.getHours() < 10 ? "0" : "") +
@@ -27,7 +26,6 @@ const AddRecord = () => {
   const [category, setCategory] = useState("Others");
   const [payee, setPayee] = useState("");
   const [note, setNote] = useState("");
-  const [selected, setSelected] = useState("");
 
   const dispatch = useDispatch();
 
@@ -49,21 +47,8 @@ const AddRecord = () => {
           token,
         })
       );
-      let new_balance = Number(accounts[selected].balance);
-      if (type === "expense") {
-        new_balance -= Number(amount);
-      } else {
-        new_balance += Number(amount);
-      }
-      dispatch(
-        updateAccount({
-          balance: new_balance,
-          _id: accounts[selected]._id,
-          token: userDetails.token,
-        })
-      );
     } catch (error) {
-      console.log("error:::::" + error);
+      console.log("error:" + error);
     }
   };
 
@@ -127,11 +112,7 @@ const AddRecord = () => {
                 value={account}
               >
                 {accounts.map((account, i) => (
-                  <option
-                    key={i}
-                    value={account.name}
-                    onClick={() => setSelected(i)}
-                  >
+                  <option key={i} value={account._id}>
                     {account.name}
                   </option>
                 ))}

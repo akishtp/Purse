@@ -86,7 +86,7 @@ const UpdateRecord = ({ record, setEditRecord }) => {
                 value={account}
               >
                 {accounts.map((account, i) => (
-                  <option key={i} value={account.name}>
+                  <option key={i} value={account._id}>
                     {account.name}
                   </option>
                 ))}

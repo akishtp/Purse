@@ -1,8 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getAccounts, addAccount, deleteAccounts } from "./accountActions";
 
+const accounts = localStorage.getItem("accounts")
+  ? JSON.parse(localStorage.getItem("accounts"))
+  : [];
+
 const initialState = {
-  accounts: [],
+  accounts,
   loading: false,
   accountsError: null,
   addAccount: false,

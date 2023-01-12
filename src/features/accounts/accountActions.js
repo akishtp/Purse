@@ -15,6 +15,7 @@ export const getAccounts = createAsyncThunk(
         "https://verlow-server.up.railway.app/api/accounts",
         config
       );
+      localStorage.setItem("accounts", JSON.stringify(data));
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.error);
