@@ -2,6 +2,11 @@
   border-bottom: 1px solid #8f8f8f;
   background-color: #1f1f1f;
   transition: 1s ease;
+  min-height: 54px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 5px;
 }
 .accounts-view {
   width: 100%;
@@ -19,7 +24,7 @@
 .accounts-view .account-details {
   height: 36px;
   background-color: #8664ff;
-  margin: 0 0 0 10px;
+  margin: 0 5px;
   display: flex;
   align-items: center;
   border-radius: 6px;
@@ -39,7 +44,7 @@
 }
 .adjust-delete-accounts button {
   height: 28px;
-  margin: 6px 10px 10px 10px;
+  margin: 6px 5px 10px 5px;
   border-radius: 12px;
   padding: 0 12px;
 }

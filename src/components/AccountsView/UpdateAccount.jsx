@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addAccount } from "../../features/accounts/accountActions";
+import { updateAccount } from "../../features/accounts/accountActions";
 
 const UpdateAccount = ({ i, setUpdateAccount }) => {
   const { userDetails } = useSelector((state) => state.user);
@@ -12,22 +12,18 @@ const UpdateAccount = ({ i, setUpdateAccount }) => {
 
   const dispatch = useDispatch();
 
-  const handleAddAccount = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    let new_accounts = [];
-    for (let j = 0; j < accounts.length; j++) {
-      if (j !== i) {
-        new_accounts.push(accounts[j]);
-      } else {
-        new_accounts.push({
-          name: accName,
-          money: balance,
-          color: color,
-        });
-      }
-    }
-    dispatch(addAccount({ accounts: new_accounts, token: userDetails.token }));
-    setUpdateAccount(false);
+    console.log(accounts[i]._id);
+    dispatch(
+      updateAccount({
+        name: accName,
+        balance,
+        color,
+        _id: accounts[i]._id,
+        token: userDetails.token,
+      })
+    );
   };
 
   return (
@@ -41,7 +37,7 @@ const UpdateAccount = ({ i, setUpdateAccount }) => {
           x
         </div>
       </div>
-      <form onSubmit={(e) => handleAddAccount(e)}>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <div className="get-details" style={{ backgroundColor: color }}>
           <div className="name-value">
             <label>

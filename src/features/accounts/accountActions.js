@@ -66,3 +66,29 @@ export const deleteAccounts = createAsyncThunk(
     }
   }
 );
+
+export const updateAccount = createAsyncThunk(
+  "account/update",
+  async (
+    { name, balance, color, _id, token },
+    { rejectWithValue, dispatch }
+  ) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    try {
+      const { data } = await axios.put(
+        `https://verlow-server.up.railway.app/api/records/${_id}`,
+        { name, balance, color },
+        config
+      );
+      // dispatch(getRecords(token));
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.error);
+    }
+  }
+);
