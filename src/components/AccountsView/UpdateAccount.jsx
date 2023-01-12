@@ -14,7 +14,6 @@ const UpdateAccount = ({ i, setUpdateAccount }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(accounts[i]._id);
     dispatch(
       updateAccount({
         name: accName,
@@ -23,7 +22,7 @@ const UpdateAccount = ({ i, setUpdateAccount }) => {
         _id: accounts[i]._id,
         token: userDetails.token,
       })
-    );
+    ).then(setUpdateAccount(false));
   };
 
   return (

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { updateAccount } from "../../features/accounts/accountActions";
 import { addRecord } from "../../features/records/recordsActions";
 import { closeAddRecord } from "../../features/records/recordsSlice";
 
@@ -26,14 +27,16 @@ const AddRecord = () => {
   const [category, setCategory] = useState("Others");
   const [payee, setPayee] = useState("");
   const [note, setNote] = useState("");
+  const [selected, setSelected] = useState("");
 
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const date = `${constDate}T${time}:00.000+00:00`;
-    if (userDetails) {
-      const token = userDetails.token;
+
+    const token = userDetails.token;
+    try {
       dispatch(
         addRecord({
           type,
@@ -46,14 +49,30 @@ const AddRecord = () => {
           token,
         })
       );
+      let new_balance = Number(accounts[selected].balance);
+      if (type === "expense") {
+        new_balance -= Number(amount);
+      } else {
+        new_balance += Number(amount);
+      }
+      dispatch(
+        updateAccount({
+          balance: new_balance,
+          _id: accounts[selected]._id,
+          token: userDetails.token,
+        })
+      );
+    } catch (error) {
+      console.log("error:::::" + error);
     }
   };
+
   useEffect(() => {
     try {
       setCategory(records[0].category);
       setAccount(records[0].account);
     } catch {
-      // null
+      // do nothing
     }
   }, [records]);
   return (
@@ -108,7 +127,11 @@ const AddRecord = () => {
                 value={account}
               >
                 {accounts.map((account, i) => (
-                  <option key={i} value={account.name}>
+                  <option
+                    key={i}
+                    value={account.name}
+                    onClick={() => setSelected(i)}
+                  >
                     {account.name}
                   </option>
                 ))}

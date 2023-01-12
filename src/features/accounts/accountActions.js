@@ -81,11 +81,11 @@ export const updateAccount = createAsyncThunk(
     };
     try {
       const { data } = await axios.put(
-        `https://verlow-server.up.railway.app/api/records/${_id}`,
+        `https://verlow-server.up.railway.app/api/accounts/${_id}`,
         { name, balance, color },
         config
       );
-      // dispatch(getRecords(token));
+      dispatch(getAccounts(token));
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.error);
