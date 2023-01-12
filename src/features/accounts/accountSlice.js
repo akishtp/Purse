@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAccounts, addAccount } from "./accountActions";
+import { getAccounts, addAccount, deleteAccounts } from "./accountActions";
 
 const initialState = {
   accounts: [],
@@ -21,6 +21,7 @@ const accountSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    // get all account
     builder.addCase(getAccounts.pending, (state) => {
       state.loading = true;
       state.accountsError = null;
@@ -33,6 +34,7 @@ const accountSlice = createSlice({
       state.loading = false;
       state.accountsError = payload;
     });
+    // add new account
     builder.addCase(addAccount.pending, (state) => {
       state.loading = true;
       state.accountsError = null;
@@ -42,6 +44,19 @@ const accountSlice = createSlice({
       state.accounts.push(payload);
     });
     builder.addCase(addAccount.rejected, (state, { payload }) => {
+      state.loading = false;
+      state.accountsError = payload;
+    });
+    // delete account
+    builder.addCase(deleteAccounts.pending, (state) => {
+      state.loading = true;
+      state.accountsError = null;
+    });
+    builder.addCase(deleteAccounts.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      // state.accounts = payload;
+    });
+    builder.addCase(deleteAccounts.rejected, (state, { payload }) => {
       state.loading = false;
       state.accountsError = payload;
     });

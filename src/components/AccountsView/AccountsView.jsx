@@ -1,7 +1,7 @@
 import UpdateAccount from "./UpdateAccount";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addAccount } from "../../features/accounts/accountActions";
+import { deleteAccounts } from "../../features/accounts/accountActions";
 import { openAddAccount } from "../../features/accounts/accountSlice";
 import "./AccountsView.css";
 
@@ -23,19 +23,8 @@ const AccountsView = () => {
   };
 
   const handleDelete = async () => {
-    let new_accounts = [];
-    for (let i = 0; i < accounts.length; i++) {
-      if (i !== selected) {
-        new_accounts.push(accounts[i]);
-        console.log(new_accounts);
-      }
-    }
-    if (window.confirm("Are you sure you wan to delete this account?")) {
-      dispatch(
-        addAccount({ accounts: new_accounts, token: userDetails.token })
-      );
-      setSelected(false);
-    }
+    const token = userDetails.token;
+    dispatch(deleteAccounts({ _id: accounts[selected]._id, token }));
   };
 
   return (
