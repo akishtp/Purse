@@ -48,7 +48,7 @@ const AddRecord = () => {
         })
       );
     } catch (error) {
-      console.log("error:" + error);
+      // do nothing
     }
   };
 

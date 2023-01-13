@@ -6,12 +6,9 @@ import UpdateRecord from "./UpdateRecord";
 
 const Record = ({ record }) => {
   const { userDetails } = useSelector((state) => state.user);
-  const { accounts } = useSelector((state) => state.accounts);
 
   const [editRecord, setEditRecord] = useState(false);
   const [recordSmall, setRecordSmall] = useState(false);
-  console.log("accounts are:" + accounts);
-  var account = accounts.find((account) => account._id === record.account);
   const dispatch = useDispatch();
 
   const handleDelete = () => {
@@ -34,7 +31,7 @@ const Record = ({ record }) => {
             />
             <div className="record-details">
               <p className="category">{record.category}</p>
-              <p className="account">{account.name}</p>
+              <p className="account">{record.account_name}</p>
               <div className="extras">
                 {record.note && <p className="payee">{record.note}</p>}
                 {record.note && record.payee && <>&nbsp;-&nbsp;</>}

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { closeAddRecord } from "./recordsSlice";
+import { getAccounts } from "../accounts/accountActions";
 
 export const getRecords = createAsyncThunk(
   "record/get",
@@ -41,6 +42,7 @@ export const addRecord = createAsyncThunk(
         config
       );
       dispatch(getRecords(token));
+      dispatch(getAccounts(token));
       dispatch(closeAddRecord());
       return data;
     } catch (error) {
@@ -64,6 +66,7 @@ export const deleteRecord = createAsyncThunk(
         config
       );
       dispatch(getRecords(token));
+      dispatch(getAccounts(token));
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.error);
@@ -89,6 +92,7 @@ export const updateRecord = createAsyncThunk(
         { type, account, amount, category, date, payee, note },
         config
       );
+      dispatch(getAccounts(token));
       dispatch(getRecords(token));
       return data;
     } catch (error) {

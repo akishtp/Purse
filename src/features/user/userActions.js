@@ -1,9 +1,10 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { getAccounts } from "../accounts/accountActions";
 
 export const signup = createAsyncThunk(
   "user/signup",
-  async ({ name, password, email }, { rejectWithValue }) => {
+  async ({ name, password, email }, { rejectWithValue, dispatch }) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -16,6 +17,7 @@ export const signup = createAsyncThunk(
         config
       );
       localStorage.setItem("userDetails", JSON.stringify(data));
+      dispatch(getAccounts(data.token));
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.error);
@@ -25,7 +27,7 @@ export const signup = createAsyncThunk(
 
 export const login = createAsyncThunk(
   "user/login",
-  async ({ name, password }, { rejectWithValue }) => {
+  async ({ name, password }, { rejectWithValue, dispatch }) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -38,6 +40,7 @@ export const login = createAsyncThunk(
         config
       );
       localStorage.setItem("userDetails", JSON.stringify(data));
+      dispatch(getAccounts(data.token));
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.error);
