@@ -6,7 +6,6 @@ const UpdateRecord = ({ record, setEditRecord }) => {
   const [type, setType] = useState(record.type);
   const [amount, setAmount] = useState(record.amount);
   const [account, setAccount] = useState(record.account);
-  const [account_name, setAccount_name] = useState(record.account_name);
   const [constDate, setConstDate] = useState(record.date.slice(0, 10));
   const [time, setTime] = useState(record.date.slice(11, 16));
   const [category, setCategory] = useState(record.category);
@@ -42,9 +41,9 @@ const UpdateRecord = ({ record, setEditRecord }) => {
   useEffect(() => {
     if (Object.values(accounts).includes(account) === false) {
       setAccount(accounts[0]._id);
-      setAccount_name(accounts[0].name);
     }
-  });
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div className="add-record">
