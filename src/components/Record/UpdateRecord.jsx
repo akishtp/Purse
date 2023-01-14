@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateRecord } from "../../features/records/recordsActions";
 
@@ -6,6 +6,7 @@ const UpdateRecord = ({ record, setEditRecord }) => {
   const [type, setType] = useState(record.type);
   const [amount, setAmount] = useState(record.amount);
   const [account, setAccount] = useState(record.account);
+  const [account_name, setAccount_name] = useState(record.account_name);
   const [constDate, setConstDate] = useState(record.date.slice(0, 10));
   const [time, setTime] = useState(record.date.slice(11, 16));
   const [category, setCategory] = useState(record.category);
@@ -37,6 +38,14 @@ const UpdateRecord = ({ record, setEditRecord }) => {
       );
     }
   };
+
+  useEffect(() => {
+    if (Object.values(accounts).includes(account) === false) {
+      setAccount(accounts[0]._id);
+      setAccount_name(accounts[0].name);
+    }
+  });
+
   return (
     <div className="add-record">
       <div className="add-record-top">
@@ -126,8 +135,8 @@ const UpdateRecord = ({ record, setEditRecord }) => {
               <option value="Shopping">Shopping</option>
               <option value="Housing">Housing</option>
               <option value="Transportation">Transportation</option>
-              <option value="Vehicle">Vehicle</option>
               <option value="Life & Entertainmnet">Life & Entertainment</option>
+              <option value="Vehicle">Vehicle</option>
               <option value="Investment">Investment</option>
               <option value="Income">Income</option>
               <option value="Others">Others</option>
