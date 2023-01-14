@@ -44,8 +44,10 @@ const recordSlice = createSlice({
         state.loading = true;
         state.addError = null;
       })
-      .addCase(addRecord.fulfilled, (state) => {
+      .addCase(addRecord.fulfilled, (state, { payload }) => {
         state.loading = false;
+        state.records = payload;
+        state.addRecord = false;
       })
       .addCase(addRecord.rejected, (state, { payload }) => {
         state.loading = false;
@@ -57,6 +59,7 @@ const recordSlice = createSlice({
       })
       .addCase(deleteRecord.fulfilled, (state, { payload }) => {
         state.loading = false;
+        state.records = payload;
       })
       .addCase(deleteRecord.rejected, (state, { payload }) => {
         state.loading = false;
@@ -66,8 +69,9 @@ const recordSlice = createSlice({
         state.loading = true;
         state.addError = null;
       })
-      .addCase(updateRecord.fulfilled, (state) => {
+      .addCase(updateRecord.fulfilled, (state, { payload }) => {
         state.loading = false;
+        state.records = payload;
       })
       .addCase(updateRecord.rejected, (state, { payload }) => {
         state.loading = false;
