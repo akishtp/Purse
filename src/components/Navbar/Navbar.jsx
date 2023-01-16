@@ -15,8 +15,7 @@ const Navbar = () => {
   return (
     <nav className="nav">
       <div className="left-side">
-        <Link to="/">Home</Link>
-        <Link to="/records">Records</Link>
+        <Link to="/">Purse</Link>
       </div>
       <div className="right-side" onClick={() => handleLogout()}>
         {userDetails.name}
