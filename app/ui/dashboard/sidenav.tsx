@@ -8,7 +8,7 @@ export default function SideNav() {
     <div className="h-full flex flex-col overflow-hidden rounded-xl">
       <Link href="/">
         <div
-          className={`${playfair_display.className} h-64 bg-violet-700 rounded-2xl text-3xl p-4 flex items-end`}
+          className={`${playfair_display.className} h-40 bg-violet-700 rounded-2xl text-3xl p-4 flex items-end hover:bg-violet-800`}
         >
           Purse
         </div>
