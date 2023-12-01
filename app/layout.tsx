@@ -1,14 +1,14 @@
 import '@/app/ui/global.css';
-import { playfair_display } from '@/app/ui/fonts';
+import { work_sans } from '@/app/ui/fonts';
 
 export default function RootLayout({
   children,
-} : {
+}: {
   children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <body className={`${playfair_display.className} antialiased`}>{children}</body>
+      <body className={`${work_sans.className} antialiased bg-neutral-900 text-neutral-200`}>{children}</body>
     </html>
   );
 }
