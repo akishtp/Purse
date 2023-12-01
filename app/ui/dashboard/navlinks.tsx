@@ -1,5 +1,9 @@
+"use client";
+
 import { HomeIcon, WalletIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import clsx from "clsx";
 
 const Links = [
   {
@@ -15,6 +19,7 @@ const Links = [
 ];
 
 export default function NavLinks() {
+  const pathname = usePathname();
   return (
     <>
       {Links.map((link) => {
@@ -23,7 +28,10 @@ export default function NavLinks() {
           <Link
             key={link.name}
             href={link.href}
-            className="bg-neutral-900 h-14 flex items-center rounded-xl p-3 hover:bg-neutral-800 my-1"
+            className={clsx(
+              `bg-neutral-900 h-14 flex items-center rounded-xl p-3 hover:bg-neutral-800 my-1`,
+              { "bg-neutral-700": pathname === link.href }
+            )}
           >
             <LinkIcon className="w-6" />
             <p className="pl-2">{link.name}</p>
