@@ -1,0 +1,39 @@
+// schema.prisma
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider  = "postgresql"
+    url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+    directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model User {
+    id        String     @id @default(cuid())
+    name      String
+    email     String     @unique
+    createdAt DateTime   @default(now()) @map(name: "created_at")
+    accounts  Accounts[] @relation("UserAccounts")
+}
+
+model Accounts {
+    id      String    @id @default(cuid())
+    name    String
+    balance Int
+    User    User      @relation("UserAccounts", fields: [userId], references: [id])
+    userId  String
+    records Records[]
+}
+
+model Records {
+    id         String   @id @default(cuid())
+    amount     Int
+    type       String
+    datetime   DateTime @default(now())
+    category   String
+    note       String?
+    account    Accounts @relation(fields: [accountsId], references: [id])
+    accountsId String
+}
