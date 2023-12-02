@@ -30,7 +30,7 @@ export default function NavLinks() {
             href={link.href}
             className={clsx(
               `bg-neutral-900 h-14 flex items-center rounded-xl p-3 hover:bg-neutral-800 my-1`,
-              { "bg-neutral-700": pathname === link.href }
+              { "bg-neutral-800": pathname === link.href }
             )}
           >
             <LinkIcon className="w-6" />

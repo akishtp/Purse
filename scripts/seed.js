@@ -119,7 +119,7 @@ async function main() {
 
   // await seedUsers(client);
   // await seedAccounts(client);
-  await seedRecords(client);
+  // await seedRecords(client);
 
   await client.end();
 }

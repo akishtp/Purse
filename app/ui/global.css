@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-.hello{
-    background-color: aliceblue;
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.main-content {
+  width: calc(100vw - 44.6666%);
+  margin-left: 16.6666%;
+}
+.left-content {
+  width: 28%;
 }
