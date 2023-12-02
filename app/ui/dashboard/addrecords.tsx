@@ -9,10 +9,10 @@ export default function AddRecords() {
           Income
         </div>
       </div>
-      <div className="bg-neutral-900 rounded-xl my-2.5 flex flex-col px-3 py-2">
+      <div className="bg-neutral-900 rounded-xl my-2.5 flex flex-col px-4 py-3">
         <label className="h-11 flex justify-between items-center">
           Account:
-          <select className="h-9 px-1 bg-neutral-800 w-2/3 text-right">
+          <select className="h-9 px-1 bg-neutral-800 w-70 text-right">
             <option>Cash</option>
             <option>SBI</option>
           </select>
@@ -21,19 +21,19 @@ export default function AddRecords() {
           Amount:
           <input
             type="number"
-            className="h-9 px-2 bg-neutral-800 w-2/3 text-right"
+            className="h-9 px-2 bg-neutral-800 w-70 text-right"
           />
         </label>
         <label className="h-11 flex justify-between items-center">
           Date:
           <input
             type="datetime-local"
-            className="h-9 px-2 bg-neutral-800 w-2/3 text-right"
+            className="h-9 px-2 bg-neutral-800 w-70 text-right"
           />
         </label>
         <label className="h-11 flex justify-between items-center">
           Category:
-          <select className="h-9 px-1 bg-neutral-800 w-2/3 text-right">
+          <select className="h-9 px-1 bg-neutral-800 w-70 text-right">
             <option>Groceries</option>
             <option>Tranport</option>
             <option>Fuel</option>
@@ -43,7 +43,7 @@ export default function AddRecords() {
           Note:
           <input
             type="text"
-            className="h-9 px-2 bg-neutral-800 w-2/3 text-right"
+            className="h-9 px-2 bg-neutral-800 w-70 text-right"
           />
         </label>
       </div>

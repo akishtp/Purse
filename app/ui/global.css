@@ -13,9 +13,12 @@ input[type="number"] {
 }
 
 .main-content {
-  width: calc(100vw - 44.6666%);
+  width: calc(100vw - 42.6666%);
   margin-left: 16.6666%;
 }
 .left-content {
-  width: 28%;
+  width: 26%;
+}
+.w-70 {
+  width: 74%;
 }
