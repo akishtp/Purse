@@ -1,5 +1,8 @@
-import prisma from "@/app/lib/prisma";
+import { fetchRecords } from "@/app/lib/data";
 
-export default function Page() {
-  return <p>Records</p>;
+export default async function Page() {
+  const records = await fetchRecords();
+  console.log(records);
+
+  return <p>Hello</p>;
 }

@@ -22,7 +22,7 @@ model Accounts {
     id      String    @id @default(cuid())
     name    String
     balance Int
-    User    User      @relation("UserAccounts", fields: [userId], references: [id])
+    user    User      @relation("UserAccounts", fields: [userId], references: [id])
     userId  String
     records Records[]
 }
