@@ -11,29 +11,68 @@ datasource db {
 }
 
 model User {
-    id        String     @id @default(cuid())
-    name      String
-    email     String     @unique
-    createdAt DateTime   @default(now()) @map(name: "created_at")
-    accounts  Accounts[] @relation("UserAccounts")
+    id         String       @id @default(cuid())
+    name       String
+    email      String       @unique
+    createdAt  DateTime     @default(now()) @map(name: "created_at")
+    banccounts BAnccounts[]
+    accounts   Account[]
+    session    Session[]
 }
 
-model Accounts {
+model Session {
+    id           String   @id @default(cuid())
+    sessionToken String   @unique @map("session_token")
+    userId       String   @map("user_id")
+    expires      DateTime
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Account {
+    id                 String  @id @default(cuid())
+    type               String
+    provider           String
+    providerAccountId  String  @map("provider_account_id")
+    refresh_token      String?
+    access_token       String?
+    expires_at         Int?
+    token_type         String?
+    scope              String?
+    id_token           String?
+    session_state      String?
+    oauth_token_secret String?
+    oauth_token        String?
+    User               User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId             String  @map("user_id")
+
+    @@unique([provider, providerAccountId])
+}
+
+model BAnccounts {
     id      String    @id @default(cuid())
     name    String
     balance Int
-    user    User      @relation("UserAccounts", fields: [userId], references: [id])
+    user    User      @relation(fields: [userId], references: [id])
     userId  String
     records Records[]
 }
 
 model Records {
-    id         String   @id @default(cuid())
+    id         String     @id @default(cuid())
     amount     Int
     type       String
-    datetime   DateTime @default(now())
+    datetime   DateTime   @default(now())
     category   String
     note       String?
-    account    Accounts @relation(fields: [accountsId], references: [id])
+    account    BAnccounts @relation(fields: [accountsId], references: [id])
     accountsId String
+}
+
+model VerificationToken {
+    id         Int      @id @default(autoincrement())
+    identifier String
+    token      String   @unique
+    expires    DateTime
+
+    @@unique([identifier, token])
 }

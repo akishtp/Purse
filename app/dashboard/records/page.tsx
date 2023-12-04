@@ -1,4 +1,5 @@
 import { fetchRecords } from "@/app/lib/data";
+// import { Record } from "../../lib/definitions";
 
 export default async function Page() {
   const records = await fetchRecords();

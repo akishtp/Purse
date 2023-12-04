@@ -1,8 +1,9 @@
 import prisma from "@/app/lib/prisma";
+import { Record } from "./definitions";
 
 export async function fetchRecords() {
   try {
-    const records = await prisma.records.findMany({
+    const records: Record[] = await prisma.records.findMany({
       where: { type: "Expense" },
       include: {
         account: {
@@ -10,7 +11,7 @@ export async function fetchRecords() {
         },
       },
     });
-    return { props: records };
+    return { records };
   } catch (err) {
     console.log(err);
   }
