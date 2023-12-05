@@ -1,7 +1,6 @@
 "use client";
 
 import { signIn, useSession } from "next-auth/react";
-import Link from "next/link";
 
 export default function Page() {
   const { data: session, status } = useSession();
@@ -26,12 +25,8 @@ export default function Page() {
       </button>
     );
   }
-  if (session) {
-    button = (
-      <Link href="/dashboard">
-        <button>Dashboard</button>
-      </Link>
-    );
+  if (status === "authenticated") {
+    return <p>Signed in as {session.user!.email}</p>;
   }
 
   return (
