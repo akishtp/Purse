@@ -4,7 +4,7 @@ import App from "./App.tsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import E404 from "./E404.tsx";
-import Login from "./routes/login.tsx";
+import Login from "./routes/Login.tsx";
 import Loans from "./routes/Loans.tsx";
 import Records from "./routes/Records.tsx";
 import Overview from "./routes/Overview.tsx";
