@@ -6,6 +6,9 @@ export default {
       fontFamily: {
         playfair: ["Playfair Display", "serif"],
       },
+      height: {
+        content: "calc(100vh - 16px)",
+      },
     },
   },
   plugins: [],

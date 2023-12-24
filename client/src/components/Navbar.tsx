@@ -1,4 +1,6 @@
 import { IoHome, IoFileTrayFull, IoPower } from "react-icons/io5";
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
   return (
     <nav className="w-2/12 h-screen p-2 flex flex-col justify-between">
@@ -10,10 +12,12 @@ const Navbar = () => {
           <IoHome className="text-3xl" />
           <span className="pl-3">Home</span>
         </div>
-        <div className="flex bg-neutral-900 rounded-xl my-2 h-16 items-center px-3 hover:bg-neutral-800">
-          <IoFileTrayFull className="text-3xl" />
-          <span className="pl-3">Records</span>
-        </div>
+        <Link to="records">
+          <div className="flex bg-neutral-900 rounded-xl my-2 h-16 items-center px-3 hover:bg-neutral-800">
+            <IoFileTrayFull className="text-3xl" />
+            <span className="pl-3">Records</span>
+          </div>
+        </Link>
       </div>
       <div>
         <div className="flex bg-neutral-900 rounded-xl h-16 items-center px-3 hover:bg-neutral-800">
