@@ -1,5 +1,5 @@
 import { IoHome, IoPower } from "react-icons/io5";
-import { BsCashStack } from "react-icons/bs";
+import { BsCashStack, BsGraphUp } from "react-icons/bs";
 import { Link, Location, useLocation } from "react-router-dom";
 
 const Navbar = () => {
@@ -22,6 +22,18 @@ const Navbar = () => {
           >
             <IoHome className="text-3xl" />
             <span className="pl-3">Home</span>
+          </div>
+        </Link>
+        <Link to="overview">
+          <div
+            className={`flex rounded-xl my-2 h-16 items-center px-3 hover:bg-neutral-800 ${
+              location.pathname === "/overview"
+                ? "bg-neutral-800"
+                : "bg-neutral-900"
+            }`}
+          >
+            <BsGraphUp className="text-3xl" />
+            <span className="pl-3">Overview</span>
           </div>
         </Link>
         <Link to="loans">

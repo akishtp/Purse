@@ -2,7 +2,7 @@ import { LuFuel } from "react-icons/lu";
 
 const RecordsView = () => {
   return (
-    <div className="h-1/2 rounded-2xl overflow-hidden">
+    <div className="h-fit rounded-2xl overflow-hidden">
       <div className="bg-neutral-800 h-14 flex items-center px-4 justify-between">
         <div className="text-lg font-bold">Records</div>
         <select className="bg-transparent">

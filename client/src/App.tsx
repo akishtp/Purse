@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="flex">
       <Navbar />
-      <div className="w-6/12 bg-neutral-900 my-2 mx-1 rounded-xl pt-6 px-4 h-content">
+      <div className="w-6/12 bg-neutral-900 my-2 mx-1 rounded-xl px-4 h-content">
         <Outlet />
       </div>
       <AddRecord />

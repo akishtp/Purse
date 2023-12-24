@@ -2,7 +2,7 @@ import React from "react";
 
 const Accounts: React.FC = () => {
   return (
-    <div className="grid gap-4 grid-cols-3 pb-6">
+    <div className="grid gap-4 grid-cols-3 pb-5">
       <div className="flex justify-between bg-blue-500 h-10 rounded-lg items-center px-2">
         <div>CASH</div>
         <div>100</div>
