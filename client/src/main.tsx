@@ -5,7 +5,8 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import E404 from "./E404.tsx";
 import Login from "./routes/login.tsx";
-import RecordsView from "./components/RecordsView.tsx";
+import Loans from "./routes/Loans.tsx";
+import Records from "./routes/Records.tsx";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +16,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <RecordsView />,
+        element: <Records />,
+      },
+      {
+        path: "/loans",
+        element: <Loans />,
       },
     ],
   },
