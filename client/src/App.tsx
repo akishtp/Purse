@@ -3,7 +3,7 @@
 
 import { Outlet } from "react-router-dom";
 import AddRecord from "./components/AddRecord";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   return (

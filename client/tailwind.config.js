@@ -9,6 +9,9 @@ export default {
       height: {
         content: "calc(100vh - 16px)",
       },
+      colors: {
+        "regal-blue": "#00000088",
+      },
     },
   },
   plugins: [],
