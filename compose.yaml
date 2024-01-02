@@ -3,9 +3,7 @@ services:
     container_name: db
     image: postgres:14
     ports:
-      - 6969:5432
-    expose:
-      - 5432
+      - 5432:5432
     env_file:
       - .env
 
