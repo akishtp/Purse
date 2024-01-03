@@ -4,11 +4,11 @@ import App from "./App.tsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import E404 from "./E404.tsx";
-import Login from "./routes/Login.tsx";
 import Records from "./routes/Records.tsx";
 import Overview from "./routes/Overview.tsx";
 import Schedule from "./routes/Schedule.tsx";
 import { Provider } from "react-redux";
+import Signup from "./routes/Signup.tsx";
 
 const router = createBrowserRouter([
   {
@@ -31,8 +31,8 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "login",
-    element: <Login />,
+    path: "signup",
+    element: <Signup />,
   },
 ]);
 

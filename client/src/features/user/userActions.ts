@@ -4,7 +4,7 @@ import axios from "axios";
 export const signup = createAsyncThunk(
   "user/signup",
   async (
-    { name, password }: { name: "string"; password: "string" },
+    { name, password }: { name: string; password: string },
     { rejectWithValue }
   ) => {
     const config = {

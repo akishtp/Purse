@@ -29,14 +29,14 @@ func main() {
 	}
 	defer db.Close();
 
-	_, err = db.Exec("CREATE TABLE IF NOT EXISTS users (id serial PRIMARY KEY, name TEXT, email TEXT UNIQUE, password TEXT)")
+	_, err = db.Exec("CREATE TABLE IF NOT EXISTS users (id serial PRIMARY KEY, name TEXT UNIQUE, password TEXT)")
 	if err != nil{
 		log.Fatal(err)
 	}
 
 	router := mux.NewRouter()
-	router.HandleFunc("/api/users", S.CreateUser(db)).Methods("POST")
-	router.HandleFunc("/api/users/{id}", S.GetUser(db)).Methods("GET")
+	router.HandleFunc("/api/user/signup", S.CreateUser(db)).Methods("POST")
+	router.HandleFunc("/api/user/{id}", S.GetUser(db)).Methods("GET")
 
 	enhancedRouter := enableCORS(jsonContentTypeMiddleware(router))
 
