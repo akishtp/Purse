@@ -7,6 +7,7 @@ import (
 	"github.com/akishtp/purse/controller"
 	"github.com/akishtp/purse/database"
 	"github.com/akishtp/purse/models"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -32,6 +33,8 @@ func loadEnv() {
 
 func serveApplication() {
     router := gin.Default()
+
+	router.Use(cors.Default())
 
     publicRoutes := router.Group("/auth")
     publicRoutes.POST("/signup", controller.Signup)
