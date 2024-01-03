@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"os"
 
+	S "github.com/akishtp/purse/services"
+
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
@@ -33,11 +35,8 @@ func main() {
 	}
 
 	router := mux.NewRouter()
-	router.HandleFunc("/api/go/users", U.getUsers(db)).Methods("GET")
-	router.HandleFunc("/api/go/users", U.createUser(db)).Methods("POST")
-	router.HandleFunc("/api/go/users/{id}", U.getUser(db)).Methods("GET")
-	router.HandleFunc("/api/go/users/{id}", U.updateUser(db)).Methods("PATCH")
-	router.HandleFunc("/api/go/users/{id}", U.deleteUser(db)).Methods("DELETE")
+	router.HandleFunc("/api/users", S.CreateUser(db)).Methods("POST")
+	router.HandleFunc("/api/users/{id}", S.GetUser(db)).Methods("GET")
 
 	enhancedRouter := enableCORS(jsonContentTypeMiddleware(router))
 
@@ -68,3 +67,4 @@ func jsonContentTypeMiddleware(next http.Handler) http.Handler {
 		next.ServeHTTP(w, r)
 	})
 }
+
