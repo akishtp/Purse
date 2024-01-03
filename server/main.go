@@ -1,70 +1,42 @@
 package main
 
 import (
-	"database/sql"
 	"fmt"
 	"log"
-	"net/http"
-	"os"
 
-	S "github.com/akishtp/purse/services"
-
-	"github.com/gorilla/mux"
+	"github.com/akishtp/purse/controller"
+	"github.com/akishtp/purse/database"
+	"github.com/akishtp/purse/models"
+	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	_ "github.com/lib/pq"
 )
 
-func goDotEnvVariable(key string) string {
-	err := godotenv.Load(".env")
-	if err != nil {
-	  log.Fatalf("Error loading .env file")
-	}
-	return os.Getenv(key)
-}
-
 func main() {
-	db, err := sql.Open("postgres", goDotEnvVariable("DATABASE_URL"))
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer db.Close();
-
-	_, err = db.Exec("CREATE TABLE IF NOT EXISTS users (id serial PRIMARY KEY, name TEXT UNIQUE, password TEXT)")
-	if err != nil{
-		log.Fatal(err)
-	}
-
-	router := mux.NewRouter()
-	router.HandleFunc("/api/user/signup", S.CreateUser(db)).Methods("POST")
-	router.HandleFunc("/api/user/{id}", S.GetUser(db)).Methods("GET")
-
-	enhancedRouter := enableCORS(jsonContentTypeMiddleware(router))
-
-	fmt.Println("server running on http://localhost:8000");
-	log.Fatal(http.ListenAndServe(":8000", enhancedRouter))
-
+	loadEnv()
+	loadDatabase()
+	serveApplication()
 }
 
-func enableCORS(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-
-		if r.Method == "OPTIONS" {
-			w.WriteHeader(http.StatusOK)
-			return
-		}
-
-		next.ServeHTTP(w, r)
-	})
-
+func loadDatabase() {
+	database.Connect()
+	database.Database.AutoMigrate(&models.User{})
+	database.Database.AutoMigrate(&models.Account{})
 }
 
-func jsonContentTypeMiddleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		next.ServeHTTP(w, r)
-	})
+func loadEnv() {
+    err := godotenv.Load(".env")
+    if err != nil {
+        log.Fatal(err)
+    }
 }
 
+func serveApplication() {
+    router := gin.Default()
+
+    publicRoutes := router.Group("/auth")
+    publicRoutes.POST("/signup", controller.Signup)
+    publicRoutes.POST("/login", controller.Login)
+
+    router.Run(":8000")
+    fmt.Println("Server running on port 8000")
+}
