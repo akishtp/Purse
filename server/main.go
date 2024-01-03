@@ -3,11 +3,14 @@ package main
 import (
 	"database/sql"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
 
 	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
+	_ "github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
 
@@ -15,16 +18,25 @@ type User struct {
 	Id 			int 	`json:"id"`
 	Name 		string 	`json:"name"`
 	Email 		string 	`json:"email"`
+	Password	string 	`json:"password"`
+}
+
+func goDotEnvVariable(key string) string {
+	err := godotenv.Load(".env")
+	if err != nil {
+	  log.Fatalf("Error loading .env file")
+	}
+	return os.Getenv(key)
 }
 
 func main() {
-	db, err := sql.Open("postgres", os.Getenv("DATABASE_URL"))
+	db, err := sql.Open("postgres", goDotEnvVariable("DATABASE_URL"))
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.Close();
 
-	_, err = db.Exec("CREATE TABLE IF NOT EXISTS users (id serial PRIMARY KEY, name TEXT, email TEXT)")
+	_, err = db.Exec("CREATE TABLE IF NOT EXISTS users (id serial PRIMARY KEY, name TEXT, email TEXT UNIQUE, password TEXT)")
 	if err != nil{
 		log.Fatal(err)
 	}
@@ -38,7 +50,9 @@ func main() {
 
 	enhancedRouter := enableCORS(jsonContentTypeMiddleware(router))
 
+	fmt.Println("server running on http://localhost:8000");
 	log.Fatal(http.ListenAndServe(":8000", enhancedRouter))
+
 }
 
 func enableCORS(next http.Handler) http.Handler {
@@ -75,7 +89,7 @@ func getUsers(db *sql.DB) http.HandlerFunc {
 		users := []User{}
 		for rows.Next() {
 			var u User
-			if err := rows.Scan(&u.Id, &u.Name, &u.Email); err != nil {
+			if err := rows.Scan(&u.Id, &u.Name, &u.Email, &u.Password); err != nil {
 				log.Fatal(err)
 			}
 			users = append(users, u)
@@ -94,7 +108,7 @@ func getUser(db *sql.DB) http.HandlerFunc {
 		id := vars["id"]
 
 		var u User
-		err := db.QueryRow("SELECT * FROM users WHERE id = $1", id).Scan(&u.Id, &u.Name, &u.Email)
+		err := db.QueryRow("SELECT * FROM users WHERE id = $1", id).Scan(&u.Id, &u.Name, &u.Email, &u.Password)
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
 			return
@@ -109,7 +123,7 @@ func createUser(db *sql.DB) http.HandlerFunc {
 		var u User
 		json.NewDecoder(r.Body).Decode(&u)
 
-		err := db.QueryRow("INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id", u.Name, u.Email).Scan(&u.Id)
+		err := db.QueryRow("INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING id", u.Name, u.Email, u.Password).Scan(&u.Id)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -127,14 +141,14 @@ func updateUser(db *sql.DB) http.HandlerFunc {
 		id := vars["id"]
 
 		// Execute the update query
-		_, err := db.Exec("UPDATE users SET name = $1, email = $2 WHERE id = $3", u.Name, u.Email, id)
+		_, err := db.Exec("UPDATE users SET name = $1, email = $2 password = $3 WHERE id = $4", u.Name, u.Email, u.Password, id)
 		if err != nil {
 			log.Fatal(err)
 		}
 
 		// Retrieve the updated user data from the database
 		var updatedUser User
-		err = db.QueryRow("SELECT id, name, email FROM users WHERE id = $1", id).Scan(&updatedUser.Id, &updatedUser.Name, &updatedUser.Email)
+		err = db.QueryRow("SELECT id, name, email, password FROM users WHERE id = $1", id).Scan(&updatedUser.Id, &updatedUser.Name, &updatedUser.Email, &updatedUser.Password)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -151,7 +165,7 @@ func deleteUser(db *sql.DB) http.HandlerFunc {
 		id := vars["id"]
 
 		var u User
-		err := db.QueryRow("SELECT * FROM users WHERE id = $1", id).Scan(&u.Id, &u.Name, &u.Email)
+		err := db.QueryRow("SELECT * FROM users WHERE id = $1", id).Scan(&u.Id, &u.Name, &u.Email, &u.Password)
 		if err != nil {
 			w.WriteHeader(http.StatusNotFound)
 			return
