@@ -1,4 +1,4 @@
-module api
+module github.com/akishtp/purse
 
 go 1.21.5
 
