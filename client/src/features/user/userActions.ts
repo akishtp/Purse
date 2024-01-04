@@ -1,11 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getAccounts } from "../accounts/accountsAction";
 
 export const signup = createAsyncThunk(
   "user/signup",
   async (
     { name, password }: { name: string; password: string },
-    { rejectWithValue }
+    { rejectWithValue, dispatch }
   ) => {
     const config = {
       headers: {
@@ -19,6 +20,7 @@ export const signup = createAsyncThunk(
         config
       );
       localStorage.setItem("userDetails", JSON.stringify(data));
+      dispatch(getAccounts(data.jwt));
       return data;
     } catch (error: any) {
       return rejectWithValue(JSON.parse(error.request.response).error);
@@ -30,7 +32,7 @@ export const login = createAsyncThunk(
   "user/login",
   async (
     { name, password }: { name: string; password: string },
-    { rejectWithValue }
+    { rejectWithValue, dispatch }
   ) => {
     const config = {
       headers: {
@@ -44,6 +46,7 @@ export const login = createAsyncThunk(
         config
       );
       localStorage.setItem("userDetails", JSON.stringify(data));
+      dispatch(getAccounts(data.jwt));
       return data;
     } catch (error: any) {
       return rejectWithValue(JSON.parse(error.request.response).error);

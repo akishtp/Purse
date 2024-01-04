@@ -29,7 +29,7 @@ func AddNewAccount(context *gin.Context){
         return
     }
 
-	context.JSON(http.StatusCreated, gin.H{"account_name": savedAccount.AccountName, "Balance": savedAccount.Balance, "Color": savedAccount.Color})
+	context.JSON(http.StatusCreated, gin.H{"id": savedAccount.ID,"account_name": savedAccount.AccountName, "Balance": savedAccount.Balance, "Color": savedAccount.Color})
 }
 
 func GetUserAccounts(context *gin.Context) {
