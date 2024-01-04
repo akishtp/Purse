@@ -9,6 +9,7 @@ import Overview from "./routes/Overview.tsx";
 import Schedule from "./routes/Schedule.tsx";
 import { Provider } from "react-redux";
 import Signup from "./routes/Signup.tsx";
+import Login from "./routes/Login.tsx";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: "signup",
     element: <Signup />,
+  },
+  {
+    path: "login",
+    element: <Login />,
   },
 ]);
 

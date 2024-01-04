@@ -26,3 +26,29 @@ export const signup = createAsyncThunk(
     }
   }
 );
+
+export const login = createAsyncThunk(
+  "user/login",
+  async (
+    { name, password }: { name: string; password: string },
+    { rejectWithValue }
+  ) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const { data } = await axios.post(
+        "http://localhost:8000/auth/login",
+        { name, password },
+        config
+      );
+      localStorage.setItem("userDetails", JSON.stringify(data));
+      return data;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue("hello");
+    }
+  }
+);

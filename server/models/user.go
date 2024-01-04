@@ -17,8 +17,8 @@ type User struct {
 }
 
 func (user *User) Save() (*User, error) {
+	
 	err := database.Database.Create(&user).Error
-
 	if err != nil{
 		return &User{}, err
 	}else{

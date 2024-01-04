@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signup } from "./userActions";
+import { login, signup } from "./userActions";
 
 interface userState {
   userDetails: { ID: string; name: string; accounts: string[] } | null;
@@ -39,6 +39,18 @@ export const userSlice = createSlice({
         state.userDetails = payload;
       })
       .addCase(signup.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      })
+      .addCase(login.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(login.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.userDetails = payload;
+      })
+      .addCase(login.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
       });
