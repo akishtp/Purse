@@ -14,14 +14,14 @@ export const signup = createAsyncThunk(
     };
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/api/user/signup",
+        "http://localhost:8000/auth/signup",
         { name, password },
         config
       );
       localStorage.setItem("userDetails", JSON.stringify(data));
       return data;
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      console.log(error.request.response);
       return rejectWithValue({ error: "error" });
     }
   }

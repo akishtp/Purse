@@ -1,10 +1,14 @@
 import { IoPower } from "react-icons/io5";
-import { Link, Location, useLocation } from "react-router-dom";
+import { Link, Location, useLocation, useNavigate } from "react-router-dom";
 import { data } from "./data";
 import { IconType } from "react-icons";
+import { useAppDispatch } from "../../app/hooks";
+import { logout } from "../../features/user/userSlice";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   let location: Location = useLocation();
+  const dispatch = useAppDispatch();
 
   const links: Array<{
     name: string;
@@ -27,7 +31,7 @@ const Navbar = () => {
             LinkIcon = link.iconFill;
           }
           return (
-            <Link to={`${link.href}`}>
+            <Link to={`${link.href}`} key={link.name}>
               <div
                 className={`flex rounded-xl my-2 h-16 items-center px-3 hover:bg-neutral-800 ${
                   location.pathname === link.href
@@ -43,7 +47,13 @@ const Navbar = () => {
         })}
       </div>
       <div>
-        <div className="flex bg-neutral-900 rounded-xl h-16 items-center px-3 hover:bg-neutral-800">
+        <div
+          className="flex bg-neutral-900 rounded-xl h-16 items-center px-3 hover:bg-neutral-800"
+          onClick={() => {
+            dispatch(logout());
+            navigate("/login");
+          }}
+        >
           <IoPower className="text-3xl" />
           <span className="pl-3">Logout</span>
         </div>

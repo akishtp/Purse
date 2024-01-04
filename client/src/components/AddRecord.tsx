@@ -45,7 +45,7 @@ const AddRecord = () => {
             />
           </label>
         </div>
-        <button className="bg-purple-700 w-full h-12 rounded-xl">
+        <button className="bg-purple-700 w-full h-12 rounded-xl hover:bg-purple-800">
           Add Record
         </button>
       </form>

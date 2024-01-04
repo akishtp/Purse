@@ -1,8 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { signup } from "./userActions";
 
-const initialState = {
-  userDetails: {},
+interface userState {
+  userDetails: { ID: string; name: string; accounts: string[] } | null;
+  loading: boolean;
+  error: any;
+}
+
+const userDetails = localStorage.getItem("userDetails")
+  ? JSON.parse(localStorage.getItem("userDetails") as any)
+  : null;
+
+const initialState: userState = {
+  userDetails: userDetails,
   loading: false,
   error: null,
 };
@@ -10,13 +20,31 @@ const initialState = {
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      localStorage.removeItem("userDetails");
+      state.loading = false;
+      state.error = false;
+      state.userDetails = null;
+    },
+  },
   extraReducers: (builder) => {
-    builder.addCase(signup.pending, (state) => {
-      state.loading = true;
-      state.error = null;
-    });
+    builder
+      .addCase(signup.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(signup.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.userDetails = payload;
+      })
+      .addCase(signup.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      });
   },
 });
+
+export const { logout } = userSlice.actions;
 
 export default userSlice.reducer;
