@@ -21,8 +21,7 @@ export const signup = createAsyncThunk(
       localStorage.setItem("userDetails", JSON.stringify(data));
       return data;
     } catch (error: any) {
-      console.log(error.request.response);
-      return rejectWithValue({ error: "error" });
+      return rejectWithValue(JSON.parse(error.request.response).error);
     }
   }
 );
@@ -46,9 +45,8 @@ export const login = createAsyncThunk(
       );
       localStorage.setItem("userDetails", JSON.stringify(data));
       return data;
-    } catch (error) {
-      console.log(error);
-      return rejectWithValue("hello");
+    } catch (error: any) {
+      return rejectWithValue(JSON.parse(error.request.response).error);
     }
   }
 );

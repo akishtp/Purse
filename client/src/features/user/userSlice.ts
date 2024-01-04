@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { login, signup } from "./userActions";
 
 interface userState {
-  userDetails: { ID: string; name: string; accounts: string[] } | null;
+  userDetails: { name: string; accounts: string[]; jwt: string } | null;
   loading: boolean;
   error: any;
 }

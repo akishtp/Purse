@@ -10,6 +10,7 @@ import Schedule from "./routes/Schedule.tsx";
 import { Provider } from "react-redux";
 import Signup from "./routes/Signup.tsx";
 import Login from "./routes/Login.tsx";
+import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
+    <Toaster position="top-right" />
     <RouterProvider router={router} />
   </Provider>
 );

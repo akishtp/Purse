@@ -3,6 +3,8 @@ import { signup } from "../features/user/userActions";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
+import toast from "react-hot-toast";
+import { PulseLoader } from "react-spinners";
 
 type UserInputs = {
   name: string;
@@ -13,9 +15,17 @@ const Signup = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { userDetails } = useAppSelector((state) => state.user);
+  const {
+    userDetails,
+    loading,
+    error: userError,
+  } = useAppSelector((state) => state.user);
 
-  const { register, handleSubmit } = useForm<UserInputs>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors: formErrors },
+  } = useForm<UserInputs>();
   const onSubmit: SubmitHandler<UserInputs> = async (data) => {
     dispatch(signup({ name: data.name, password: data.password }));
   };
@@ -25,6 +35,58 @@ const Signup = () => {
       navigate("/");
     }
   }, [userDetails]);
+
+  useEffect(() => {
+    if (formErrors.password && formErrors.name) {
+      toast.error("Enter your name and password", {
+        style: {
+          background: "rgb(23 23 23)",
+          color: "rgb(245 245 245)",
+        },
+      });
+    }
+  }, [formErrors.password, formErrors.name]);
+  useEffect(() => {
+    if (formErrors.password && !formErrors.name) {
+      toast.error("Enter your password", {
+        style: {
+          background: "rgb(23 23 23)",
+          color: "rgb(245 245 245)",
+        },
+      });
+    }
+  }, [formErrors.password]);
+  useEffect(() => {
+    if (formErrors.name && !formErrors.password) {
+      toast.error("Enter your name", {
+        style: {
+          background: "rgb(23 23 23)",
+          color: "rgb(245 245 245)",
+        },
+      });
+    }
+  }, [formErrors.name]);
+
+  useEffect(() => {
+    if (
+      userError ===
+      `ERROR: duplicate key value violates unique constraint "users_name_key" (SQLSTATE 23505)`
+    ) {
+      toast.error("Name already in use. Choose a different one", {
+        style: {
+          background: "rgb(23 23 23)",
+          color: "rgb(245 245 245)",
+        },
+      });
+    } else if (userError) {
+      toast.error(userError, {
+        style: {
+          background: "rgb(23 23 23)",
+          color: "rgb(245 245 245)",
+        },
+      });
+    }
+  }, [userError]);
 
   return (
     <div className="flex items-center justify-center h-screen flex-col">
@@ -37,18 +99,18 @@ const Signup = () => {
             Name:
             <input
               {...register("name", { required: true })}
-              className="h-12 px-4 w-full rounded-lg my-1 bg-neutral-800 focus:outline-none"
+              className="h-12 px-4 w-full rounded-lg my-1 bg-neutral-900 focus:outline-none border-2 border-neutral-800"
             />
           </label>
           <label className="py-3">
             Password:
             <input
               {...register("password", { required: true })}
-              className="h-12 px-4 w-full rounded-lg my-1 bg-neutral-800 focus:outline-none"
+              className="h-12 px-4 w-full rounded-lg my-1 bg-neutral-900 focus:outline-none border-2 border-neutral-800"
             />
           </label>
-          <button className="bg-purple-700 h-12 hover:bg-purple-800 rounded-lg text-lg">
-            Signup
+          <button className="bg-purple-700 h-12 hover:bg-purple-800 rounded-lg text-lg flex items-center justify-center">
+            {loading ? <PulseLoader color="#fff" size={5} /> : "Signup"}
           </button>
         </form>
         <div className="mt-6 w-3/4">

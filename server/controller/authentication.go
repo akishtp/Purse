@@ -24,11 +24,17 @@ func Signup(context *gin.Context) {
 	savedUser, err := user.Save()
 
 	if err != nil {
-        context.JSON(http.StatusBadRequest, gin.H{"Error":err.Error()})
+        context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
         return
     }
 
-	context.JSON(http.StatusCreated, gin.H{"user": savedUser})
+    jwt, err := helper.GenerateJWT(*savedUser)
+    if err != nil {
+        context.JSON(http.StatusBadRequest, gin.H{"error": "Could not generate JWT"})
+        return
+    }
+
+	context.JSON(http.StatusCreated, gin.H{"name": savedUser.Name, "jwt": jwt, "accounts": savedUser.Accounts})
 }
 
 func Login(context *gin.Context) {
@@ -59,5 +65,5 @@ func Login(context *gin.Context) {
         return
     }
 
-    context.JSON(http.StatusOK, gin.H{"jwt": jwt})
+    context.JSON(http.StatusOK, gin.H{"name": user.Name, "jwt": jwt, "accounts": user.Accounts})
 } 
