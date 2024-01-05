@@ -45,8 +45,8 @@ export const login = createAsyncThunk(
         { name, password },
         config
       );
+      await dispatch(getAccounts(data.jwt));
       localStorage.setItem("userDetails", JSON.stringify(data));
-      dispatch(getAccounts(data.jwt));
       return data;
     } catch (error: any) {
       return rejectWithValue(JSON.parse(error.request.response).error);

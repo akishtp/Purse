@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getAccounts } from "./accountsAction";
 
 interface accountState {
-  id: string;
+  ID: number;
   account_name: string;
   balance: number;
   color: string;
@@ -35,7 +35,7 @@ const accountsSlice = createSlice({
     });
     builder.addCase(getAccounts.fulfilled, (state, { payload }) => {
       state.loading = false;
-      state.accounts = payload.data;
+      state.accounts = payload;
     });
     builder.addCase(getAccounts.rejected, (state, { payload }) => {
       state.loading = false;
