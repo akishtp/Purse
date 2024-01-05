@@ -1,9 +1,9 @@
 import { IoPower } from "react-icons/io5";
 import { Link, Location, useLocation } from "react-router-dom";
-import { data } from "./data";
+import { data } from "../data/navbar";
 import { IconType } from "react-icons";
-import { useAppDispatch } from "../../app/hooks";
-import { logout } from "../../features/user/userSlice";
+import { useAppDispatch } from "../app/hooks";
+import { logout } from "../features/user/userSlice";
 
 const Navbar = () => {
   let location: Location = useLocation();

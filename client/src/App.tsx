@@ -3,7 +3,7 @@
 
 import { Outlet, useNavigate } from "react-router-dom";
 import AddRecord from "./components/AddRecord";
-import Navbar from "./components/Navbar/Navbar";
+import Navbar from "./components/Navbar";
 import { useEffect } from "react";
 import { useAppSelector } from "./app/hooks";
 

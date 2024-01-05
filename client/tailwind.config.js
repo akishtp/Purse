@@ -10,7 +10,7 @@ export default {
         content: "calc(100vh - 16px)",
       },
       colors: {
-        "regal-blue": "#00000088",
+        "black-opaque": "#00000088",
       },
     },
   },

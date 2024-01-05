@@ -4,7 +4,7 @@ import AddAccount from "./AddAccount";
 
 const Accounts: React.FC = () => {
   const { accounts } = useAppSelector((state) => state.accounts);
-  const [addAccountModal, setAddAccountModal] = useState(false);
+  const [addAccountModal, setAddAccountModal] = useState<boolean>(false);
 
   useEffect(() => {
     console.log("use effect", accounts);
@@ -24,7 +24,7 @@ const Accounts: React.FC = () => {
         );
       })}
       <div
-        className="flex justify-between bg-transparent border-2 h-10 rounded-lg items-center px-2 cursor-pointer"
+        className="flex justify-between bg-transparent border-2 h-10 rounded-lg items-center px-2 cursor-pointer select-none"
         onClick={() => {
           setAddAccountModal(!addAccountModal);
         }}
@@ -32,7 +32,9 @@ const Accounts: React.FC = () => {
         <div>Add Account</div>
         <div>+</div>
       </div>
-      {addAccountModal && <AddAccount />}
+      {addAccountModal && (
+        <AddAccount setAddAccountModal={setAddAccountModal} />
+      )}
     </div>
   );
 };

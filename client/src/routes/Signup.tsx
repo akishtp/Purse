@@ -99,14 +99,14 @@ const Signup = () => {
             Name:
             <input
               {...register("name", { required: true })}
-              className="h-12 px-4 w-full rounded-lg my-1 bg-neutral-900 focus:outline-none border-2 border-neutral-800"
+              className="h-12 px-4 w-full rounded-lg my-1 bg-neutral-900 focus:outline-none border-2 border-neutral-800 hover:border-neutral-700 focus:border-neutral-700"
             />
           </label>
           <label className="py-3">
             Password:
             <input
               {...register("password", { required: true })}
-              className="h-12 px-4 w-full rounded-lg my-1 bg-neutral-900 focus:outline-none border-2 border-neutral-800"
+              className="h-12 px-4 w-full rounded-lg my-1 bg-neutral-900 focus:outline-none border-2 border-neutral-800 hover:border-neutral-700 focus:border-neutral-700"
             />
           </label>
           <button className="bg-purple-700 h-12 hover:bg-purple-800 rounded-lg text-lg flex items-center justify-center">
