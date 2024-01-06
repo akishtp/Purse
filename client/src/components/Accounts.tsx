@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from "react";
+import { useState, FC } from "react";
 import { useAppSelector } from "../app/hooks";
 import AddAccount from "./AddAccount";
 
-const Accounts: React.FC = () => {
+const Accounts: FC = () => {
   const { accounts } = useAppSelector((state) => state.accounts);
   const [addAccountModal, setAddAccountModal] = useState<boolean>(false);
-
-  useEffect(() => {}, [accounts]);
 
   return (
     <div className="grid gap-4 grid-cols-3 pb-5">
       {accounts?.map((account) => {
         return (
           <div
-            className={`flex justify-between h-10 rounded-lg items-center px-2 ${account.color}`}
+            className="flex justify-between h-10 rounded-lg items-center px-2"
+            style={{ backgroundColor: account.color }}
             key={account.ID}
           >
             <div>{account.account_name}</div>

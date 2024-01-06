@@ -22,14 +22,13 @@ func AddNewAccount(context *gin.Context){
     }
 
 	input.UserID = user.ID
-
 	savedAccount, err := input.Save()
 	if err != nil {
         context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
         return
     }
 
-	context.JSON(http.StatusCreated, gin.H{"id": savedAccount.ID,"account_name": savedAccount.AccountName, "Balance": savedAccount.Balance, "Color": savedAccount.Color})
+	context.JSON(http.StatusCreated, gin.H{"ID": savedAccount.ID,"account_name": savedAccount.AccountName, "balance": savedAccount.Balance, "color": savedAccount.Color})
 }
 
 func GetUserAccounts(context *gin.Context) {

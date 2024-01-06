@@ -8,8 +8,8 @@ import (
 type Account struct{
 	gorm.Model
 	AccountName string 	`gorm:"not null;" json:"account_name"`
-	Balance 	int		`gotm:"not null;" json:"balance"`
-	Color		string	`gorm:"not null;" json:"account"`
+	Balance 	string	`gotm:"not null;" json:"balance"`
+	Color		string	`gorm:"not null;" json:"color"`
 	UserID 		uint
 }
 

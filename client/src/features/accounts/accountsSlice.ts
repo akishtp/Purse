@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAccounts } from "./accountsAction";
+import { addAccount, getAccounts } from "./accountsAction";
 
 interface accountState {
   ID: number;
@@ -38,6 +38,19 @@ const accountsSlice = createSlice({
       state.accounts = payload;
     });
     builder.addCase(getAccounts.rejected, (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+    });
+    // add new account
+    builder.addCase(addAccount.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(addAccount.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.accounts = payload;
+    });
+    builder.addCase(addAccount.rejected, (state, { payload }) => {
       state.loading = false;
       state.error = payload;
     });

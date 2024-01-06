@@ -2,6 +2,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { Dispatch, SetStateAction, FC, useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { colorsArr } from "../data/colors";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { addAccount } from "../features/accounts/accountsAction";
 
 interface AddAccountProps {
   setAddAccountModal: Dispatch<SetStateAction<boolean>>;
@@ -16,6 +18,10 @@ type AccountInputs = {
 const AddAccount: FC<AddAccountProps> = ({ setAddAccountModal }) => {
   const [selectedColor, setSelectedColor] = useState<string>("#2481de");
   const colors = colorsArr;
+
+  const dispatch = useAppDispatch();
+  const { userDetails } = useAppSelector((state) => state.user);
+
   const {
     register,
     getValues,
@@ -23,8 +29,14 @@ const AddAccount: FC<AddAccountProps> = ({ setAddAccountModal }) => {
     // formState: { errors: formErrors },
   } = useForm<AccountInputs>();
   const onSubmit: SubmitHandler<AccountInputs> = async (data) => {
-    // dispatch(login({ name: data.name, password: data.password }));
-    console.log(data);
+    dispatch(
+      addAccount({
+        account_name: data.account_name,
+        balance: data.balance,
+        color: data.color,
+        token: userDetails!.jwt,
+      })
+    );
   };
 
   return (
@@ -37,9 +49,9 @@ const AddAccount: FC<AddAccountProps> = ({ setAddAccountModal }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="bg-neutral-800 h-12 flex items-center px-4 justify-between rounded-t-2xl">
-          <div className="font-bold">Add Account</div>
+          <div className="font-bold text-lg">Add Account</div>
           <IoCloseCircleOutline
-            className="text-xl cursor-pointer"
+            className="text-2xl cursor-pointer"
             onClick={() => setAddAccountModal(false)}
           />
         </div>
