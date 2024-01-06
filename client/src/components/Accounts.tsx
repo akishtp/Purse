@@ -7,7 +7,7 @@ const Accounts: FC = () => {
   const [addAccountModal, setAddAccountModal] = useState<boolean>(false);
 
   return (
-    <div className="grid gap-4 grid-cols-3 pb-5">
+    <div className="grid gap-4 grid-cols-4 pb-5">
       {accounts?.map((account) => {
         return (
           <div

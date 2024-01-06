@@ -4,6 +4,7 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import { colorsArr } from "../data/colors";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { addAccount } from "../features/accounts/accountsAction";
+import { PulseLoader } from "react-spinners";
 
 interface AddAccountProps {
   setAddAccountModal: Dispatch<SetStateAction<boolean>>;
@@ -21,6 +22,7 @@ const AddAccount: FC<AddAccountProps> = ({ setAddAccountModal }) => {
 
   const dispatch = useAppDispatch();
   const { userDetails } = useAppSelector((state) => state.user);
+  const { loading } = useAppSelector((state) => state.accounts);
 
   const {
     register,
@@ -29,7 +31,7 @@ const AddAccount: FC<AddAccountProps> = ({ setAddAccountModal }) => {
     // formState: { errors: formErrors },
   } = useForm<AccountInputs>();
   const onSubmit: SubmitHandler<AccountInputs> = async (data) => {
-    dispatch(
+    await dispatch(
       addAccount({
         account_name: data.account_name,
         balance: data.balance,
@@ -37,6 +39,7 @@ const AddAccount: FC<AddAccountProps> = ({ setAddAccountModal }) => {
         token: userDetails!.jwt,
       })
     );
+    setAddAccountModal(false);
   };
 
   return (
@@ -59,6 +62,7 @@ const AddAccount: FC<AddAccountProps> = ({ setAddAccountModal }) => {
           <label className="flex items-center justify-between py-2">
             Balance:
             <input
+              autoFocus
               {...register("balance", { required: true })}
               className="h-12 px-4 w-2/3 rounded-lg bg-neutral-900 focus:outline-none border-2 border-neutral-800 text-right hover:border-neutral-700 focus:border-neutral-700"
             />
@@ -96,7 +100,7 @@ const AddAccount: FC<AddAccountProps> = ({ setAddAccountModal }) => {
             </div>
           </label>
           <button className="bg-neutral-100 text-neutral-900 w-full h-12 rounded-lg hover:bg-neutral-300 my-2">
-            Add Account
+            {loading ? <PulseLoader color="#fff" size={5} /> : "Add Account"}
           </button>
         </form>
       </div>
