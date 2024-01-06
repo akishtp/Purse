@@ -8,8 +8,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func AddAccount(context *gin.Context){
-	var input models.Account
+func AddRecord (context *gin.Context) {
+	var input models.Record
 	if err := context.ShouldBindJSON(&input); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -22,21 +22,11 @@ func AddAccount(context *gin.Context){
     }
 
 	input.UserID = user.ID
-	savedAccount, err := input.Save()
+	savedRecord, err := input.Save()
 	if err != nil {
         context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
         return
     }
 
-	context.JSON(http.StatusCreated, gin.H{"ID": savedAccount.ID,"account_name": savedAccount.AccountName, "balance": savedAccount.Balance, "color": savedAccount.Color})
-}
-
-func GetUserAccounts(context *gin.Context) {
-	user, err := helper.CurrentUser(context)
-
-	if err != nil {
-        context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-        return
-    }
-	context.JSON(http.StatusOK, gin.H{"data": user.Accounts})
+	context.JSON(http.StatusCreated, gin.H{"ID": savedRecord.ID,"type": savedRecord.Type, "amount": savedRecord.Amount, "category": savedRecord.Category, "date_time": savedRecord.DateTime, "note": savedRecord.Note})
 }

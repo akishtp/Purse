@@ -20,8 +20,9 @@ func main() {
 
 func loadDatabase() {
 	database.Connect()
-	database.Database.AutoMigrate(&models.User{})
+	database.Database.AutoMigrate(&models.Record{})
 	database.Database.AutoMigrate(&models.Account{})
+	database.Database.AutoMigrate(&models.User{})
 }
 
 func loadEnv() {
@@ -43,8 +44,9 @@ func serveApplication() {
 
 	protectedRoutes := router.Group("/api")
     protectedRoutes.Use(middleware.JWTAuthMiddleware())
-    protectedRoutes.POST("/account", controller.AddNewAccount)
+    protectedRoutes.POST("/accounts", controller.AddAccount)
     protectedRoutes.GET("/accounts", controller.GetUserAccounts)
+    protectedRoutes.POST("/records", controller.AddRecord)
 
     router.Run(":8000")
     fmt.Println("Server running on port 8000")

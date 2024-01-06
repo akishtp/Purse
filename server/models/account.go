@@ -11,6 +11,7 @@ type Account struct{
 	Balance 	string	`gotm:"not null;" json:"balance"`
 	Color		string	`gorm:"not null;" json:"color"`
 	UserID 		uint
+	Record  	[]Record
 }
 
 func (account *Account) Save() (*Account, error){

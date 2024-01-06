@@ -14,6 +14,7 @@ type User struct {
 	Name 		string `gorm:"size:255;not null;unique" json:"name"`
 	Password 	string `gorm:"size:255;not null;" json:"-"`
 	Accounts  	[]Account
+	Records		[]Record
 }
 
 func (user *User) Save() (*User, error) {

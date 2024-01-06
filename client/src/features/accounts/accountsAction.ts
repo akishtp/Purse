@@ -43,7 +43,7 @@ export const addAccount = createAsyncThunk(
     const strBalance = String(balance);
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/api/account",
+        "http://localhost:8000/api/accounts",
         { account_name, balance: strBalance, color },
         config
       );
