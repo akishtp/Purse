@@ -1,43 +1,39 @@
-import { Dispatch, SetStateAction, FC } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { Dispatch, SetStateAction, FC, useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
-import Select from "react-select";
-import { colors } from "../data/colors";
+import { colorsArr } from "../data/colors";
 
 interface AddAccountProps {
   setAddAccountModal: Dispatch<SetStateAction<boolean>>;
 }
 
+type AccountInputs = {
+  account_name: string;
+  balance: number;
+  color: string;
+};
+
 const AddAccount: FC<AddAccountProps> = ({ setAddAccountModal }) => {
-  const selectableColors: Array<{
-    value: string;
-    label: string;
-    bgcolor: string;
-    color: string;
-  }> = colors;
-  const styles = {
-    option: (
-      provided: any,
-      state: { data: { value: string; color: string } }
-    ) => ({
-      ...provided,
-      backgroundColor: state.data.value,
-      color: state.data.color,
-    }),
-    control: (provided: any) => ({
-      ...provided,
-      backgroundColor: "#171717",
-      height: "48px",
-      border: "2px solid #262626",
-      borderRadius: "8px",
-    }),
+  const [selectedColor, setSelectedColor] = useState<string>("#2481de");
+  const colors = colorsArr;
+  const {
+    register,
+    getValues,
+    handleSubmit,
+    // formState: { errors: formErrors },
+  } = useForm<AccountInputs>();
+  const onSubmit: SubmitHandler<AccountInputs> = async (data) => {
+    // dispatch(login({ name: data.name, password: data.password }));
+    console.log(data);
   };
+
   return (
     <div
       className="fixed bg-black-opaque h-screen w-screen top-0 left-0 flex items-center justify-center"
       onClick={() => setAddAccountModal(false)}
     >
       <div
-        className="bg-neutral-900 border-2 border-neutral-950 rounded-2xl flex flex-col w-2/5"
+        className="bg-neutral-900 border-2 border-neutral-950 rounded-2xl flex flex-col w-[36%]"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="bg-neutral-800 h-12 flex items-center px-4 justify-between rounded-t-2xl">
@@ -47,22 +43,45 @@ const AddAccount: FC<AddAccountProps> = ({ setAddAccountModal }) => {
             onClick={() => setAddAccountModal(false)}
           />
         </div>
-        <form className="px-4 py-1">
+        <form onSubmit={handleSubmit(onSubmit)} className="px-4 py-1">
           <label className="flex items-center justify-between py-2">
             Balance:
-            <input className="h-12 px-4 w-2/3 rounded-lg bg-neutral-900 focus:outline-none border-2 border-neutral-800 text-right hover:border-neutral-700 focus:border-neutral-700" />
+            <input
+              {...register("balance", { required: true })}
+              className="h-12 px-4 w-2/3 rounded-lg bg-neutral-900 focus:outline-none border-2 border-neutral-800 text-right hover:border-neutral-700 focus:border-neutral-700"
+            />
           </label>
           <label className="flex items-center justify-between py-2">
             Account Name:
-            <input className="h-12 px-4 w-2/3 rounded-lg bg-neutral-900 focus:outline-none border-2 border-neutral-800 text-right hover:border-neutral-700 focus:border-neutral-700" />
+            <input
+              {...register("account_name", { required: true })}
+              className="h-12 px-4 w-2/3 rounded-lg bg-neutral-900 focus:outline-none border-2 border-neutral-800 text-right hover:border-neutral-700 focus:border-neutral-700"
+            />
           </label>
           <label className="flex items-center justify-between py-2">
-            Color:
-            <Select
-              className="w-2/3"
-              options={selectableColors}
-              styles={styles}
-            />
+            <div>Color:</div>
+            <div className="flex items-center justify-between w-2/3">
+              <select
+                {...register("color")}
+                className="h-12 px-4 rounded-lg bg-neutral-900 focus:outline-none border-2 border-neutral-800 text-right hover:border-neutral-700 focus:border-neutral-700 w-select-color"
+                onClick={() => {
+                  setSelectedColor(getValues("color"));
+                }}
+              >
+                {colors.map((color) => {
+                  return (
+                    <option key={color.value} value={color.value}>
+                      {color.label}
+                    </option>
+                  );
+                })}
+              </select>
+              {/* <ColorBox color={selectedColor} /> */}
+              <div
+                className="h-12 w-12 rounded-2xl border-neutral-800 border-2"
+                style={{ backgroundColor: selectedColor }}
+              ></div>
+            </div>
           </label>
           <button className="bg-neutral-100 text-neutral-900 w-full h-12 rounded-lg hover:bg-neutral-300 my-2">
             Add Account

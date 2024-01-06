@@ -6,9 +6,7 @@ const Accounts: React.FC = () => {
   const { accounts } = useAppSelector((state) => state.accounts);
   const [addAccountModal, setAddAccountModal] = useState<boolean>(false);
 
-  useEffect(() => {
-    console.log("use effect", accounts);
-  }, [accounts]);
+  useEffect(() => {}, [accounts]);
 
   return (
     <div className="grid gap-4 grid-cols-3 pb-5">

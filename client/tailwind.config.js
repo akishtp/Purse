@@ -12,6 +12,9 @@ export default {
       colors: {
         "black-opaque": "#00000088",
       },
+      width: {
+        "select-color": "calc(100% - 56px)",
+      },
     },
   },
   plugins: [],
