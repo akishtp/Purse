@@ -10,6 +10,7 @@ import (
 
 func Signup(context *gin.Context) {
 	var input models.AuthenticationInput
+    var accountInput models.Account
 
 	if err := context.ShouldBindJSON(&input); err != nil {
         context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -33,8 +34,19 @@ func Signup(context *gin.Context) {
         context.JSON(http.StatusBadRequest, gin.H{"error": "Could not generate JWT"})
         return
     }
+    
+    accountInput.UserID = savedUser.ID
+    accountInput.Balance = "0"
+    accountInput.AccountName = "CASH"
+    accountInput.Color = "#2481de"
+    accountInput.Save()
+    // if err != nil {
+    //     context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+    //     return
+    // }
 
-	context.JSON(http.StatusCreated, gin.H{"name": savedUser.Name, "jwt": jwt, "accounts": savedUser.Accounts})
+	context.JSON(http.StatusCreated, gin.H{"name": savedUser.Name, "jwt": jwt})
+
 }
 
 func Login(context *gin.Context) {
