@@ -47,6 +47,7 @@ func serveApplication() {
     protectedRoutes.POST("/accounts", controller.AddAccount)
     protectedRoutes.GET("/accounts", controller.GetUserAccounts)
     protectedRoutes.POST("/records", controller.AddRecord)
+    protectedRoutes.GET("/records", controller.GetUserRecords)
 
     router.Run(":8000")
     fmt.Println("Server running on port 8000")

@@ -37,7 +37,7 @@ func ValidateJWT(context *gin.Context) error {
     return errors.New("invalid token provided")
 }
 
-func CurrentUser(context *gin.Context) (models.User, error) {
+func CurrentAccountUser(context *gin.Context) (models.User, error) {
     err := ValidateJWT(context)
     if err != nil {
         return models.User{}, err
@@ -46,12 +46,37 @@ func CurrentUser(context *gin.Context) (models.User, error) {
     claims, _ := token.Claims.(jwt.MapClaims)
     userId := uint(claims["id"].(float64))
 
-    user, err := models.FindById(userId)
+    user, err := models.FindUserByAccountId(userId)
     if err != nil {
         return models.User{}, err
     }
     return user, nil
 }
+
+func CurrentRecordUser(context *gin.Context) (models.User, error) {
+    err := ValidateJWT(context)
+    if err != nil {
+        return models.User{}, err
+    }
+    token, _ := getToken(context)
+    claims, _ := token.Claims.(jwt.MapClaims)
+    userId := uint(claims["id"].(float64))
+
+    user, err := models.FindUserByRecordId(userId)
+    if err != nil {
+        return models.User{}, err
+    }
+    return user, nil
+}
+
+
+// func CurrentRecordUser(context *gin.Context) (models.Account, error){
+
+//     if err != nil {
+//         return models.Account{}, err
+//     }
+//     return account, nil
+// }
 
 func getToken(context *gin.Context) (*jwt.Token, error) {
     tokenString := getTokenFromRequest(context)

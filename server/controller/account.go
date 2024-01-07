@@ -15,7 +15,7 @@ func AddAccount(context *gin.Context){
 		return
 	}
 
-	user, err := helper.CurrentUser(context)
+	user, err := helper.CurrentAccountUser(context)
 	if err != nil {
         context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
         return
@@ -32,7 +32,7 @@ func AddAccount(context *gin.Context){
 }
 
 func GetUserAccounts(context *gin.Context) {
-	user, err := helper.CurrentUser(context)
+	user, err := helper.CurrentAccountUser(context)
 
 	if err != nil {
         context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

@@ -22,3 +22,12 @@ func (account *Account) Save() (*Account, error){
     }
 	return account, nil
 }
+
+func FindAccountByRecordId(id uint) (Account, error) {
+    var account Account
+    err := database.Database.Preload("Records").Where("ID=?", id).Find(&account).Error
+    if err != nil {
+        return Account{}, err
+    }
+    return account, nil
+}
