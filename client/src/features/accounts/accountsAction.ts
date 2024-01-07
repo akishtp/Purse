@@ -17,8 +17,7 @@ export const getAccounts = createAsyncThunk(
       localStorage.setItem("accounts", JSON.stringify(data.data));
       return data.data;
     } catch (error: any) {
-      console.log(error.request.response);
-      return rejectWithValue(error.request.response);
+      return rejectWithValue(JSON.parse(error.request.response).error);
     }
   }
 );
@@ -40,11 +39,10 @@ export const addAccount = createAsyncThunk(
         Authorization: `Bearer ${token}`,
       },
     };
-    const strBalance = String(balance);
     try {
       const { data } = await axios.post(
         "http://localhost:8000/api/accounts",
-        { account_name, balance: strBalance, color },
+        { account_name, balance, color },
         config
       );
       let existingAccounts = JSON.parse(
@@ -55,8 +53,7 @@ export const addAccount = createAsyncThunk(
 
       return existingAccounts;
     } catch (error: any) {
-      console.log(error.request.response);
-      return rejectWithValue(error.request.response);
+      return rejectWithValue(JSON.parse(error.request.response).error);
     }
   }
 );

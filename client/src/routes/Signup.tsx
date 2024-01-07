@@ -98,6 +98,7 @@ const Signup = () => {
           <label className="py-3">
             Name:
             <input
+              autoFocus
               {...register("name", { required: true })}
               className="h-12 px-4 w-full rounded-lg my-1 bg-neutral-900 focus:outline-none border-2 border-neutral-800 hover:border-neutral-700 focus:border-neutral-700"
             />
@@ -105,7 +106,6 @@ const Signup = () => {
           <label className="py-3">
             Password:
             <input
-              autoFocus
               {...register("password", { required: true })}
               className="h-12 px-4 w-full rounded-lg my-1 bg-neutral-900 focus:outline-none border-2 border-neutral-800 hover:border-neutral-700 focus:border-neutral-700"
             />

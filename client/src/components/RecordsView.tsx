@@ -1,6 +1,8 @@
-import { LuFuel } from "react-icons/lu";
+import { useAppSelector } from "../app/hooks";
 
 const RecordsView = () => {
+  const { records } = useAppSelector((state) => state.records);
+
   return (
     <div className="h-fit rounded-2xl overflow-hidden">
       <div className="bg-neutral-800 h-14 flex items-center px-4 justify-between">
@@ -16,44 +18,14 @@ const RecordsView = () => {
         </select>
       </div>
       <div className="overflow-scroll h-full">
-        <div className="bg-neutral-950 h-16 border-b px-4 flex items-center border-neutral-800">
-          <div>
-            <LuFuel className="text-2xl" />
-          </div>
-        </div>
-        <div className="bg-neutral-950 h-16 border-b px-4 flex items-center border-neutral-800">
-          A record 11
-        </div>
-        <div className="bg-neutral-950 h-16 border-b px-4 flex items-center border-neutral-800">
-          A record 10
-        </div>
-        <div className="bg-neutral-950 h-16 border-b px-4 flex items-center border-neutral-800">
-          A record 9
-        </div>
-        <div className="bg-neutral-950 h-16 border-b px-4 flex items-center border-neutral-800">
-          A record 8
-        </div>
-        <div className="bg-neutral-950 h-16 border-b px-4 flex items-center border-neutral-800">
-          A record 7
-        </div>
-        <div className="bg-neutral-950 h-16 border-b px-4 flex items-center border-neutral-800">
-          A record 6
-        </div>
-        <div className="bg-neutral-950 h-16 border-b px-4 flex items-center border-neutral-800">
-          A record 5
-        </div>
-        <div className="bg-neutral-950 h-16 border-b px-4 flex items-center border-neutral-800">
-          A record 4
-        </div>
-        <div className="bg-neutral-950 h-16 border-b px-4 flex items-center border-neutral-800">
-          A record 3
-        </div>
-        <div className="bg-neutral-950 h-16 border-b px-4 flex items-center border-neutral-800">
-          A record 2
-        </div>
-        <div className="bg-neutral-950 h-16 px-4 flex items-center border-neutral-800">
-          A record 1
-        </div>
+        {records?.map((record) => {
+          return (
+            <div
+              className="bg-neutral-950 h-16 border-b px-4 flex items-center border-neutral-800"
+              key={record.ID}
+            ></div>
+          );
+        })}
         <div className="h-14"></div>
       </div>
     </div>
