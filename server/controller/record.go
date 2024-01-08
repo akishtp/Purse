@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/akishtp/purse/helper"
@@ -23,7 +22,6 @@ func AddRecord (context *gin.Context) {
     }
 
 	input.UserID = user.ID
-	fmt.Println(input)
 	savedRecord, err := input.Save()
 	if err != nil {
         context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

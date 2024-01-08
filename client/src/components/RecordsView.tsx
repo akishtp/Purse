@@ -23,7 +23,9 @@ const RecordsView = () => {
             <div
               className="bg-neutral-950 h-16 border-b px-4 flex items-center border-neutral-800"
               key={record.ID}
-            ></div>
+            >
+              Hello
+            </div>
           );
         })}
         <div className="h-14"></div>

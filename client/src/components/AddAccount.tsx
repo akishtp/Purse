@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Dispatch, SetStateAction, FC, useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
-import { colorsArr } from "../data/colors";
+import { colors } from "../data/colors";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { addAccount } from "../features/accounts/accountsAction";
 import { PulseLoader } from "react-spinners";
@@ -18,7 +18,6 @@ type AccountInputs = {
 
 const AddAccount: FC<AddAccountProps> = ({ setAddAccountModal }) => {
   const [selectedColor, setSelectedColor] = useState<string>("#2481de");
-  const colors = colorsArr;
 
   const dispatch = useAppDispatch();
   const { userDetails } = useAppSelector((state) => state.user);

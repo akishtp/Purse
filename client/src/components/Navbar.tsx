@@ -1,20 +1,12 @@
 import { IoPower } from "react-icons/io5";
 import { Link, Location, useLocation } from "react-router-dom";
-import { data } from "../data/navbar";
-import { IconType } from "react-icons";
+import { links } from "../data/navbar";
 import { useAppDispatch } from "../app/hooks";
 import { logout } from "../features/user/userSlice";
 
 const Navbar = () => {
   let location: Location = useLocation();
   const dispatch = useAppDispatch();
-
-  const links: Array<{
-    name: string;
-    href: string;
-    iconOutline: IconType;
-    iconFill: IconType;
-  }> = data;
 
   return (
     <nav className="w-2/12 h-screen p-2 flex flex-col justify-between">

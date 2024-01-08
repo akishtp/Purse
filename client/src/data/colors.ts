@@ -3,7 +3,7 @@ interface colorType {
   label: string;
 }
 
-export const colorsArr: colorType[] = [
+export const colors: colorType[] = [
   { value: "#2461de", label: "Blue" },
   { value: "#ff4949", label: "Red" },
   { value: "#7d49ff", label: "Violet" },

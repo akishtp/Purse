@@ -7,7 +7,7 @@ import {
   IoHomeOutline,
 } from "react-icons/io5";
 
-export const data = [
+export const links = [
   {
     name: "Home",
     href: "/",

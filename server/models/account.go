@@ -2,14 +2,15 @@ package models
 
 import (
 	"github.com/akishtp/purse/database"
+	"github.com/goccy/go-json"
 	"gorm.io/gorm"
 )
 
 type Account struct{
 	gorm.Model
-	AccountName string 	`gorm:"not null;" json:"account_name"`
-	Balance 	string	`gotm:"not null;" json:"balance"`
-	Color		string	`gorm:"not null;" json:"color"`
+	AccountName string 		`gorm:"not null;" json:"account_name"`
+	Balance 	json.Number	`gorm:"not null;" json:"balance"`
+	Color		string		`gorm:"not null;" json:"color"`
 	UserID 		uint
 	Record  	[]Record
 }
