@@ -9,14 +9,12 @@ interface accountState {
 }
 
 interface accountsState {
-  accounts: accountState[] | null;
+  accounts: accountState[];
   loading: boolean;
   error: any;
 }
 
-const accounts = localStorage.getItem("accounts")
-  ? JSON.parse(localStorage.getItem("accounts") as any)
-  : null;
+const accounts = JSON.parse(localStorage.getItem("accounts") as any);
 
 const initialState: accountsState = {
   accounts,

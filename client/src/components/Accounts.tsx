@@ -20,15 +20,15 @@ const Accounts: FC = () => {
           </div>
         );
       })}
-      <div
-        className="flex justify-between bg-transparent border-2 h-10 rounded-lg items-center px-2 cursor-pointer select-none"
+      <button
+        className="flex justify-between bg-transparent border-2 h-10 rounded-lg items-center px-2 select-none"
         onClick={() => {
           setAddAccountModal(!addAccountModal);
         }}
       >
         <div>Add Account</div>
         <div>+</div>
-      </div>
+      </button>
       {addAccountModal && (
         <AddAccount setAddAccountModal={setAddAccountModal} />
       )}

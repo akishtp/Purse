@@ -22,3 +22,56 @@ export const getRecords = createAsyncThunk(
     }
   }
 );
+
+export const addRecord = createAsyncThunk(
+  "record/add",
+  async (
+    {
+      type,
+      accountID,
+      account_name,
+      amount,
+      category,
+      date_time,
+      note,
+      token,
+    }: {
+      type: string;
+      accountID: number;
+      account_name: string;
+      amount: number;
+      category: string;
+      date_time: string;
+      note: string;
+      token: string;
+    },
+    { rejectWithValue }
+  ) => {
+    // console.log({
+    //   type,
+    //   accountID,
+    //   account_name,
+    //   amount,
+    //   category,
+    //   date_time,
+    //   note,
+    // });
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    try {
+      const { data } = await axios.post(
+        "http://localhost:8000/api/records",
+        { type, accountID, account_name, amount, category, date_time, note },
+        config
+      );
+      console.log(data);
+    } catch (error: any) {
+      return rejectWithValue(JSON.parse(error.request.response).error);
+    }
+  }
+);
