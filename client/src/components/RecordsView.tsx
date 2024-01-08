@@ -24,7 +24,7 @@ const RecordsView = () => {
               className="bg-neutral-950 h-16 border-b px-4 flex items-center border-neutral-800"
               key={record.ID}
             >
-              {record.note}
+              {record.date_time.toString()}
             </div>
           );
         })}

@@ -15,6 +15,7 @@ type RecordInputs = {
 
 const AddRecord = () => {
   var currentDate = new Date();
+
   const [type, setType] = useState("Expense");
   const { userDetails } = useAppSelector((state) => state.user);
   const { accounts } = useAppSelector((state) => state.accounts);
@@ -26,7 +27,14 @@ const AddRecord = () => {
     // formState: { errors: formErrors },
   } = useForm<RecordInputs>({
     defaultValues: {
-      date: currentDate.toISOString().slice(0, 10),
+      date:
+        currentDate.getFullYear() +
+        "-" +
+        (currentDate.getMonth() < 10 ? "0" : "") +
+        (currentDate.getMonth() + 1) +
+        "-" +
+        (currentDate.getDate() < 10 ? "0" : "") +
+        currentDate.getDate(),
       time:
         (currentDate.getHours() < 10 ? "0" : "") +
         currentDate.getHours() +
@@ -37,6 +45,8 @@ const AddRecord = () => {
   });
 
   const onSubmit: SubmitHandler<RecordInputs> = async (data) => {
+    console.log(data.date);
+
     dispatch(
       addRecord({
         type,
