@@ -45,8 +45,6 @@ const AddRecord = () => {
   });
 
   const onSubmit: SubmitHandler<RecordInputs> = async (data) => {
-    console.log(data.date);
-
     dispatch(
       addRecord({
         type,

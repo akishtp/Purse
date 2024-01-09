@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getRecords } from "./recordsAction";
+import { addRecord, getRecords } from "./recordsAction";
 
 interface RecordState {
   ID: number;
@@ -43,6 +43,18 @@ const recordsSlice = createSlice({
         state.records = payload;
       })
       .addCase(getRecords.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
+      })
+      .addCase(addRecord.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(addRecord.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.records = payload;
+      })
+      .addCase(addRecord.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
       });

@@ -17,7 +17,6 @@ export const getRecords = createAsyncThunk(
       localStorage.setItem("records", JSON.stringify(data.data));
       return data.data;
     } catch (error: any) {
-      console.log(error);
       return rejectWithValue(JSON.parse(error.request.response).error);
     }
   }
@@ -47,16 +46,6 @@ export const addRecord = createAsyncThunk(
     },
     { rejectWithValue }
   ) => {
-    // console.log({
-    //   type,
-    //   accountID,
-    //   account_name,
-    //   amount,
-    //   category,
-    //   date_time,
-    //   note,
-    // });
-
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -69,7 +58,11 @@ export const addRecord = createAsyncThunk(
         { type, accountID, account_name, amount, category, date_time, note },
         config
       );
-      console.log(data);
+      let existingRecords = JSON.parse(localStorage.getItem("records") as any);
+      existingRecords.push(data);
+      localStorage.setItem("accounts", JSON.stringify(existingRecords));
+
+      return existingRecords;
     } catch (error: any) {
       return rejectWithValue(JSON.parse(error.request.response).error);
     }
