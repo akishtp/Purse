@@ -24,6 +24,7 @@ const userSlice = createSlice({
     logout: (state) => {
       localStorage.removeItem("userDetails");
       localStorage.removeItem("accounts");
+      localStorage.removeItem("records");
       state.loading = false;
       state.error = false;
       state.userDetails = null;

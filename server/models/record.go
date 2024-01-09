@@ -29,3 +29,12 @@ func (record *Record) Save() (*Record, error){
 	
 	return record, nil
 }
+
+func (record *Record) FindRecordsbyUser() ([]Record, error){
+	var records []Record
+	err := database.Database.Order("date_time desc").Find(&records, "user_id = ?", record.UserID).Error
+	if err != nil {
+        return nil, err
+    }
+	return records, nil
+}

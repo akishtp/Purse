@@ -33,10 +33,16 @@ func AddRecord (context *gin.Context) {
 
 func GetUserRecords(context *gin.Context) {
 	user, err := helper.CurrentRecordUser(context)
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
 
+	// Retrieve records for the current user
+	records, err := (&models.Record{UserID: user.ID}).FindRecordsbyUser()
 	if err != nil {
         context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
         return
     }
-	context.JSON(http.StatusOK, gin.H{"data": user.Records})
+	context.JSON(http.StatusOK, gin.H{"data": records})
 }
