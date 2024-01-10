@@ -50,9 +50,8 @@ const recordsSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(addRecord.fulfilled, (state, { payload }) => {
+      .addCase(addRecord.fulfilled, (state) => {
         state.loading = false;
-        state.records = payload;
       })
       .addCase(addRecord.rejected, (state, { payload }) => {
         state.loading = false;

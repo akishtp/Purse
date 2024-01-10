@@ -32,7 +32,7 @@ const RecordsView = () => {
                 <CategoryIcon className="text-3xl" />
                 <div className="px-8 w-full flex items-center justify-between">
                   <div>{record.note}</div>
-                  <div className="text-sm">{record.account_name}</div>
+                  <div>{record.account_name}</div>
                 </div>
               </div>
               <div

@@ -44,7 +44,7 @@ export const addRecord = createAsyncThunk(
       note: string;
       token: string;
     },
-    { rejectWithValue }
+    { rejectWithValue, dispatch }
   ) => {
     const config = {
       headers: {
@@ -53,16 +53,12 @@ export const addRecord = createAsyncThunk(
       },
     };
     try {
-      const { data } = await axios.post(
+      await axios.post(
         "http://localhost:8000/api/records",
         { type, accountID, account_name, amount, category, date_time, note },
         config
       );
-      let existingRecords = JSON.parse(localStorage.getItem("records") as any);
-      existingRecords.push(data);
-      localStorage.setItem("accounts", JSON.stringify(existingRecords));
-
-      return existingRecords;
+      await dispatch(getRecords(token));
     } catch (error: any) {
       return rejectWithValue(JSON.parse(error.request.response).error);
     }
