@@ -21,16 +21,28 @@ const RecordsView = () => {
       <div className="overflow-scroll h-full">
         {records?.map((record) => {
           let CategoryIcon = categories.find(
-            (o) => o.name === record.category
+            (category) => category.name === record.category
           )!.icon;
           return (
             <div
-              className="bg-neutral-950 h-16 border-b px-4 flex items-center border-neutral-800"
+              className="bg-neutral-950 h-16 border-b px-4 flex items-center border-neutral-800 justify-between"
               key={record.ID}
             >
-              <CategoryIcon className="text-3xl" />
-              {/* {record.date_time.toString()} */}
-              {record.note}
+              <div className="flex items-center w-4/5">
+                <CategoryIcon className="text-3xl" />
+                <div className="px-8 w-full flex items-center justify-between">
+                  <div>{record.note}</div>
+                  <div className="text-sm">{record.account_name}</div>
+                </div>
+              </div>
+              <div
+                className={`flex w-1/5 justify-end ${
+                  record.type === "Expense" ? "text-red-500" : "text-green-500"
+                }`}
+              >
+                <div>{record.type === "Expense" ? "-" : "+"}</div>
+                <div>{record.amount}</div>
+              </div>
             </div>
           );
         })}

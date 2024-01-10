@@ -14,9 +14,7 @@ export const getRecords = createAsyncThunk(
         "http://localhost:8000/api/records",
         config
       );
-      console.log(data);
-
-      // localStorage.setItem("records", JSON.stringify(data.data));
+      localStorage.setItem("records", JSON.stringify(data.data));
       return data.data;
     } catch (error: any) {
       return rejectWithValue(JSON.parse(error.request.response).error);
