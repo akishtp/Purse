@@ -28,6 +28,12 @@ func AddRecord (context *gin.Context) {
         return
     }
 
+	if (savedRecord.Type == "Expense"){
+		// reduce from balance
+	}else if(savedRecord.Type == "Income"){
+		// add to balance
+	}
+
 	context.JSON(http.StatusCreated, gin.H{"ID": savedRecord.ID,"type": savedRecord.Type, "amount": savedRecord.Amount, "category": savedRecord.Category, "date_time": savedRecord.DateTime, "note": savedRecord.Note, "account_id": savedRecord.AccountID})
 }
 

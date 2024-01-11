@@ -22,23 +22,17 @@ const Accounts: FC = () => {
           </div>
         );
       })}
-      <button
-        className="flex justify-between bg-transparent border-2 h-10 rounded-lg items-center px-2 select-none display-none md:display-block"
-        onClick={() => setAddAccountModal(true)}
-      >
-        <div>Add Account</div>
-        <div>+</div>
-      </button>
-      {addAccountModal && (
-        <AddAccount setAddAccountModal={setAddAccountModal} />
-      )}
       <Drawer.Trigger
-        className="flex justify-between bg-transparent border-2 h-10 rounded-lg items-center px-2 select-none md:display-none"
+        className="flex justify-between bg-transparent border-2 h-10 rounded-lg items-center px-2 select-none"
         onClick={() => setAddAccountModal(true)}
       >
         <div>Add Account</div>
         <div>+</div>
       </Drawer.Trigger>
+
+      {addAccountModal && (
+        <AddAccount setAddAccountModal={setAddAccountModal} />
+      )}
       {addAccountModal && (
         <Drawer.Portal>
           <Drawer.Content className="fixed bottom-0 z-50 flex justify-center w-screen border-t border-neutral-800 flex-col items-center bg-neutral-900 rounded-t-2xl">

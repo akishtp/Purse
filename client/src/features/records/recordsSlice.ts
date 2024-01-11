@@ -7,7 +7,7 @@ interface RecordState {
   account_name: string;
   amount: string;
   category: string;
-  date_time: Date;
+  date_time: string;
   note: string;
   accountID: number;
 }

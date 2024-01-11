@@ -46,26 +46,6 @@ const Signup = () => {
       });
     }
   }, [formErrors.password, formErrors.name]);
-  useEffect(() => {
-    if (formErrors.password && !formErrors.name) {
-      toast.error("Enter your password", {
-        style: {
-          background: "rgb(23 23 23)",
-          color: "rgb(245 245 245)",
-        },
-      });
-    }
-  }, [formErrors.password]);
-  useEffect(() => {
-    if (formErrors.name && !formErrors.password) {
-      toast.error("Enter your name", {
-        style: {
-          background: "rgb(23 23 23)",
-          color: "rgb(245 245 245)",
-        },
-      });
-    }
-  }, [formErrors.name]);
 
   useEffect(() => {
     if (
