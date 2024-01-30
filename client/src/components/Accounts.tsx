@@ -2,7 +2,6 @@ import { FC, useState } from "react";
 import { useAppSelector } from "../app/hooks";
 import AddAccount from "./AddAccount";
 import { Drawer } from "vaul";
-import AccountForm from "./AccountForm";
 
 const Accounts: FC = () => {
   const { accounts } = useAppSelector((state) => state.accounts);
@@ -32,18 +31,6 @@ const Accounts: FC = () => {
 
       {addAccountModal && (
         <AddAccount setAddAccountModal={setAddAccountModal} />
-      )}
-      {addAccountModal && (
-        <Drawer.Portal>
-          <Drawer.Content className="fixed bottom-0 z-50 flex justify-center w-screen border-t border-neutral-800 flex-col items-center bg-neutral-900 rounded-t-2xl">
-            <div className="h-2 w-32 bg-neutral-700 rounded my-4 hover:bg-neutral-500"></div>
-            <Drawer.Title className="w-full px-4 text-2xl font-bold">
-              Add Account
-            </Drawer.Title>
-            <AccountForm setAddAccountModal={setAddAccountModal} />
-          </Drawer.Content>
-          <Drawer.Overlay className="fixed inset-0 z-40 bg-black/80" />
-        </Drawer.Portal>
       )}
     </div>
   );

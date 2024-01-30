@@ -40,3 +40,4 @@ func GetUserAccounts(context *gin.Context) {
     }
 	context.JSON(http.StatusOK, gin.H{"data": user.Accounts})
 }
+

@@ -46,7 +46,8 @@ const RecordsView = () => {
                             : "text-green-500"
                         }`}
                       >
-                        <div>{record.type === "Expense" ? "-" : "+"}</div>
+                        <div>{record.type === "Expense" ? "-" : ""}</div>
+                        <div>₹</div>
                         <div>{record.amount}</div>
                       </div>
                       <div className="text-neutral-500 text-sm">

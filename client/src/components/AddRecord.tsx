@@ -100,6 +100,7 @@ const AddRecord = () => {
             <span className="w-1/3">Amount:</span>
             <input
               {...register("amount", { required: true })}
+              min={0}
               type="number"
               className="h-11 bg-neutral-900 w-2/3 text-right px-4 border-2 border-neutral-800 rounded-lg"
             />

@@ -14,7 +14,7 @@ type Record struct{
 	AccountName string		`gorm:"not null;" json:"account_name"`
 	Amount 		json.Number	`gorm:"not null;" json:"amount"`
 	Category 	string		`gorm:"not null;" json:"category"`
-	DateTime	time.Time	`gorm:"not null;" json:"date_time"`
+	DateTime	time.Time	`gorm:"not null;type:timestamp without time zone" json:"date_time"`
 	Note 		string		`gorm:"not null;" json:"note"`
 	AccountID 	uint
 	UserID 		uint

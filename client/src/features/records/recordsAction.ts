@@ -53,6 +53,8 @@ export const addRecord = createAsyncThunk(
       },
     };
     try {
+      console.log(date_time);
+
       await axios.post(
         "http://localhost:8000/api/records",
         { type, accountID, account_name, amount, category, date_time, note },

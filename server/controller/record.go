@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/akishtp/purse/helper"
@@ -10,6 +11,12 @@ import (
 
 func AddRecord (context *gin.Context) {
 	var input models.Record
+
+	// location, err := time.LoadLocation("Asia/Kolkata")
+	// if err != nil {
+	// 	context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	// }
+
 	if err := context.ShouldBindJSON(&input); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -22,6 +29,11 @@ func AddRecord (context *gin.Context) {
     }
 
 	input.UserID = user.ID
+
+	// input.DateTime = input.DateTime.UTC()
+
+	fmt.Println(input.DateTime)
+
 	savedRecord, err := input.Save()
 	if err != nil {
         context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -30,7 +42,7 @@ func AddRecord (context *gin.Context) {
 
 	if (savedRecord.Type == "Expense"){
 		// reduce from balance
-	}else if(savedRecord.Type == "Income"){
+	}else if (savedRecord.Type == "Income"){
 		// add to balance
 	}
 
