@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/akishtp/purse/helper"
@@ -11,11 +10,6 @@ import (
 
 func AddRecord (context *gin.Context) {
 	var input models.Record
-
-	// location, err := time.LoadLocation("Asia/Kolkata")
-	// if err != nil {
-	// 	context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-	// }
 
 	if err := context.ShouldBindJSON(&input); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -30,21 +24,17 @@ func AddRecord (context *gin.Context) {
 
 	input.UserID = user.ID
 
-	// input.DateTime = input.DateTime.UTC()
-
-	fmt.Println(input.DateTime)
-
 	savedRecord, err := input.Save()
 	if err != nil {
         context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
         return
     }
 
-	if (savedRecord.Type == "Expense"){
-		// reduce from balance
-	}else if (savedRecord.Type == "Income"){
-		// add to balance
-	}
+	err = models.UpdateAccountBalance(savedRecord.AccountID, savedRecord.Amount, savedRecord.Type )
+	if err != nil {
+        context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
 
 	context.JSON(http.StatusCreated, gin.H{"ID": savedRecord.ID,"type": savedRecord.Type, "amount": savedRecord.Amount, "category": savedRecord.Category, "date_time": savedRecord.DateTime, "note": savedRecord.Note, "account_id": savedRecord.AccountID})
 }
