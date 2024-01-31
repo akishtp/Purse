@@ -25,7 +25,19 @@ const initialState: accountsState = {
 const accountsSlice = createSlice({
   name: "accounts",
   initialState,
-  reducers: {},
+  reducers: {
+    updateBalance: (state, action) => {
+      console.log("updating balance");
+      const { amount, type, id } = action.payload;
+      let account = state.accounts.find((account) => account.ID === id);
+      console.log("a", account);
+
+      if (account) {
+        if (type === "Expense") account.balance -= amount;
+        else if (type === "Income") account.balance += amount;
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getAccounts.pending, (state) => {
       state.loading = true;
@@ -55,4 +67,5 @@ const accountsSlice = createSlice({
   },
 });
 
+export const { updateBalance } = accountsSlice.actions;
 export default accountsSlice.reducer;

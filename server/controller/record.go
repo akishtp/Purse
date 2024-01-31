@@ -24,13 +24,13 @@ func AddRecord (context *gin.Context) {
 
 	input.UserID = user.ID
 
-	savedRecord, err := input.Save()
+	err = models.UpdateAccountBalance(input.AccountID, input.Amount, input.Type)
 	if err != nil {
-        context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-        return
-    }
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
 
-	err = models.UpdateAccountBalance(savedRecord.AccountID, savedRecord.Amount, savedRecord.Type )
+	savedRecord, err := input.Save()
 	if err != nil {
         context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
         return

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { getAccounts } from "../accounts/accountsAction";
+import { updateBalance } from "../accounts/accountsSlice";
 
 export const getRecords = createAsyncThunk(
   "records/get",
@@ -62,7 +62,7 @@ export const addRecord = createAsyncThunk(
         config
       );
       await dispatch(getRecords(token));
-      await dispatch(getAccounts(token));
+      dispatch(updateBalance({ amount, type, id: accountID }));
     } catch (error: any) {
       console.log(error);
 
