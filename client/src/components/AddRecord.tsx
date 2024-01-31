@@ -3,6 +3,8 @@ import { categories } from "../data/categories";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { addRecord } from "../features/records/recordsAction";
+import { useMediaQuery } from "@uidotdev/usehooks";
+import { Drawer } from "vaul";
 
 type RecordInputs = {
   category: string;
@@ -15,6 +17,7 @@ type RecordInputs = {
 
 const AddRecord = () => {
   var currentDate = new Date();
+  const isDesktop = useMediaQuery("only screen and (min-width: 768px)");
 
   const [type, setType] = useState("Expense");
   const { userDetails } = useAppSelector((state) => state.user);
@@ -58,6 +61,23 @@ const AddRecord = () => {
       })
     );
   };
+  if (!isDesktop) {
+    return (
+      <Drawer.Portal>
+        <Drawer.Content className="fixed bottom-0 z-50 flex justify-center w-screen border-t border-neutral-800 flex-col items-center bg-neutral-900 rounded-t-2xl">
+          <div className="h-2 w-32 bg-neutral-700 rounded my-4 hover:bg-neutral-500"></div>
+          <Drawer.Title className="w-full px-4 text-2xl font-bold">
+            Add Account
+          </Drawer.Title>
+          {/* <AccountForm setAddAccountModal={setAddAccountModal} /> */}
+        </Drawer.Content>
+        <Drawer.Overlay
+          className="fixed inset-0 z-40 bg-black/80"
+          // onClick={() => setAddAccountModal(false)}
+        />
+      </Drawer.Portal>
+    );
+  }
   return (
     <div className="p-2 w-4/12">
       <div className="bg-neutral-900 flex items-center justify-between p-2 rounded-2xl">
@@ -151,4 +171,5 @@ const AddRecord = () => {
     </div>
   );
 };
+
 export default AddRecord;

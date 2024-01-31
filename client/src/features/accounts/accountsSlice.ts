@@ -14,10 +14,8 @@ interface accountsState {
   error: any;
 }
 
-const accounts = JSON.parse(localStorage.getItem("accounts") as any);
-
 const initialState: accountsState = {
-  accounts,
+  accounts: [],
   loading: false,
   error: null,
 };
@@ -27,14 +25,13 @@ const accountsSlice = createSlice({
   initialState,
   reducers: {
     updateBalance: (state, action) => {
-      console.log("updating balance");
       const { amount, type, id } = action.payload;
       let account = state.accounts.find((account) => account.ID === id);
-      console.log("a", account);
 
       if (account) {
-        if (type === "Expense") account.balance -= amount;
-        else if (type === "Income") account.balance += amount;
+        if (type === "Expense") account.balance = account.balance - amount;
+        else if (type === "Income")
+          account.balance = Number(account.balance) + Number(amount);
       }
     },
   },

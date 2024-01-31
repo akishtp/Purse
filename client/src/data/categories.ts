@@ -1,6 +1,11 @@
 import { IconType } from "react-icons";
-import { LuShoppingBasket } from "react-icons/lu";
+import { LuFuel, LuShoppingBasket } from "react-icons/lu";
 import { MdOutlineFastfood, MdQuestionMark } from "react-icons/md";
+import { HiOutlineHome } from "react-icons/hi";
+import { TbSchool } from "react-icons/tb";
+import { MdTravelExplore } from "react-icons/md";
+import { GiMedicines } from "react-icons/gi";
+import { PiHandCoins } from "react-icons/pi";
 
 interface categoryType {
   name: string;
@@ -18,26 +23,30 @@ export const categories: categoryType[] = [
   },
   {
     name: "Fuel",
-    icon: MdQuestionMark,
+    icon: LuFuel,
   },
   {
     name: "Rent",
-    icon: MdQuestionMark,
+    icon: HiOutlineHome,
   },
   {
     name: "Education",
-    icon: MdQuestionMark,
+    icon: TbSchool,
   },
   {
     name: "Trips",
-    icon: MdQuestionMark,
+    icon: MdTravelExplore,
   },
   {
     name: "Medical",
-    icon: MdQuestionMark,
+    icon: GiMedicines,
   },
   {
     name: "Pocket Money",
+    icon: PiHandCoins,
+  },
+  {
+    name: "Missing",
     icon: MdQuestionMark,
   },
 ];

@@ -9,7 +9,7 @@ const Navbar = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <nav className="w-2/12 h-screen p-2 flex flex-col justify-between">
+    <nav className="w-4/12 h-screen p-2 flex flex-col justify-between md:w-2/12">
       <div>
         <Link to="/">
           <div className="bg-purple-700 h-48 rounded-2xl text-4xl flex items-end py-2 px-3 font-playfair hover:bg-purple-800">

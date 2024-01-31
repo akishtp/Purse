@@ -26,7 +26,6 @@ const Accounts: FC = () => {
           className="flex justify-between bg-transparent border-2 h-10 rounded-lg items-center px-2 select-none"
           onClick={() => {
             setAddAccountModal(!addAccountModal);
-            console.log(addAccountModal);
           }}
         >
           <div>Add Account</div>

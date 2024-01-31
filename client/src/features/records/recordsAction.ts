@@ -15,7 +15,6 @@ export const getRecords = createAsyncThunk(
         "http://localhost:8000/api/records",
         config
       );
-      localStorage.setItem("records", JSON.stringify(data.data));
       return data.data;
     } catch (error: any) {
       return rejectWithValue(JSON.parse(error.request.response).error);
@@ -54,8 +53,6 @@ export const addRecord = createAsyncThunk(
       },
     };
     try {
-      console.log(date_time);
-
       await axios.post(
         "http://localhost:8000/api/records",
         { type, accountID, account_name, amount, category, date_time, note },
@@ -64,8 +61,6 @@ export const addRecord = createAsyncThunk(
       await dispatch(getRecords(token));
       dispatch(updateBalance({ amount, type, id: accountID }));
     } catch (error: any) {
-      console.log(error);
-
       return rejectWithValue(JSON.parse(error.request.response).error);
     }
   }

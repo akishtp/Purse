@@ -14,7 +14,6 @@ export const getAccounts = createAsyncThunk(
         "http://localhost:8000/api/accounts",
         config
       );
-      localStorage.setItem("accounts", JSON.stringify(data.data));
       return data.data;
     } catch (error: any) {
       return rejectWithValue(JSON.parse(error.request.response).error);

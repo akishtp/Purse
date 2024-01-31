@@ -13,17 +13,13 @@ interface RecordState {
 }
 
 interface RecordsState {
-  records: RecordState[] | null;
+  records: RecordState[];
   loading: boolean;
   error: any;
 }
 
-const records = localStorage.getItem("records")
-  ? JSON.parse(localStorage.getItem("records") as any)
-  : null;
-
 const initialState: RecordsState = {
-  records,
+  records: [],
   loading: false,
   error: null,
 };
