@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1499.8853"
+   height="300.02744"
+   viewBox="0 0 1499.8853 300.02744"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <rect
+       x="459.74576"
+       y="82.627121"
+       width="1002.1186"
+       height="332.62711"
+       id="rect1" />
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(-3.1023796e-5,-2.9751784e-5)">
+    <g
+       id="g7"
+       transform="matrix(0.68212702,0,0,0.65694726,12.316934,-29.838996)"
+       style="fill:none;stroke:#ffffff;stroke-width:46.1206;stroke-dasharray:none;stroke-opacity:1">
+      <path
+         id="path4"
+         style="fill:none;stroke:#ffffff;stroke-width:46.1206;stroke-dasharray:none;stroke-opacity:1"
+         d="M 414.99634,209.5049 A 204.99632,270.11761 0 0 1 312.49817,443.43362 204.99632,270.11761 0 0 1 107.50185,443.43361 204.99632,270.11761 0 0 1 5.0036926,209.5049 Z" />
+      <path
+         id="path5"
+         style="fill:none;stroke:#ffffff;stroke-width:46.1206;stroke-dasharray:none;stroke-opacity:1"
+         transform="scale(1,-1)"
+         d="m 169.88546,-209.70296 a 43.167213,141.22192 0 0 1 -21.58361,122.301778 43.167213,141.22192 0 0 1 -43.16721,-4e-6 43.167213,141.22192 0 0 1 -21.583607,-122.301774 z" />
+      <path
+         id="path5-3"
+         style="fill:none;stroke:#ffffff;stroke-width:46.1206;stroke-dasharray:none;stroke-opacity:1"
+         transform="scale(1,-1)"
+         d="m 327.38544,-210.15465 a 43.167213,141.22192 0 0 1 -21.5836,122.301777 43.167213,141.22192 0 0 1 -43.16722,-3e-6 43.167213,141.22192 0 0 1 -21.5836,-122.301774 z" />
+    </g>
+    <text
+       xml:space="preserve"
+       id="text1"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:96px;line-height:0;font-family:'Helvetica Neue';-inkscape-font-specification:'Helvetica Neue Bold';letter-spacing:1.99665px;word-spacing:0px;white-space:pre;shape-inside:url(#rect1);display:inline;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:1.71141;stroke-dasharray:none;stroke-opacity:1"
+       transform="matrix(3.4677741,0,0,3.8008084,-1253.7649,-150.3312)"><tspan
+         x="459.74609"
+         y="113.15044"
+         id="tspan2">PURSE</tspan></text>
+  </g>
+</svg>
