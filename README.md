@@ -2,11 +2,12 @@
 
 ## TODO
 
-- [ ] make a docker container
-- [ ] run with local postgres
-- [ ] use lucia for auth
-- [ ] create signup page
-- [ ] add a login page
+- [x] add a login page
+- [x] create signup page
+- [x] add drizzle ORM
+- [x] make a docker container
+- [x] run with local postgres
+- [x] use lucia for auth
 - [ ] create home page
 - [ ] create a route to add accounts
 - [ ] add crud to accounts
@@ -14,5 +15,6 @@
 - [ ] add crud to transactions
 - [ ] add a dashboard page
 - [ ] make graphs
-- [ ] connect to sbi api
 - [ ] find a way to host???
+
+- [ ] connect to sbi api

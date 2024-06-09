@@ -18,6 +18,7 @@ export default function Navbar() {
             width={150}
             height={30}
             alt="purse"
+            priority
           />
         </div>
         <div className="scale-100 dark:scale-0 flex gap-4">
@@ -26,6 +27,7 @@ export default function Navbar() {
             width={150}
             height={30}
             alt="purse"
+            priority
           />
         </div>
         <div className="flex gap-4 items-center">
