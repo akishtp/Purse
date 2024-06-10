@@ -9,6 +9,12 @@
 - [x] run with local postgres
 - [x] use lucia for auth
 - [ ] create home page
+- [ ] add a route to add users
+  - [ ] create sidebar
+  - [ ] create add record
+  - [ ] create overview
+    - [ ] create tags for account
+    - [ ] create transaction display
 - [ ] create a route to add accounts
 - [ ] add crud to accounts
 - [ ] add a route to add transactions
@@ -17,4 +23,5 @@
 - [ ] make graphs
 - [ ] find a way to host???
 
+- [ ] fix docker db:push issue
 - [ ] connect to sbi api

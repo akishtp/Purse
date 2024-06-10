@@ -6,7 +6,7 @@ import { hash, verify } from "@node-rs/argon2";
 import { generateIdFromEntropySize } from "lucia";
 import db from "@/server/db";
 import { userTable } from "@/server/db/schema";
-import { lucia } from "@/server/lucia";
+import { lucia, validateRequest } from "@/server/lucia";
 import { cookies } from "next/headers";
 import { eq } from "drizzle-orm";
 
@@ -114,4 +114,30 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
   return {
     success: "Logged in successfully",
   };
+};
+
+export const logout = async () => {
+  try {
+    const { session } = await validateRequest();
+
+    if (!session) {
+      return {
+        error: "Unauthorized",
+      };
+    }
+
+    await lucia.invalidateSession(session.id);
+
+    const sessionCookie = lucia.createBlankSessionCookie();
+
+    cookies().set(
+      sessionCookie.name,
+      sessionCookie.value,
+      sessionCookie.attributes
+    );
+  } catch (error: any) {
+    return {
+      error: error?.message,
+    };
+  }
 };

@@ -34,7 +34,12 @@ export default function Navbar() {
           <div className="flex gap-2">
             <div className="flex scale-0 dark:scale-100 absolute gap-4">
               <button onClick={() => setTheme("light")}>
-                <Image src="/light.svg" width={24} height={24} alt="light" />
+                <Image
+                  src="/icons/light.svg"
+                  width={24}
+                  height={24}
+                  alt="light"
+                />
               </button>
               <a href="https://www.github.com/akishtp/purse">
                 <Image
@@ -47,7 +52,12 @@ export default function Navbar() {
             </div>
             <div className="scale-100 dark:scale-0 flex gap-4">
               <button onClick={() => setTheme("dark")}>
-                <Image src="/dark.svg" width={24} height={24} alt="dark" />
+                <Image
+                  src="/icons/dark.svg"
+                  width={24}
+                  height={24}
+                  alt="dark"
+                />
               </button>
               <a href="https://www.github.com/akishtp/purse">
                 <Image
