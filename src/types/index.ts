@@ -20,3 +20,13 @@ export const SignupSchema = z
     message: "Passwords do not match",
     path: ["confirmPassword"],
   });
+
+export const TransactionSchema = z.object({
+  account: z.string().min(1, "Account cannot be empty"),
+  amount: z.coerce
+    .number()
+    .min(1, { message: "Amount must be greater than 1" }),
+  date: z.coerce.date(),
+  category: z.string().min(1, "Category cannot be empty"),
+  note: z.string(),
+});

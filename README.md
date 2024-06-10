@@ -9,12 +9,14 @@
 - [x] run with local postgres
 - [x] use lucia for auth
 - [ ] create home page
-- [ ] add a route to add users
-  - [ ] create sidebar
-  - [ ] create add record
+  - [x] create sidebar
+    - [ ] mobile view
+  - [x] create add transaction
+    - [ ] mobile view
   - [ ] create overview
     - [ ] create tags for account
     - [ ] create transaction display
+- [ ] add a route to add users
 - [ ] create a route to add accounts
 - [ ] add crud to accounts
 - [ ] add a route to add transactions
