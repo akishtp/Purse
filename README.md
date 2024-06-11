@@ -14,7 +14,8 @@
   - [x] create add transaction
     - [ ] mobile view
   - [ ] create overview
-    - [ ] create tags for account
+    - [x] create tags for account
+      - [x] mobile view
     - [ ] create transaction display
 - [ ] add a route to add users
 - [ ] create a route to add accounts
@@ -25,5 +26,5 @@
 - [ ] make graphs
 - [ ] find a way to host???
 
-- [ ] fix docker db:push issue
+- [ ] fix docker db:push problem
 - [ ] connect to sbi api

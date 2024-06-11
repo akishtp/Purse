@@ -70,13 +70,13 @@ export default function Navbar() {
             </div>
           </div>
           {pathname === "/auth/login" ? (
-            <Link href="/auth/signup">
-              <Button>Signup</Button>
-            </Link>
+            <Button asChild>
+              <Link href="/auth/signup">Signup</Link>
+            </Button>
           ) : (
-            <Link href="/auth/login">
-              <Button>Login</Button>
-            </Link>
+            <Button asChild>
+              <Link href="/auth/login">Login</Link>
+            </Button>
           )}
         </div>
       </div>

@@ -30,3 +30,9 @@ export const TransactionSchema = z.object({
   category: z.string().min(1, "Category cannot be empty"),
   note: z.string(),
 });
+
+export const AccountSchema = z.object({
+  name: z.string().min(1, "Name cannot be empty"),
+  balance: z.coerce.number(),
+  color: z.string(),
+});

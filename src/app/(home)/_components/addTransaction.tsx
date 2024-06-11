@@ -51,11 +51,11 @@ export const AddTransaction = () => {
   }
   return (
     <div className="w-4/12 p-2 flex flex-col gap-2">
-      <div className="bg-neutral-200 w-full rounded-2xl p-2 dark:bg-neutral-800 flex ">
+      <div className="bg-neutral-200 w-full rounded-2xl p-2 dark:bg-neutral-900 flex ">
         <div
           onClick={() => setType("Expense")}
           className={`w-1/2 rounded-lg h-10 flex items-center justify-center cursor-pointer ${
-            type === "Expense" ? "bg-neutral-100 dark:bg-neutral-700" : ""
+            type === "Expense" ? "bg-neutral-100 dark:bg-neutral-800" : ""
           }`}
         >
           Expense
@@ -63,13 +63,13 @@ export const AddTransaction = () => {
         <div
           onClick={() => setType("Income")}
           className={`w-1/2 rounded-lg h-10 flex items-center justify-center cursor-pointer ${
-            type === "Income" ? "bg-neutral-100 dark:bg-neutral-700" : ""
+            type === "Income" ? "bg-neutral-100 dark:bg-neutral-800" : ""
           }`}
         >
           Income
         </div>
       </div>
-      <div className="bg-neutral-200 w-full rounded-2xl py-2 px-4 dark:bg-neutral-800">
+      <div className="bg-neutral-200 w-full rounded-2xl py-2 px-4 dark:bg-neutral-900">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -200,7 +200,7 @@ export const AddTransaction = () => {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="my-1">
+            <Button type="submit" className="my-2">
               Submit
             </Button>
           </form>
