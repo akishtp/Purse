@@ -16,7 +16,8 @@
   - [ ] create overview
     - [x] create tags for account
       - [x] mobile view
-    - [ ] create transaction display
+    - [x] create transaction display
+      - [ ] mobile view
 - [ ] add a route to add users
 - [ ] create a route to add accounts
 - [ ] add crud to accounts

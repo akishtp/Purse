@@ -15,9 +15,15 @@ export default async function HomeLayout({
   }
 
   return (
-    <div className="min-h-screen flex">
+    <div className="h-screen flex">
       <Sidebar />
-      {children}
+
+      <div className="flex flex-1 pt-2 px-1">
+        <div className="rounded-2xl w-full p-4 bg-neutral-200 dark:bg-neutral-900">
+          {children}
+        </div>
+      </div>
+
       <AddTransaction />
     </div>
   );
