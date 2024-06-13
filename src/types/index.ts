@@ -21,7 +21,7 @@ export const SignupSchema = z
     path: ["confirmPassword"],
   });
 
-export const TransactionSchema = z.object({
+export const AddTransactionSchema = z.object({
   account: z.string().min(1, "Account cannot be empty"),
   amount: z.coerce
     .number()
@@ -31,8 +31,20 @@ export const TransactionSchema = z.object({
   note: z.string(),
 });
 
-export const AccountSchema = z.object({
+export const AddAccountSchema = z.object({
   name: z.string().min(1, "Name cannot be empty"),
   balance: z.coerce.number(),
   color: z.string(),
+});
+
+const AccountSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  balance: z.number(),
+  color: z.string(),
+  userId: z.string(),
+});
+
+export const AccountsSchema = z.object({
+  accounts: z.array(AccountSchema),
 });

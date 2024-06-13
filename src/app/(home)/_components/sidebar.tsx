@@ -12,8 +12,8 @@ export const Sidebar = () => {
   return (
     <nav className="w-2/12 flex flex-col justify-between p-2">
       <div className="flex flex-col gap-2">
-        <div className="h-48 bg-purple-700 rounded-2xl flex items-end px-3 py-2">
-          Purse
+        <div className="h-48 bg-purple-700 pl-3 pr-12 py-3 flex items-end rounded-2xl hover:bg-purple-800">
+          <img src="/logos/purse-light.svg" alt="purse" />
         </div>
         <Link href="/">
           <div

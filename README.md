@@ -18,8 +18,9 @@
       - [x] mobile view
     - [x] create transaction display
       - [ ] mobile view
-- [ ] add a route to add users
-- [ ] create a route to add accounts
+- [x] add a route to add users
+- [x] create a route to add accounts
+- [x] use state management (zustand)
 - [ ] add crud to accounts
 - [ ] add a route to add transactions
 - [ ] add crud to transactions

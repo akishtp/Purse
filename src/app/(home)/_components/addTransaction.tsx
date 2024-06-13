@@ -16,7 +16,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { TransactionSchema } from "@/types";
+import { AddTransactionSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -35,8 +35,8 @@ import { useState } from "react";
 
 export const AddTransaction = () => {
   const [type, setType] = useState("Expense");
-  const form = useForm<z.infer<typeof TransactionSchema>>({
-    resolver: zodResolver(TransactionSchema),
+  const form = useForm<z.infer<typeof AddTransactionSchema>>({
+    resolver: zodResolver(AddTransactionSchema),
     defaultValues: {
       account: "",
       amount: 0,
@@ -46,7 +46,7 @@ export const AddTransaction = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof TransactionSchema>) {
+  function onSubmit(values: z.infer<typeof AddTransactionSchema>) {
     console.log(values);
   }
   return (

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -14,7 +14,7 @@ import {
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { AccountSchema } from "@/types";
+import { AddAccountSchema } from "@/types";
 import {
   Form,
   FormControl,
@@ -32,56 +32,80 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useAccountStore } from "@/providers/account-store-provider";
 
-export const AddAccount = () => {
+export const AccountComponent = () => {
   const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
+  const { accounts, get } = useAccountStore((state) => state);
 
-  if (isDesktop) {
-    return (
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <button
-            className="flex justify-between h-10 rounded-lg items-center px-2 border-2 border-neutral-300 font-medium dark:border-neutral-800"
-            onClick={() => setOpen(true)}
-          >
-            <div>Add Account</div>
-            <div>+</div>
-          </button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
-          <AccountForm />
-        </DialogContent>
-      </Dialog>
-    );
-  }
+  useEffect(() => {
+    get();
+  }, []);
 
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger asChild>
-        <button
-          className="flex justify-between h-10 rounded-lg items-center px-2 border-2 border-neutral-300 font-medium dark:border-neutral-800"
-          onClick={() => setOpen(true)}
-        >
-          <div>Add Account</div>
-          <div>+</div>
-        </button>
-      </DrawerTrigger>
-      <DrawerContent>
-        <AccountForm className="px-4" />
-        <DrawerFooter className="pt-2">
-          <DrawerClose asChild>
-            <Button variant="outline">Cancel</Button>
-          </DrawerClose>
-        </DrawerFooter>
-      </DrawerContent>
-    </Drawer>
+    <div className="grid gap-2 grid-cols-2 pb-3 md:grid-cols-4">
+      {accounts.map((account) => {
+        return (
+          <div
+            key={account.id}
+            className={`flex justify-between h-10 rounded-lg items-center px-2 ${account.color}`}
+          >
+            <div>{account.name}</div>
+            <div>{account.balance}</div>
+          </div>
+        );
+      })}
+      {isDesktop ? (
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogTrigger asChild>
+            <button
+              className="flex justify-between h-10 rounded-lg items-center px-2 border-2 border-neutral-300 font-medium dark:border-neutral-800"
+              onClick={() => setOpen(true)}
+            >
+              <div>Add Account</div>
+              <div>+</div>
+            </button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px]">
+            <AccountForm className=" " setOpen={setOpen} />
+          </DialogContent>
+        </Dialog>
+      ) : (
+        <Drawer open={open} onOpenChange={setOpen}>
+          <DrawerTrigger asChild>
+            <button
+              className="flex justify-between h-10 rounded-lg items-center px-2 border-2 border-neutral-300 font-medium dark:border-neutral-800"
+              onClick={() => setOpen(true)}
+            >
+              <div>Add Account</div>
+              <div>+</div>
+            </button>
+          </DrawerTrigger>
+          <DrawerContent>
+            <AccountForm className="px-4" setOpen={setOpen} />
+            <DrawerFooter className="pt-2">
+              <DrawerClose asChild>
+                <Button variant="outline">Cancel</Button>
+              </DrawerClose>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
+      )}
+    </div>
   );
 };
 
-function AccountForm({ className }: React.ComponentProps<"form">) {
-  const form = useForm<z.infer<typeof AccountSchema>>({
-    resolver: zodResolver(AccountSchema),
+function AccountForm({
+  className,
+  setOpen,
+}: {
+  className: string;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+}) {
+  const { add } = useAccountStore((state) => state);
+  const form = useForm<z.infer<typeof AddAccountSchema>>({
+    resolver: zodResolver(AddAccountSchema),
     defaultValues: {
       name: "",
       balance: 0,
@@ -89,9 +113,11 @@ function AccountForm({ className }: React.ComponentProps<"form">) {
     },
   });
 
-  function onSubmit(values: z.infer<typeof AccountSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof AddAccountSchema>) {
+    add(values);
+    setOpen(false);
   }
+
   return (
     <Form {...form}>
       <form

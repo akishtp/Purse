@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, numeric } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, integer, serial } from "drizzle-orm/pg-core";
 
 export const userTable = pgTable("user", {
   id: text("id").primaryKey(),
@@ -18,10 +18,11 @@ export const sessionTable = pgTable("session", {
 });
 
 export const accountTable = pgTable("accounts", {
-  id: text("id").primaryKey(),
+  id: serial("id").primaryKey(),
   userId: text("user_id")
     .notNull()
     .references(() => userTable.id),
   name: text("name").notNull(),
-  balance: numeric("balance").notNull(),
+  balance: integer("balance").notNull(),
+  color: text("color").notNull(),
 });
