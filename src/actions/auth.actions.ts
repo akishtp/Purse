@@ -1,11 +1,11 @@
 "use server";
 
-import { z } from "zod";
-import { LoginSchema, SignupSchema } from "@/types";
 import { hash, verify } from "@node-rs/argon2";
+import { LoginSchema, SignupSchema } from "@/types";
 import { generateIdFromEntropySize } from "lucia";
+import { z } from "zod";
 import db from "@/server/db";
-import { userTable } from "@/server/db/schema";
+import { accountTable, userTable } from "@/server/db/schema";
 import { lucia, validateRequest } from "@/server/lucia";
 import { cookies } from "next/headers";
 import { eq } from "drizzle-orm";
@@ -17,19 +17,18 @@ export const signup = async (values: z.infer<typeof SignupSchema>) => {
     outputLen: 32,
     parallelism: 1,
   });
-  const userId = generateIdFromEntropySize(15);
-
+  const userId = generateIdFromEntropySize(16);
   try {
     await db
       .insert(userTable)
       .values({
         id: userId,
-        username: values.username,
+        name: values.name,
         hashedPassword,
       })
       .returning({
         id: userTable.id,
-        username: userTable.username,
+        name: userTable.name,
       });
 
     const session = await lucia.createSession(userId, {
@@ -44,8 +43,15 @@ export const signup = async (values: z.infer<typeof SignupSchema>) => {
       sessionCookie.attributes
     );
 
+    await db.insert(accountTable).values({
+      userId: userId,
+      name: "CASH",
+      balance: 0,
+      color: "bg-[#2481de]",
+    });
+
     return {
-      success: true,
+      success: "Signed up successfully",
       data: {
         userId,
       },
@@ -67,7 +73,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
   }
 
   const existingUser = await db.query.userTable.findFirst({
-    where: (table) => eq(table.username, values.username),
+    where: (table) => eq(table.name, values.name),
   });
 
   if (!existingUser) {
@@ -95,7 +101,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 
   if (!isValidPassword) {
     return {
-      error: "Incorrect username or password",
+      error: "Incorrect name or password",
     };
   }
 
@@ -136,6 +142,8 @@ export const logout = async () => {
       sessionCookie.attributes
     );
   } catch (error: any) {
+    console.log(error);
+
     return {
       error: error?.message,
     };

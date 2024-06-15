@@ -1,6 +1,6 @@
 services:
   web:
-    image: purse
+    image: "node:22-alpine"
     container_name: nextjs
     build:
       context: .
@@ -8,8 +8,8 @@ services:
     ports:
       - "3000:3000"
     environment:
+      - POSTGRES_URL=postgres://postgres:postgres@db:5432/postgres
       - NODE_ENV=development
-      - POSTGRES_URL=postgres://postgres:password@db:5432/purse
     depends_on:
       - db
 

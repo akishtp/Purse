@@ -10,10 +10,10 @@
 - [x] use lucia for auth
 - [ ] create home page
   - [x] create sidebar
-    - [ ] mobile view
+    - [x] mobile view
   - [x] create add transaction
     - [ ] mobile view
-  - [ ] create overview
+  - [x] create overview
     - [x] create tags for account
       - [x] mobile view
     - [x] create transaction display
@@ -22,7 +22,7 @@
 - [x] create a route to add accounts
 - [x] use state management (zustand)
 - [ ] add crud to accounts
-- [ ] add a route to add transactions
+- [x] add a route to add transactions
 - [ ] add crud to transactions
 - [ ] add a dashboard page
 - [ ] make graphs

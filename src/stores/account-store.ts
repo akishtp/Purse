@@ -1,8 +1,8 @@
-import { addAccount, getAccounts } from "@/actions/accounts.actions";
-import { createStore } from "zustand/vanilla";
-import { AccountsSchema, AddAccountSchema } from "@/types/index";
-import { z } from "zod";
+import { addAccount, getAccounts } from "@/actions/account.actions";
 import { toast } from "@/components/ui/use-toast";
+import { AccountsSchema, AddAccountSchema } from "@/types";
+import { z } from "zod";
+import { createStore } from "zustand/vanilla";
 
 export type AccountActions = {
   add: (values: z.infer<typeof AddAccountSchema>) => void;
@@ -31,6 +31,7 @@ export const createAccountStore = (
         set((state) => ({
           accounts: [...state.accounts, ...res.data],
         }));
+
         toast({
           variant: "default",
           description: res.success,
@@ -48,10 +49,10 @@ export const createAccountStore = (
         set(() => ({
           accounts: res.data,
         }));
-        toast({
-          variant: "default",
-          description: res.success,
-        });
+        // toast({
+        //   variant: "default",
+        //   description: res.success,
+        // });
       }
     },
   }));

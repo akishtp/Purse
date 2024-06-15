@@ -24,7 +24,7 @@ export default function SignupPage() {
   const form = useForm<z.infer<typeof SignupSchema>>({
     resolver: zodResolver(SignupSchema),
     defaultValues: {
-      username: "",
+      name: "",
       password: "",
       confirmPassword: "",
     },
@@ -55,10 +55,10 @@ export default function SignupPage() {
       >
         <FormField
           control={form.control}
-          name="username"
+          name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Name</FormLabel>
               <FormControl>
                 <Input {...field} className="min-w-80" />
               </FormControl>

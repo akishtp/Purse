@@ -1,19 +1,21 @@
 import { z } from "zod";
 
+// <------------------------- Auth ------------------------->
+
 export const LoginSchema = z.object({
-  username: z.string(),
+  name: z.string(),
   password: z.string(),
 });
 
 export const SignupSchema = z
   .object({
-    username: z
+    name: z
       .string()
-      .min(2, { message: "Username must be atleast 2 charecters long" })
-      .max(50, { message: "Username must be less than 50 charecters long" }),
+      .min(3, { message: "Name must be atleast 3 charecters long" })
+      .max(18, { message: "Name must be less than 18 charecters long" }),
     password: z
       .string()
-      .min(2, { message: "Password must be at least 2 characters long" }),
+      .min(6, { message: "Password must be atleast 6 charecters long" }),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -21,30 +23,57 @@ export const SignupSchema = z
     path: ["confirmPassword"],
   });
 
-export const AddTransactionSchema = z.object({
-  account: z.string().min(1, "Account cannot be empty"),
-  amount: z.coerce
-    .number()
-    .min(1, { message: "Amount must be greater than 1" }),
-  date: z.coerce.date(),
-  category: z.string().min(1, "Category cannot be empty"),
-  note: z.string(),
-});
+// <------------------------- Account ------------------------->
 
 export const AddAccountSchema = z.object({
-  name: z.string().min(1, "Name cannot be empty"),
+  name: z
+    .string()
+    .max(6, { message: "Account name can't be longer than 6 charecters" }),
   balance: z.coerce.number(),
   color: z.string(),
 });
 
-const AccountSchema = z.object({
-  id: z.number(),
-  name: z.string(),
-  balance: z.number(),
-  color: z.string(),
-  userId: z.string(),
+export const AccountsSchema = z.object({
+  accounts: z.array(
+    z.object({
+      id: z.number(),
+      userId: z.string(),
+
+      name: z.string(),
+      balance: z.number(),
+      color: z.string(),
+    })
+  ),
 });
 
-export const AccountsSchema = z.object({
-  accounts: z.array(AccountSchema),
+// <------------------------- Transaction ------------------------->
+
+export const AddTransactionSchema = z.object({
+  type: z
+    .string()
+    .min(3, { message: "Type must be atleast 3 charecters long" }),
+  amount: z.coerce.number(),
+  category: z.string(),
+  accountId: z.string(),
+  dateTime: z.string().datetime(),
+  note: z
+    .string()
+    .max(16, { message: "Note can't be longer than 16 charecters" }),
+});
+
+export const TransactionsSchema = z.object({
+  transactions: z.array(
+    z.object({
+      id: z.number(),
+      userId: z.string(),
+
+      type: z.string(),
+      amount: z.number(),
+      category: z.string(),
+      account: z.string(),
+      accountId: z.number(),
+      dateTime: z.string().datetime(),
+      note: z.string(),
+    })
+  ),
 });

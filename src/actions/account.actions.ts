@@ -15,6 +15,7 @@ export const addAccount = async (values: z.infer<typeof AddAccountSchema>) => {
       error: "You must be logged in to add an account",
     };
   }
+
   try {
     const newAccount = await db
       .insert(accountTable)
@@ -25,12 +26,14 @@ export const addAccount = async (values: z.infer<typeof AddAccountSchema>) => {
         color: values.color,
       })
       .returning({
+        id: accountTable.id,
         userId: accountTable.userId,
+
         name: accountTable.name,
         balance: accountTable.balance,
         color: accountTable.color,
-        id: accountTable.id,
       });
+
     return {
       success: "Account created successfully",
       data: newAccount,
@@ -57,7 +60,7 @@ export const getAccounts = async () => {
     });
 
     return {
-      success: true,
+      success: "Successfully fetched accounts",
       data: accounts,
     };
   } catch (error: any) {

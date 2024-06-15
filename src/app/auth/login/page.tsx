@@ -24,7 +24,7 @@ export default function LoginPage() {
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
-      username: "",
+      name: "",
       password: "",
     },
   });
@@ -54,10 +54,10 @@ export default function LoginPage() {
       >
         <FormField
           control={form.control}
-          name="username"
+          name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Name</FormLabel>
               <FormControl>
                 <Input {...field} className="min-w-80" />
               </FormControl>
