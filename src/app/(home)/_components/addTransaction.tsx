@@ -55,7 +55,7 @@ export default function AddTransaction() {
     );
   }
   return (
-    <div className="w-1/3 p-2">
+    <div className="p-2 fixed right-0 w-[28rem]">
       <AddTransactionForm />
     </div>
   );

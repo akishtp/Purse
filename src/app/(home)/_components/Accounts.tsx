@@ -13,7 +13,7 @@ export default function Accounts() {
   }, []);
 
   return (
-    <div className="grid grid-cols-2 gap-1 md:gap-2 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4">
+    <div className="grid grid-cols-2 gap-1 md:gap-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
       {accounts.map((account) => (
         <div
           key={account.id}

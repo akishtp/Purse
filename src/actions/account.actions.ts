@@ -24,6 +24,7 @@ export const addAccount = async (values: z.infer<typeof AddAccountSchema>) => {
         name: values.name,
         balance: values.balance,
         color: values.color,
+        createdAt: new Date(),
       })
       .returning({
         id: accountTable.id,
@@ -57,6 +58,7 @@ export const getAccounts = async () => {
   try {
     const accounts = await db.query.accountTable.findMany({
       where: (table) => eq(table.userId, user.id),
+      orderBy: (table) => table.createdAt,
     });
 
     return {

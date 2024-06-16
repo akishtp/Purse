@@ -12,21 +12,24 @@
   - [x] create sidebar
     - [x] mobile view
   - [x] create add transaction
-    - [ ] mobile view
+    - [x] mobile view
   - [x] create overview
     - [x] create tags for account
       - [x] mobile view
     - [x] create transaction display
-      - [ ] mobile view
+      - [x] mobile view
 - [x] add a route to add users
 - [x] create a route to add accounts
 - [x] use state management (zustand)
-- [ ] add crud to accounts
 - [x] add a route to add transactions
-- [ ] add crud to transactions
-- [ ] add a dashboard page
+- [x] add a dashboard page
+- [ ] add edit to accounts
+- [ ] add delete to accounts
+- [ ] add edit to transactions
+- [ ] add delete to transactions
 - [ ] make graphs
 - [ ] find a way to host???
 
 - [ ] fix docker db:push problem
 - [ ] connect to sbi api
+- [ ] show balance

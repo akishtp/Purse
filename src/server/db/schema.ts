@@ -33,6 +33,10 @@ export const accountTable = pgTable("accounts", {
   name: text("name").notNull(),
   balance: integer("balance").notNull(),
   color: text("color").notNull(),
+  createdAt: timestamp("created_at", {
+    withTimezone: true,
+    mode: "date",
+  }),
 });
 
 export const transactionTable = pgTable("transactions", {
