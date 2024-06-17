@@ -17,7 +17,7 @@ export default function Transactions() {
         <>
           {transactions.map((transaction) => {
             return (
-              <div key={transaction.id} className="h-14 flex px-4 items-center">
+              <div key={transaction.id} className="h-14 flex px-2 items-center">
                 <div className="w-1/4 flex items-center gap-2">
                   <div>{transaction.category}</div>
                   <div className="text-sm">{transaction.account}</div>

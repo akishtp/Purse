@@ -50,10 +50,6 @@ export const createTransactionStore = (
         set(() => ({
           transactions: res.data,
         }));
-        // toast({
-        //   variant: "default",
-        //   description: res.success,
-        // });
       }
     },
   }));

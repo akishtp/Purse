@@ -44,7 +44,7 @@ export default function AddTransaction() {
     return (
       <Drawer open={open} onOpenChange={setOpen}>
         <DrawerTrigger asChild>
-          <button className="absolute bottom-4 right-4 rounded-full bg-purple-700 h-12 w-12 text-white text-xl">
+          <button className="fixed bottom-4 right-4 rounded-full bg-purple-700 h-12 w-12 text-white text-xl">
             +
           </button>
         </DrawerTrigger>

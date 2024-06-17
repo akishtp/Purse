@@ -72,7 +72,7 @@ export default function LoginPage() {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input {...field} className="min-w-80" />
+                <Input {...field} className="min-w-80" type="password" />
               </FormControl>
               <FormMessage />
             </FormItem>

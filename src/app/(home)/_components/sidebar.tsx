@@ -9,7 +9,7 @@ export default function Sidebar() {
   const { setTheme } = useTheme();
   const router = useRouter();
   return (
-    <div className="w-16 p-2 md:w-60 flex flex-col justify-between h-screen fixed">
+    <div className="w-16 p-2 md:w-60 flex flex-col justify-between h-dvh fixed">
       <div className="flex flex-col gap-2">
         <div className="h-12 md:h-44 bg-purple-700 rounded-xl"></div>
         <Link
