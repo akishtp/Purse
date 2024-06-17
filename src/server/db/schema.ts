@@ -6,6 +6,7 @@ import {
   text,
   timestamp,
 } from "drizzle-orm/pg-core";
+import { string } from "zod";
 
 export const userTable = pgTable("users", {
   id: text("id").primaryKey(),
@@ -52,9 +53,6 @@ export const transactionTable = pgTable("transactions", {
   accountId: integer("accountId")
     .notNull()
     .references(() => accountTable.id),
-  dateTime: timestamp("date_time", {
-    withTimezone: true,
-    mode: "date",
-  }).notNull(),
+  dateTime: text("dateTime").notNull(),
   note: text("note").notNull(),
 });

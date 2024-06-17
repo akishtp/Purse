@@ -2,13 +2,20 @@
 
 import { useAccountStore } from "@/providers/account-store-provider";
 import { useTransactionStore } from "@/providers/transaction-store-provider";
+import { TransactionsSchema } from "@/types";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { useEffect, useState } from "react";
+import { z } from "zod";
 
-type Expense = {
-  date: Date;
+interface Expense {
+  date: string;
   amount: number;
-};
+}
+
+// Helper function to format date as YYYY-MM-DD
+// const formatDate = (date: Date): string => {
+//   return date.toISOString().split("T")[0];
+// };
 
 export default function DashboardPage() {
   const [balance, setBalance] = useState<number>(0);
@@ -45,20 +52,70 @@ export default function DashboardPage() {
   }, [transactions]);
 
   useEffect(() => {
-    var array = [];
-    const now = new Date();
-    const thirtyDaysAgo = new Date();
-    thirtyDaysAgo.setDate(now.getDate() - 30);
+    var array: Expense[] = [];
+    const date = new Date();
+    date.setHours(0, 0, 0, 0);
 
-    for (var i = thirtyDaysAgo; i <= now; i.setDate(i.getDate() + 1)) {
+    for (var i = 0; i <= 30; i++) {
+      date.setDate(date.getDate() - 1);
       array.push({
-        date: i,
+        date: date.toLocaleDateString(),
         amount: 0,
       });
     }
 
+    transactions.forEach((transaction) => {
+      const transactionDate = new Date(transaction.dateTime);
+      if (transactionDate > date) {
+        array[0].amount += transaction.amount;
+      }
+    });
+
     setExpenses(array);
   }, [transactions]);
+
+  // useEffect(() => {
+  //   const getLast30Days = (): string[] => {
+  //     const dates: string[] = [];
+  //     const today = new Date();
+
+  //     for (let i = 29; i >= 0; i--) {
+  //       const date = new Date(today);
+  //       date.setDate(today.getDate() - i);
+  //       dates.push(formatDate(date));
+  //     }
+
+  //     return dates;
+  //   };
+
+  //   const aggregateTransactions = (
+  //     transactions: z.infer<typeof TransactionsSchema>
+  //   ): AggregatedData[] => {
+  //     const dates = getLast30Days();
+  //     const aggregation: { [key: string]: number } = {};
+  //     let cumulativeAmount = 0;
+
+  //     dates.forEach((date) => {
+  //       aggregation[date] = 0;
+  //     });
+
+  //     transactions.forEach((transaction) => {
+  //       const transactionDate = formatDate(new Date(transaction.dateTime));
+  //       if (aggregation.hasOwnProperty(transactionDate)) {
+  //         cumulativeAmount += transaction.amount;
+  //         aggregation[transactionDate] = cumulativeAmount;
+  //       }
+  //     });
+
+  //     return dates.map((date) => ({
+  //       date,
+  //       amount: aggregation[date],
+  //     }));
+  //   };
+
+  //   const result = aggregateTransactions(transactions);
+  //   setExpenses(result);
+  // }, []);
 
   return (
     <>
@@ -98,8 +155,8 @@ export default function DashboardPage() {
       </div>
       {expenses.map((expense, index) => {
         return (
-          <div key={index} className="flex">
-            <div>{expense.date.toISOString()}</div>
+          <div key={index} className="flex gap-10">
+            <div>{expense.date}</div>
             <div>{expense.amount}</div>
           </div>
         );

@@ -48,6 +48,7 @@ export const signup = async (values: z.infer<typeof SignupSchema>) => {
       name: "CASH",
       balance: 0,
       color: "bg-[#2481de]",
+      createdAt: new Date(),
     });
 
     return {

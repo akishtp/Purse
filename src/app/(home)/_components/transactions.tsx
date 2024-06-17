@@ -21,14 +21,21 @@ export default function Transactions() {
                 <div className="text-start flex-1 flex justify-between items-center">
                   <div className="text-sm">{transaction.note}</div>
                   <div className="text-xs text-end">
-                    <div>{format(transaction.dateTime, "dd/MM/yyyy")}</div>
-                    <div>{format(transaction.dateTime, "HH:mm")}</div>
+                    {/* <div>{format(transaction.dateTime, "dd/MM/yyyy")}</div> */}
+                    <div>{transaction.dateTime}</div>
+                    {/* <div>{format(transaction.dateTime, "HH:mm")}</div> */}
                   </div>
                 </div>
                 <div className="w-1/6 text-end">
-                  <div className="text-red-500 text-sm">
-                    {transaction.amount}
-                  </div>
+                  {transaction.type === "Income" ? (
+                    <div className="text-green-500 text-sm">
+                      -{transaction.amount}
+                    </div>
+                  ) : (
+                    <div className="text-red-500 text-sm">
+                      +{transaction.amount}
+                    </div>
+                  )}
                   <div className="text-xs">{"balance"}</div>
                 </div>
               </div>

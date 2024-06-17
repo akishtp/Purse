@@ -72,14 +72,12 @@ function AddTransactionForm() {
     return `${hours}:${minutes}`;
   };
   const [time, setTime] = useState(getCurrentTime);
+
   const handleChange = (event: {
     target: { value: SetStateAction<string> };
   }) => {
     setTime(event.target.value);
   };
-  useEffect(() => {
-    setTime(getCurrentTime());
-  }, []);
 
   const { add, transactions } = useTransactionStore((state) => state);
   const { accounts } = useAccountStore((state) => state);
@@ -97,7 +95,9 @@ function AddTransactionForm() {
   });
 
   function onSubmit(values: z.infer<typeof AddTransactionSchema>) {
-    values.dateTime = `${values.dateTime.split("T")[0]}T${time}`;
+    values.dateTime = `${values.dateTime.toString().split("T")[0]}T${time}`;
+    console.log(values.dateTime);
+
     values.type = type;
     add(values);
   }
@@ -245,7 +245,11 @@ function AddTransactionForm() {
                       <Calendar
                         mode="single"
                         selected={new Date(field.value)}
-                        onSelect={(date) => field.onChange(date?.toISOString())}
+                        onSelect={(date) => {
+                          date?.setHours(5);
+                          date?.setMinutes(30);
+                          field.onChange(date?.toISOString());
+                        }}
                         initialFocus
                       />
                     </PopoverContent>
