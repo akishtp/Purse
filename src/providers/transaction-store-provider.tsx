@@ -3,8 +3,16 @@
 import {
   type TransactionStore,
   createTransactionStore,
+  initTransactionsStore,
 } from "@/stores/transaction-store";
-import { type ReactNode, createContext, useRef, useContext } from "react";
+import {
+  type ReactNode,
+  createContext,
+  useRef,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useStore } from "zustand";
 
 export type TransactionStoreApi = ReturnType<typeof createTransactionStore>;
@@ -21,8 +29,22 @@ export const TransactionStoreProvider = ({
   children,
 }: TransactionStoreProviderProps) => {
   const storeRef = useRef<TransactionStoreApi>();
-  if (!storeRef.current) {
-    storeRef.current = createTransactionStore();
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  useEffect(() => {
+    const initializeStore = async () => {
+      const initialState = await initTransactionsStore();
+      storeRef.current = createTransactionStore(initialState.transactions);
+      setIsInitialized(true);
+    };
+
+    if (!storeRef.current) {
+      initializeStore();
+    }
+  }, []);
+
+  if (!isInitialized) {
+    return <div>Fetching transactions...</div>;
   }
 
   return (

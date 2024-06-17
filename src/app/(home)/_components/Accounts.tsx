@@ -6,11 +6,7 @@ import { useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 export default function Accounts() {
-  const { accounts, get } = useAccountStore((state) => state);
-
-  useEffect(() => {
-    get();
-  }, []);
+  const { accounts } = useAccountStore((state) => state);
 
   return (
     <div className="grid grid-cols-2 gap-1 md:gap-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">

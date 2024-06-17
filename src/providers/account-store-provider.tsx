@@ -1,9 +1,20 @@
 "use client";
 
-import { type ReactNode, createContext, useRef, useContext } from "react";
+import {
+  type ReactNode,
+  createContext,
+  useRef,
+  useContext,
+  useState,
+  useEffect,
+} from "react";
 import { useStore } from "zustand";
 
-import { type AccountStore, createAccountStore } from "@/stores/account-store";
+import {
+  type AccountStore,
+  createAccountStore,
+  initAccountsStore,
+} from "@/stores/account-store";
 
 export type AccountStoreApi = ReturnType<typeof createAccountStore>;
 
@@ -19,6 +30,24 @@ export const AccountStoreProvider = ({
   children,
 }: AccountStoreProviderProps) => {
   const storeRef = useRef<AccountStoreApi>();
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  useEffect(() => {
+    const initializeStore = async () => {
+      const initialState = await initAccountsStore();
+      storeRef.current = createAccountStore(initialState.accounts);
+      setIsInitialized(true);
+    };
+
+    if (!storeRef.current) {
+      initializeStore();
+    }
+  }, []);
+
+  if (!isInitialized) {
+    return <div>Fetching accounts...</div>;
+  }
+
   if (!storeRef.current) {
     storeRef.current = createAccountStore();
   }

@@ -33,18 +33,16 @@ export const AddAccountSchema = z.object({
   color: z.string(),
 });
 
-export const AccountsSchema = z.object({
-  accounts: z.array(
-    z.object({
-      id: z.number(),
-      userId: z.string(),
+export const AccountsSchema = z.array(
+  z.object({
+    id: z.number(),
+    userId: z.string(),
 
-      name: z.string(),
-      balance: z.number(),
-      color: z.string(),
-    })
-  ),
-});
+    name: z.string(),
+    balance: z.number(),
+    color: z.string(),
+  })
+);
 
 // <------------------------- Transaction ------------------------->
 
@@ -61,19 +59,17 @@ export const AddTransactionSchema = z.object({
     .max(16, { message: "Note can't be longer than 16 charecters" }),
 });
 
-export const TransactionsSchema = z.object({
-  transactions: z.array(
-    z.object({
-      id: z.number(),
-      userId: z.string(),
+export const TransactionsSchema = z.array(
+  z.object({
+    id: z.number(),
+    userId: z.string(),
 
-      type: z.string(),
-      amount: z.number(),
-      category: z.string(),
-      account: z.string(),
-      accountId: z.number(),
-      dateTime: z.string().datetime(),
-      note: z.string(),
-    })
-  ),
-});
+    type: z.string(),
+    amount: z.number(),
+    category: z.string(),
+    account: z.string(),
+    accountId: z.number(),
+    dateTime: z.string().datetime(),
+    note: z.string(),
+  })
+);

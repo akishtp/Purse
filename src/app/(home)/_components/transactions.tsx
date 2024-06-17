@@ -5,11 +5,7 @@ import { useEffect } from "react";
 import { format } from "date-fns";
 
 export default function Transactions() {
-  const { transactions, get } = useTransactionStore((state) => state);
-
-  useEffect(() => {
-    get();
-  }, []);
+  const { transactions } = useTransactionStore((state) => state);
 
   return (
     <div className="w-full bg-neutral-50 divide-y-2 divide-neutral-100 overflow-scroll h-fit border-x-2 border-b-2 rounded-b-xl dark:divide-neutral-900 dark:bg-neutral-950">
