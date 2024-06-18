@@ -90,8 +90,8 @@ export const createAccountStore = (
         });
       }
     },
-    delete: async (accountId: number) => {
-      const res = await deleteAccount(accountId);
+    delete: async (id: number) => {
+      const res = await deleteAccount(id);
       if (res.error) {
         toast({
           variant: "destructive",
@@ -99,9 +99,7 @@ export const createAccountStore = (
         });
       } else if (res.success) {
         set((state) => ({
-          accounts: state.accounts.filter(
-            (account) => account.id !== accountId
-          ),
+          accounts: state.accounts.filter((account) => account.id !== id),
         }));
         toast({
           variant: "default",

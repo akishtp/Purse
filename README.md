@@ -26,7 +26,7 @@
 - [x] add edit to accounts
 - [x] add delete to accounts
 - [ ] add edit to transactions
-- [ ] add delete to transactions
+- [x] add delete to transactions
 - [x] make graphs
   - [x] balance record
 - [ ] find a way to host???

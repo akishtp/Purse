@@ -46,5 +46,5 @@ export const transactionTable = pgTable("transactions", {
     .references(() => accountTable.id, { onDelete: "cascade" })
     .notNull(),
   dateTime: text("dateTime").notNull(),
-  note: text("note"),
+  note: text("note").notNull(),
 });

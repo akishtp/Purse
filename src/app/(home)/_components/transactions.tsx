@@ -1,8 +1,17 @@
 "use client";
 
 import { useTransactionStore } from "@/providers/transaction-store-provider";
+import { TransactionSchema } from "@/types";
+import { useState } from "react";
+import { z } from "zod";
+import EditTransaction from "./editTransaction";
 
 export default function Transactions() {
+  const [editTransactionModal, setEditTransactionModal] =
+    useState<boolean>(false);
+  const [selectedTransaction, setSelectedTransaction] =
+    useState<z.infer<typeof TransactionSchema>>();
+
   const { transactions } = useTransactionStore((state) => state);
 
   const formatDate = (dateString: string) => {
@@ -30,7 +39,14 @@ export default function Transactions() {
         <>
           {transactions.map((transaction) => {
             return (
-              <div key={transaction.id} className="h-14 flex px-2 items-center">
+              <div
+                key={transaction.id}
+                onClick={() => {
+                  setEditTransactionModal(true);
+                  setSelectedTransaction(transaction);
+                }}
+                className="h-14 flex px-2 items-center cursor-pointer"
+              >
                 <div className="w-1/4 flex items-center gap-2">
                   <div>{transaction.category}</div>
                   <div className="text-sm">{transaction.account}</div>
@@ -57,6 +73,13 @@ export default function Transactions() {
               </div>
             );
           })}
+          {editTransactionModal && selectedTransaction && (
+            <EditTransaction
+              editTransactionModal={editTransactionModal}
+              selectedTransaction={selectedTransaction}
+              setEditTransactionModal={setEditTransactionModal}
+            />
+          )}
         </>
       ) : (
         <div className="h-14 flex items-center justify-center">

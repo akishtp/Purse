@@ -102,3 +102,25 @@ export const getTransactions = async () => {
     };
   }
 };
+
+export const deleteTransaction = async (id: number) => {
+  const { user } = await validateRequest();
+
+  if (!user) {
+    return {
+      error: "You must be logged in to delete an account",
+    };
+  }
+
+  try {
+    await db.delete(transactionTable).where(eq(transactionTable.id, id));
+
+    return {
+      success: "Transaction deleted successfully",
+    };
+  } catch (error: any) {
+    return {
+      error: error.message,
+    };
+  }
+};
