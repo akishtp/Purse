@@ -14,21 +14,29 @@
   - [x] create add transaction
     - [x] mobile view
   - [x] create overview
-    - [x] create tags for account
+    - [x] create badges for account
       - [x] mobile view
-    - [x] create transaction display
-      - [x] mobile view
+    - [ ] create transaction display
+      - [ ] mobile view
+      - [ ] icons
+      - [ ] display balance
 - [x] add a route to add users
 - [x] create a route to add accounts
 - [x] use state management (zustand)
 - [x] add a route to add transactions
 - [x] add a dashboard page
 - [x] add edit to accounts
+  - [ ] update account name in transactions
 - [x] add delete to accounts
-- [ ] add edit to transactions
+- [x] add edit to transactions
+  - [x] update transaction in db
+  - [x] update account balance
 - [x] add delete to transactions
+  - [x] delete from db
+  - [x] update account balance
 - [x] make graphs
   - [x] balance record
+- [ ] logo
 - [ ] find a way to host???
 
 - [ ] fix docker db:push problem

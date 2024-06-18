@@ -19,7 +19,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import useMediaQuery from "@/hooks/useMediaQuery";
-import { cn } from "@/lib/utils";
 import { Dispatch, SetStateAction, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -48,7 +47,7 @@ export default function AddAccount() {
           </button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
-          <AddAccountForm className="" setOpen={setOpen} />
+          <AddAccountForm setOpen={setOpen} />
         </DialogContent>
       </Dialog>
     );
@@ -63,7 +62,7 @@ export default function AddAccount() {
         </button>
       </DrawerTrigger>
       <DrawerContent>
-        <AddAccountForm className="px-4" setOpen={setOpen} />
+        <AddAccountForm setOpen={setOpen} />
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
             <Button variant="outline">Cancel</Button>
@@ -75,10 +74,8 @@ export default function AddAccount() {
 }
 
 function AddAccountForm({
-  className,
   setOpen,
 }: {
-  className: string;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }) {
   const { add } = useAccountStore((state) => state);
@@ -100,7 +97,7 @@ function AddAccountForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={cn("flex flex-col gap-4", className)}
+        className={"px-4 lg:px-0 flex flex-col gap-4"}
       >
         <FormField
           control={form.control}

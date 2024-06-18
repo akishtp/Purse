@@ -1,16 +1,40 @@
 import {
   addTransaction,
   deleteTransaction,
+  editTransaction,
   getTransactions,
 } from "@/actions/transaction.actions";
 import { toast } from "@/components/ui/use-toast";
-import { AddTransactionSchema, TransactionsSchema } from "@/types";
+import {
+  AddTransactionSchema,
+  TransactionSchema,
+  TransactionsSchema,
+} from "@/types";
 import { z } from "zod";
 import { createStore } from "zustand/vanilla";
 
 export type TransactionActions = {
   add: (values: z.infer<typeof AddTransactionSchema>) => void;
-  delete: (id: number) => void;
+  edit: ({
+    values,
+    ogAmount,
+    ogType,
+  }: {
+    values: z.infer<typeof TransactionSchema>;
+    ogAmount: number;
+    ogType: string;
+  }) => void;
+  delete: ({
+    id,
+    accountId,
+    type,
+    amount,
+  }: {
+    id: number;
+    accountId: number;
+    type: string;
+    amount: number;
+  }) => void;
 };
 
 export type TransactionStore = {
@@ -56,8 +80,47 @@ export const createTransactionStore = (
         });
       }
     },
-    delete: async (id: number) => {
-      const res = await deleteTransaction(id);
+    edit: async ({
+      values,
+      ogAmount,
+      ogType,
+    }: {
+      values: z.infer<typeof TransactionSchema>;
+      ogAmount: number;
+      ogType: string;
+    }) => {
+      const res = await editTransaction({ values, ogAmount, ogType });
+      if (res.error) {
+        toast({
+          variant: "destructive",
+          description: res.error,
+        });
+      } else if (res.success) {
+        set((state) => ({
+          transactions: state.transactions.map((transaction) =>
+            transaction.id === values.id
+              ? { ...transaction, ...res.data }
+              : transaction
+          ),
+        }));
+        toast({
+          variant: "default",
+          description: res.success,
+        });
+      }
+    },
+    delete: async ({
+      id,
+      accountId,
+      type,
+      amount,
+    }: {
+      id: number;
+      accountId: number;
+      type: string;
+      amount: number;
+    }) => {
+      const res = await deleteTransaction(id, accountId, type, amount);
       if (res.error) {
         toast({
           variant: "destructive",

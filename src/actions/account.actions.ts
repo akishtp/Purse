@@ -108,6 +108,7 @@ export const editAccount = async ({
           account: values.name,
           accountId: values.id,
           dateTime: new Date().toISOString(),
+          note: "",
         });
       } else {
         await db.insert(transactionTable).values({
@@ -119,6 +120,7 @@ export const editAccount = async ({
           account: values.name,
           accountId: values.id,
           dateTime: new Date().toISOString(),
+          note: "",
         });
       }
     }

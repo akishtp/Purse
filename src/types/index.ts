@@ -64,7 +64,7 @@ export const TransactionSchema = z.object({
   userId: z.string(),
 
   type: z.string(),
-  amount: z.number(),
+  amount: z.coerce.number(),
   category: z.string(),
   account: z.string(),
   accountId: z.number(),

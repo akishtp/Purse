@@ -1,11 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { format } from "date-fns";
+import { format, set } from "date-fns";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { useTransactionStore } from "@/providers/transaction-store-provider";
-import { SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -49,19 +49,23 @@ export default function AddTransaction() {
           </button>
         </DrawerTrigger>
         <DrawerContent className="bg-neutral-100 dark:bg-neutral-900">
-          <AddTransactionForm />
+          <AddTransactionForm setOpen={setOpen} />
         </DrawerContent>
       </Drawer>
     );
   }
   return (
     <div className="p-2 fixed right-0 w-[28rem]">
-      <AddTransactionForm />
+      <AddTransactionForm setOpen={setOpen} />
     </div>
   );
 }
 
-function AddTransactionForm() {
+function AddTransactionForm({
+  setOpen,
+}: {
+  setOpen: Dispatch<SetStateAction<boolean>>;
+}) {
   const [type, setType] = useState("Expense");
 
   // <------------------------------- Time was a headache -------------------------------->
@@ -100,6 +104,7 @@ function AddTransactionForm() {
 
     values.type = type;
     add(values);
+    setOpen(false);
   }
 
   return (

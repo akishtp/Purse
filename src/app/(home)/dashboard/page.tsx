@@ -66,10 +66,10 @@ export default function DashboardPage() {
         <div className="grid grid-cols-1 2xl:grid-cols-2 gap-2">
           <AspectRatio
             ratio={5 / 4}
-            className="border-2 rounded-lg bg-neutral-100 dark:bg-neutral-900 flex items-start justify-center flex-col"
+            className="border-2 rounded-lg bg-neutral-100 dark:bg-neutral-900 flex items-start justify-center flex-col p-4"
           >
             <div>Balance:</div>
-            <ResponsiveContainer width="94%" height="94%">
+            <ResponsiveContainer width="100%" height="100%">
               <LineChart
                 width={730}
                 height={250}
