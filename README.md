@@ -23,7 +23,7 @@
 - [x] use state management (zustand)
 - [x] add a route to add transactions
 - [x] add a dashboard page
-- [ ] add edit to accounts
+- [x] add edit to accounts
 - [ ] add delete to accounts
 - [ ] add edit to transactions
 - [ ] add delete to transactions

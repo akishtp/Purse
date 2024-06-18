@@ -1,19 +1,22 @@
-import { addAccount, getAccounts } from "@/actions/account.actions";
+import {
+  addAccount,
+  editAccount,
+  getAccounts,
+} from "@/actions/account.actions";
 import { toast } from "@/components/ui/use-toast";
-import { AccountsSchema, AddAccountSchema } from "@/types";
+import { AccountSchema, AccountsSchema, AddAccountSchema } from "@/types";
 import { z } from "zod";
 import { createStore } from "zustand/vanilla";
 
-export type Account = {
-  id: number;
-  userId: string;
-  name: string;
-  balance: number;
-  color: string;
-};
-
 export type AccountActions = {
   add: (values: z.infer<typeof AddAccountSchema>) => void;
+  edit: ({
+    values,
+    ogBalance,
+  }: {
+    values: z.infer<typeof AccountSchema>;
+    ogBalance: number;
+  }) => void;
 };
 
 export type AccountStore = {
@@ -52,6 +55,32 @@ export const createAccountStore = (
       } else if (res.success) {
         set((state) => ({
           accounts: [...state.accounts, ...res.data],
+        }));
+
+        toast({
+          variant: "default",
+          description: res.success,
+        });
+      }
+    },
+    edit: async ({
+      values,
+      ogBalance,
+    }: {
+      values: z.infer<typeof AccountSchema>;
+      ogBalance: number;
+    }) => {
+      const res = await editAccount({ values, ogBalance });
+      if (res.error) {
+        toast({
+          variant: "destructive",
+          description: res.error,
+        });
+      } else if (res.success) {
+        set((state) => ({
+          accounts: state.accounts.map((account) =>
+            account.id === values.id ? values : account
+          ),
         }));
 
         toast({

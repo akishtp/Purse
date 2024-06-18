@@ -2,10 +2,16 @@
 
 import { useAccountStore } from "@/providers/account-store-provider";
 import AddAccount from "./addAccount";
-import { useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { z } from "zod";
+import { AccountSchema } from "@/types";
+import EditAccount from "./editAccount";
 
 export default function Accounts() {
+  const [editAccountModal, setEditAccountModal] = useState<boolean>(false);
+  const [selectedAccount, setSelectedAccount] =
+    useState<z.infer<typeof AccountSchema>>();
   const { accounts } = useAccountStore((state) => state);
 
   return (
@@ -13,8 +19,12 @@ export default function Accounts() {
       {accounts.map((account) => (
         <div
           key={account.id}
+          onClick={() => {
+            setEditAccountModal(true);
+            setSelectedAccount(account);
+          }}
           className={cn(
-            "h-10 flex items-center justify-between text-white rounded-lg px-2",
+            "h-10 flex items-center justify-between text-white rounded-lg px-2 cursor-pointer",
             account.color
           )}
         >
@@ -23,6 +33,14 @@ export default function Accounts() {
         </div>
       ))}
       <AddAccount />
+
+      {editAccountModal && selectedAccount && (
+        <EditAccount
+          editAccountModal={editAccountModal}
+          selectedAccount={selectedAccount}
+          setEditAccountModal={setEditAccountModal}
+        />
+      )}
     </div>
   );
 }

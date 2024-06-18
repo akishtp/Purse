@@ -88,7 +88,7 @@ function AddAccountForm({
     defaultValues: {
       name: "",
       balance: 0,
-      color: "bg-red-500",
+      color: "bg-blue-500",
     },
   });
 
@@ -133,7 +133,7 @@ function AddAccountForm({
           name="color"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Color</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>

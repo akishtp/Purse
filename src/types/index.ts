@@ -33,16 +33,16 @@ export const AddAccountSchema = z.object({
   color: z.string(),
 });
 
-export const AccountsSchema = z.array(
-  z.object({
-    id: z.number(),
-    userId: z.string(),
+export const AccountSchema = z.object({
+  id: z.number(),
+  userId: z.string(),
 
-    name: z.string(),
-    balance: z.number(),
-    color: z.string(),
-  })
-);
+  name: z.string(),
+  balance: z.coerce.number(),
+  color: z.string(),
+});
+
+export const AccountsSchema = z.array(AccountSchema);
 
 // <------------------------- Transaction ------------------------->
 

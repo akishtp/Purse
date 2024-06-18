@@ -1,9 +1,9 @@
 "use server";
 
 import db from "@/server/db";
-import { accountTable } from "@/server/db/schema";
+import { accountTable, transactionTable } from "@/server/db/schema";
 import { validateRequest } from "@/server/lucia";
-import { AddAccountSchema } from "@/types";
+import { AccountSchema, AddAccountSchema } from "@/types";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 
@@ -68,6 +68,67 @@ export const getAccounts = async () => {
   } catch (error: any) {
     return {
       error: error?.message,
+    };
+  }
+};
+
+export const editAccount = async ({
+  values,
+  ogBalance,
+}: {
+  values: z.infer<typeof AccountSchema>;
+  ogBalance: number;
+}) => {
+  const { user } = await validateRequest();
+
+  if (!user) {
+    return {
+      error: "You must be logged in to edit an account",
+    };
+  }
+
+  try {
+    await db
+      .update(accountTable)
+      .set({
+        name: values.name,
+        balance: values.balance,
+        color: values.color,
+      })
+      .where(eq(accountTable.id, values.id));
+
+    if (values.balance !== ogBalance) {
+      if (values.balance > ogBalance) {
+        await db.insert(transactionTable).values({
+          userId: user.id,
+
+          type: "Income",
+          amount: values.balance - ogBalance,
+          category: "Adjust Balance",
+          account: values.name,
+          accountId: values.id,
+          dateTime: new Date().toISOString(),
+        });
+      } else {
+        await db.insert(transactionTable).values({
+          userId: user.id,
+
+          type: "Expense",
+          amount: ogBalance - values.balance,
+          category: "Adjust Balance",
+          account: values.name,
+          accountId: values.id,
+          dateTime: new Date().toISOString(),
+        });
+      }
+    }
+
+    return {
+      success: "Account updated successfully",
+    };
+  } catch (error: any) {
+    return {
+      error: error.message,
     };
   }
 };

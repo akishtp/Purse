@@ -2,165 +2,117 @@
 
 import { useAccountStore } from "@/providers/account-store-provider";
 import { useTransactionStore } from "@/providers/transaction-store-provider";
-import { TransactionsSchema } from "@/types";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { useEffect, useState } from "react";
-import { z } from "zod";
+import {
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  Line,
+  LineChart,
+} from "recharts";
 
-interface Expense {
+type DailyBalances = {
   date: string;
-  amount: number;
-}
-
-// Helper function to format date as YYYY-MM-DD
-// const formatDate = (date: Date): string => {
-//   return date.toISOString().split("T")[0];
-// };
+  balance: number;
+};
 
 export default function DashboardPage() {
-  const [balance, setBalance] = useState<number>(0);
-  const [cashflow, setCashflow] = useState<number>(0);
-  const [expenses, setExpenses] = useState<Expense[]>([]);
+  const [dailyBalances, setDailyBalances] = useState<DailyBalances[]>([]);
 
   const { transactions } = useTransactionStore((state) => state);
   const { accounts } = useAccountStore((state) => state);
 
   useEffect(() => {
-    const totalBalance = accounts.reduce(
+    const now = new Date();
+    const balances = [];
+
+    let currentBalance = accounts.reduce(
       (acc, account) => acc + account.balance,
       0
     );
-    setBalance(totalBalance);
-  }, [accounts]);
+    let transactionIndex = 0;
 
-  useEffect(() => {
-    const now = new Date();
-    const thirtyDaysAgo = new Date();
-    thirtyDaysAgo.setDate(now.getDate() - 30);
+    for (let i = 0; i < 30; i++) {
+      const date = new Date();
+      date.setDate(now.getDate() - i);
+      const dateString = date.toISOString().split("T")[0];
 
-    const cashflowLast30Days = transactions
-      .filter((transaction) => new Date(transaction.dateTime) > thirtyDaysAgo)
-      .reduce((acc, transaction) => {
+      while (
+        transactionIndex < transactions.length &&
+        new Date(transactions[transactionIndex].dateTime).toDateString() ===
+          date.toDateString()
+      ) {
+        const transaction = transactions[transactionIndex];
         if (transaction.type === "Expense") {
-          return acc - transaction.amount;
+          currentBalance += transaction.amount;
         } else if (transaction.type === "Income") {
-          return acc + transaction.amount;
+          currentBalance -= transaction.amount;
         }
-        return acc;
-      }, 0);
-    setCashflow(cashflowLast30Days);
-  }, [transactions]);
-
-  useEffect(() => {
-    var array: Expense[] = [];
-    const date = new Date();
-    date.setHours(0, 0, 0, 0);
-
-    for (var i = 0; i <= 30; i++) {
-      date.setDate(date.getDate() - 1);
-      array.push({
-        date: date.toLocaleDateString(),
-        amount: 0,
-      });
+        transactionIndex++;
+      }
+      balances.push({ date: dateString, balance: currentBalance });
     }
 
-    transactions.forEach((transaction) => {
-      const transactionDate = new Date(transaction.dateTime);
-      if (transactionDate > date) {
-        array[0].amount += transaction.amount;
-      }
-    });
-
-    setExpenses(array);
-  }, [transactions]);
-
-  // useEffect(() => {
-  //   const getLast30Days = (): string[] => {
-  //     const dates: string[] = [];
-  //     const today = new Date();
-
-  //     for (let i = 29; i >= 0; i--) {
-  //       const date = new Date(today);
-  //       date.setDate(today.getDate() - i);
-  //       dates.push(formatDate(date));
-  //     }
-
-  //     return dates;
-  //   };
-
-  //   const aggregateTransactions = (
-  //     transactions: z.infer<typeof TransactionsSchema>
-  //   ): AggregatedData[] => {
-  //     const dates = getLast30Days();
-  //     const aggregation: { [key: string]: number } = {};
-  //     let cumulativeAmount = 0;
-
-  //     dates.forEach((date) => {
-  //       aggregation[date] = 0;
-  //     });
-
-  //     transactions.forEach((transaction) => {
-  //       const transactionDate = formatDate(new Date(transaction.dateTime));
-  //       if (aggregation.hasOwnProperty(transactionDate)) {
-  //         cumulativeAmount += transaction.amount;
-  //         aggregation[transactionDate] = cumulativeAmount;
-  //       }
-  //     });
-
-  //     return dates.map((date) => ({
-  //       date,
-  //       amount: aggregation[date],
-  //     }));
-  //   };
-
-  //   const result = aggregateTransactions(transactions);
-  //   setExpenses(result);
-  // }, []);
+    setDailyBalances(balances.reverse());
+  }, [transactions, accounts]);
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-3 gap-2">
-        <div className="border-2 h-24 rounded-2xl flex py-3 px-2 flex-col justify-between bg-neutral-100 dark:bg-neutral-900">
-          <div>Total balance:</div>
-          {balance < 0 ? (
-            <div className="text-2xl text-end text-red-500">{balance}</div>
-          ) : (
-            <div className="text-2xl text-end text-green-500">+{balance}</div>
-          )}
-        </div>
-        <div className="border-2 h-24 rounded-2xl flex py-3 px-2 flex-col justify-between bg-neutral-100 dark:bg-neutral-900">
-          <div>Last 30 days:</div>
-          {cashflow < 0 ? (
-            <div className="text-2xl text-end text-red-500">{cashflow}</div>
-          ) : (
-            <div className="text-2xl text-end text-green-500">+{cashflow}</div>
-          )}
-        </div>
-      </div>
+      <QuickView />
       <div>
         <div className="grid grid-cols-1 2xl:grid-cols-2 gap-2">
           <AspectRatio
             ratio={5 / 4}
-            className="border-2 rounded-lg bg-neutral-100 dark:bg-neutral-900"
+            className="border-2 rounded-lg bg-neutral-100 dark:bg-neutral-900 flex items-start justify-center flex-col"
           >
-            Balance line graph
-          </AspectRatio>
-          <AspectRatio
-            ratio={5 / 4}
-            className="border-2 rounded-lg bg-neutral-100 dark:bg-neutral-900"
-          >
-            <div>Balance line graph</div>
+            <div>Balance:</div>
+            <ResponsiveContainer width="94%" height="94%">
+              <LineChart
+                width={730}
+                height={250}
+                data={dailyBalances}
+                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              >
+                <XAxis dataKey="date" tickFormatter={formatXAxis} />
+                <YAxis />
+                <Tooltip content={<CustomTooltip />} />
+                <Line type="monotone" dataKey="balance" stroke="#8884d8" />
+              </LineChart>
+            </ResponsiveContainer>
           </AspectRatio>
         </div>
       </div>
-      {expenses.map((expense, index) => {
-        return (
-          <div key={index} className="flex gap-10">
-            <div>{expense.date}</div>
-            <div>{expense.amount}</div>
-          </div>
-        );
-      })}
     </>
   );
 }
+
+import { TooltipProps } from "recharts";
+import QuickView from "./_components/quickView";
+
+interface CustomTooltipProps extends TooltipProps<number, string> {}
+
+const CustomTooltip: React.FC<CustomTooltipProps> = ({
+  active,
+  payload,
+  label,
+}) => {
+  if (active && payload && payload.length) {
+    return (
+      <div>
+        <p className="label">{`Date: ${label}`}</p>
+        <p className="intro">{`Balance: ${payload[0].value}`}</p>
+      </div>
+    );
+  }
+
+  return null;
+};
+
+const formatXAxis = (tickItem: string) => {
+  const date = new Date(tickItem);
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // getMonth() is zero-based
+  return `${day}/${month}`;
+};

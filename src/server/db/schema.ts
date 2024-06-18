@@ -54,5 +54,5 @@ export const transactionTable = pgTable("transactions", {
     .notNull()
     .references(() => accountTable.id),
   dateTime: text("dateTime").notNull(),
-  note: text("note").notNull(),
+  note: text("note"),
 });

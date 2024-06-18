@@ -40,7 +40,7 @@ export const addTransaction = async (
         category: values.category,
         account: account?.name,
         accountId: accountIdNum,
-        dateTime: new Date(values.dateTime),
+        dateTime: values.dateTime,
         note: values.note,
       })
       .returning({
