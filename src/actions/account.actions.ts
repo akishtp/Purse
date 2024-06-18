@@ -132,3 +132,25 @@ export const editAccount = async ({
     };
   }
 };
+
+export const deleteAccount = async (id: number) => {
+  const { user } = await validateRequest();
+
+  if (!user) {
+    return {
+      error: "You must be logged in to delete an account",
+    };
+  }
+
+  try {
+    await db.delete(accountTable).where(eq(accountTable.id, id));
+
+    return {
+      success: "Account deleted successfully",
+    };
+  } catch (error: any) {
+    return {
+      error: error.message,
+    };
+  }
+};

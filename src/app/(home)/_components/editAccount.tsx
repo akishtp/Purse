@@ -36,6 +36,13 @@ export default function EditAccount({
   editAccountModal: boolean;
 }) {
   const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const { delete: deleteAccount } = useAccountStore((state) => state);
+
+  const handleDelete = () => {
+    deleteAccount(selectedAccount.id);
+    setEditAccountModal(false);
+  };
+
   if (isDesktop) {
     return (
       <Dialog open={editAccountModal} onOpenChange={setEditAccountModal}>
@@ -46,7 +53,11 @@ export default function EditAccount({
             selectedAccount={selectedAccount}
           />
           <DialogFooter>
-            <Button variant="destructive" className="w-full">
+            <Button
+              variant="destructive"
+              className="w-full"
+              onClick={handleDelete}
+            >
               Delete
             </Button>
           </DialogFooter>
@@ -63,7 +74,9 @@ export default function EditAccount({
           selectedAccount={selectedAccount}
         />
         <DrawerFooter>
-          <Button variant="destructive">Delete</Button>
+          <Button variant="destructive" onClick={handleDelete}>
+            Delete
+          </Button>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

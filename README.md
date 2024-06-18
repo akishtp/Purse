@@ -24,10 +24,12 @@
 - [x] add a route to add transactions
 - [x] add a dashboard page
 - [x] add edit to accounts
-- [ ] add delete to accounts
+- [x] add delete to accounts
 - [ ] add edit to transactions
 - [ ] add delete to transactions
 - [ ] make graphs
+  - [ ]
+  - [ ]
 - [ ] find a way to host???
 
 - [ ] fix docker db:push problem

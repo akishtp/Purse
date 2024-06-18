@@ -1,5 +1,6 @@
 import {
   addAccount,
+  deleteAccount,
   editAccount,
   getAccounts,
 } from "@/actions/account.actions";
@@ -17,6 +18,7 @@ export type AccountActions = {
     values: z.infer<typeof AccountSchema>;
     ogBalance: number;
   }) => void;
+  delete: (id: number) => void;
 };
 
 export type AccountStore = {
@@ -82,7 +84,25 @@ export const createAccountStore = (
             account.id === values.id ? values : account
           ),
         }));
-
+        toast({
+          variant: "default",
+          description: res.success,
+        });
+      }
+    },
+    delete: async (accountId: number) => {
+      const res = await deleteAccount(accountId);
+      if (res.error) {
+        toast({
+          variant: "destructive",
+          description: res.error,
+        });
+      } else if (res.success) {
+        set((state) => ({
+          accounts: state.accounts.filter(
+            (account) => account.id !== accountId
+          ),
+        }));
         toast({
           variant: "default",
           description: res.success,

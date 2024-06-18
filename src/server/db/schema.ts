@@ -1,12 +1,4 @@
-import {
-  date,
-  integer,
-  pgTable,
-  serial,
-  text,
-  timestamp,
-} from "drizzle-orm/pg-core";
-import { string } from "zod";
+import { integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
 
 export const userTable = pgTable("users", {
   id: text("id").primaryKey(),
@@ -17,8 +9,8 @@ export const userTable = pgTable("users", {
 export const sessionTable = pgTable("sessions", {
   id: text("id").primaryKey(),
   userId: text("user_id")
-    .notNull()
-    .references(() => userTable.id),
+    .references(() => userTable.id, { onDelete: "cascade" })
+    .notNull(),
   expiresAt: timestamp("expires_at", {
     withTimezone: true,
     mode: "date",
@@ -28,8 +20,8 @@ export const sessionTable = pgTable("sessions", {
 export const accountTable = pgTable("accounts", {
   id: serial("id").primaryKey(),
   userId: text("user_id")
-    .notNull()
-    .references(() => userTable.id),
+    .references(() => userTable.id, { onDelete: "cascade" })
+    .notNull(),
 
   name: text("name").notNull(),
   balance: integer("balance").notNull(),
@@ -43,16 +35,16 @@ export const accountTable = pgTable("accounts", {
 export const transactionTable = pgTable("transactions", {
   id: serial("id").primaryKey(),
   userId: text("user_id")
-    .notNull()
-    .references(() => userTable.id),
+    .references(() => userTable.id, { onDelete: "cascade" })
+    .notNull(),
 
   type: text("type").notNull(),
   amount: integer("amount").notNull(),
   category: text("category").notNull(),
   account: text("account").notNull(),
   accountId: integer("accountId")
-    .notNull()
-    .references(() => accountTable.id),
+    .references(() => accountTable.id, { onDelete: "cascade" })
+    .notNull(),
   dateTime: text("dateTime").notNull(),
   note: text("note"),
 });
