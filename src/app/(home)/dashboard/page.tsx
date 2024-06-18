@@ -34,15 +34,17 @@ export default function DashboardPage() {
     );
     let transactionIndex = 0;
 
-    for (let i = 0; i < 30; i++) {
-      const date = new Date();
-      date.setDate(now.getDate() - i);
-      const dateString = date.toISOString().split("T")[0];
+    for (let i = 0; i <= 30; i++) {
+      const transactionDate = new Date();
+      const balanceDate = new Date();
+      transactionDate.setDate(now.getDate() - i + 1);
+      balanceDate.setDate(now.getDate() - i);
+      const dateString = balanceDate.toISOString().split("T")[0];
 
       while (
         transactionIndex < transactions.length &&
         new Date(transactions[transactionIndex].dateTime).toDateString() ===
-          date.toDateString()
+          transactionDate.toDateString()
       ) {
         const transaction = transactions[transactionIndex];
         if (transaction.type === "Expense") {
@@ -54,7 +56,6 @@ export default function DashboardPage() {
       }
       balances.push({ date: dateString, balance: currentBalance });
     }
-
     setDailyBalances(balances.reverse());
   }, [transactions, accounts]);
 
@@ -113,6 +114,6 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({
 const formatXAxis = (tickItem: string) => {
   const date = new Date(tickItem);
   const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0"); // getMonth() is zero-based
+  const month = String(date.getMonth() + 1).padStart(2, "0");
   return `${day}/${month}`;
 };

@@ -27,11 +27,11 @@
 - [x] add delete to accounts
 - [ ] add edit to transactions
 - [ ] add delete to transactions
-- [ ] make graphs
-  - [ ]
-  - [ ]
+- [x] make graphs
+  - [x] balance record
 - [ ] find a way to host???
 
 - [ ] fix docker db:push problem
 - [ ] connect to sbi api
 - [ ] show balance
+- [ ] add your own categories
