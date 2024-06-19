@@ -126,13 +126,13 @@ function AddTransactionForm({
           />
           <div
             onClick={() => setType("Expense")}
-            className="w-1/2 text-center z-10 h-full"
+            className="w-1/2 z-10 h-full flex items-center justify-center"
           >
             Expense
           </div>
           <div
             onClick={() => setType("Income")}
-            className="w-1/2 text-center z-10 h-full"
+            className="w-1/2 z-10 h-full flex items-center justify-center"
           >
             Income
           </div>

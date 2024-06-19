@@ -1,5 +1,9 @@
 # purse
 
+## BREAKING
+
+- [ ] all sorts of updates and inserts. show it without refresh
+
 ## TODO
 
 - [x] add a login page
@@ -36,9 +40,12 @@
   - [x] update account balance
 - [x] make graphs
   - [x] balance record
-- [ ] logo
+- [x] logo
 - [ ] find a way to host???
 
+## COULD DO
+
+- [ ] landing page
 - [ ] fix docker db:push problem
 - [ ] connect to sbi api
 - [ ] add your own categories

@@ -2,18 +2,26 @@
 
 import { BarChart3, Home, Moon, Power, Sun, User } from "lucide-react";
 import { useTheme } from "next-themes";
+import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function Sidebar() {
   const { setTheme } = useTheme();
-  const router = useRouter();
   const pathname = usePathname();
 
   return (
     <div className="w-16 p-2 md:w-60 flex flex-col justify-between h-dvh fixed">
       <div className="flex flex-col gap-2">
-        <div className="h-12 md:h-44 bg-purple-700 rounded-xl"></div>
+        <div className="h-12 md:h-44 bg-purple-700 rounded-xl flex items-center justify-center md:items-end md:pb-2">
+          <div className="scale-0 md:scale-100">
+            <Image src="/logo-light.svg" alt="Purse" width={210} height={45} />
+          </div>
+          <div className="absolute scale-100 md:scale-0">
+            <Image src="/icon-light.svg" alt="Purse" width={24} height={24} />
+          </div>
+        </div>
+
         <Link
           href="/"
           className={`h-12 md:h-14 rounded-xl flex items-center md:px-4 border-2 justify-center md:justify-start

@@ -50,7 +50,9 @@ export const AddTransactionSchema = z.object({
   type: z
     .string()
     .min(3, { message: "Type must be atleast 3 charecters long" }),
-  amount: z.coerce.number(),
+  amount: z.coerce
+    .number()
+    .min(1, { message: "Amount must be greater than 0" }),
   category: z.string(),
   accountId: z.string(),
   dateTime: z.string(),

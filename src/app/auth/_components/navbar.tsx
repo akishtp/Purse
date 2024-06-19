@@ -15,7 +15,7 @@ export default function Navbar() {
       <div className="h-16 container flex items-center justify-between">
         <div className="flex scale-0 dark:scale-100 absolute gap-4">
           <Image
-            src={"/logos/purse-light.svg"}
+            src="/logo-light.svg"
             width={150}
             height={30}
             alt="purse"
@@ -24,7 +24,7 @@ export default function Navbar() {
         </div>
         <div className="scale-100 dark:scale-0 flex gap-4">
           <Image
-            src={"/logos/purse-dark.svg"}
+            src="/logo-dark.svg"
             width={150}
             height={30}
             alt="purse"
