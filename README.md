@@ -46,7 +46,10 @@
 ## COULD DO
 
 - [ ] landing page
+- [ ] animations
 - [ ] fix docker db:push problem
-- [ ] connect to sbi api
+- [ ] connect to bank api
 - [ ] add your own categories
 - [ ] display balance with each transaction
+- [ ] track investments
+- [ ] track prices
