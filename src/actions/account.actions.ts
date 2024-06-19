@@ -75,9 +75,11 @@ export const getAccounts = async () => {
 export const editAccount = async ({
   values,
   ogBalance,
+  ogName,
 }: {
   values: z.infer<typeof AccountSchema>;
   ogBalance: number;
+  ogName: string;
 }) => {
   const { user } = await validateRequest();
 
@@ -96,6 +98,11 @@ export const editAccount = async ({
         color: values.color,
       })
       .where(eq(accountTable.id, values.id));
+
+    await db
+      .update(transactionTable)
+      .set({ account: values.name })
+      .where(eq(transactionTable.account, ogName));
 
     if (values.balance !== ogBalance) {
       if (values.balance > ogBalance) {

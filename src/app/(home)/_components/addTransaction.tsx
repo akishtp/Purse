@@ -35,6 +35,7 @@ import {
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { Textarea } from "@/components/ui/textarea";
+import { categories } from "@/data/categories";
 
 export default function AddTransaction() {
   const [open, setOpen] = useState(false);
@@ -91,7 +92,8 @@ function AddTransactionForm({
     defaultValues: {
       type: transactions.length > 0 ? transactions[0].type : "Expense",
       amount: 0,
-      category: transactions.length > 0 ? transactions[0].category : "Food",
+      category:
+        transactions.length > 0 ? transactions[0].category : "Breakfast",
       accountId: accounts.length > 0 ? accounts[0].id.toString() : "",
       dateTime: new Date().toISOString(),
       note: "",
@@ -122,20 +124,18 @@ function AddTransactionForm({
               transition: "transform 0.3s ease-in-out",
             }}
           />
-          <button
-            type="button"
+          <div
             onClick={() => setType("Expense")}
             className="w-1/2 text-center z-10 h-full"
           >
             Expense
-          </button>
-          <button
-            type="button"
+          </div>
+          <div
             onClick={() => setType("Income")}
             className="w-1/2 text-center z-10 h-full"
           >
             Income
-          </button>
+          </div>
         </div>
         <div className="bg-neutral-100 rounded-2xl gap-2 px-4 pb-4 border-2 dark:bg-neutral-900">
           <FormField
@@ -155,9 +155,13 @@ function AddTransactionForm({
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="Food">Food</SelectItem>
-                      <SelectItem value="Fuel">Fuel</SelectItem>
-                      <SelectItem value="Rent">Rent</SelectItem>
+                      {categories.map((category) => {
+                        return (
+                          <SelectItem value={category.name}>
+                            {category.name}
+                          </SelectItem>
+                        );
+                      })}
                     </SelectContent>
                   </Select>
                   <FormMessage />

@@ -5,6 +5,8 @@ import { TransactionSchema } from "@/types";
 import { useState } from "react";
 import { z } from "zod";
 import EditTransaction from "./editTransaction";
+import { categories } from "@/data/categories";
+import { CircleHelp, LucideProps } from "lucide-react";
 
 export default function Transactions() {
   const [editTransactionModal, setEditTransactionModal] =
@@ -38,6 +40,10 @@ export default function Transactions() {
       {transactions.length > 0 ? (
         <>
           {transactions.map((transaction) => {
+            let categoryIcon =
+              categories.find(
+                (category) => category.name === transaction.category
+              )?.icon || CircleHelp;
             return (
               <div
                 key={transaction.id}
@@ -48,7 +54,7 @@ export default function Transactions() {
                 className="h-14 flex px-2 items-center cursor-pointer"
               >
                 <div className="w-1/4 flex items-center gap-2">
-                  <div>{transaction.category}</div>
+                  <Icon icon={categoryIcon} />
                   <div className="text-sm">{transaction.account}</div>
                 </div>
                 <div className="text-start flex-1 flex justify-between items-center">
@@ -88,4 +94,8 @@ export default function Transactions() {
       )}
     </div>
   );
+}
+
+function Icon({ icon: Icon }: { icon: React.FC<LucideProps> }) {
+  return <Icon />;
 }

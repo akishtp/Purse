@@ -35,6 +35,7 @@ import { Dialog } from "@radix-ui/react-dialog";
 import { Dispatch, SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { categories } from "@/data/categories";
 
 export default function EditTransaction({
   selectedTransaction,
@@ -170,20 +171,18 @@ const EditTransactionForm = ({
               transition: "transform 0.3s ease-in-out",
             }}
           />
-          <button
-            type="button"
+          <div
             onClick={() => setType("Expense")}
             className="w-1/2 text-center z-10 h-full"
           >
             Expense
-          </button>
-          <button
-            type="button"
+          </div>
+          <div
             onClick={() => setType("Income")}
             className="w-1/2 text-center z-10 h-full"
           >
             Income
-          </button>
+          </div>
         </div>
         <div className="rounded-2xl gap-2">
           <FormField
@@ -203,9 +202,13 @@ const EditTransactionForm = ({
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="Food">Food</SelectItem>
-                      <SelectItem value="Fuel">Fuel</SelectItem>
-                      <SelectItem value="Rent">Rent</SelectItem>
+                      {categories.map((category) => {
+                        return (
+                          <SelectItem value={category.name}>
+                            {category.name}
+                          </SelectItem>
+                        );
+                      })}
                     </SelectContent>
                   </Select>
                   <FormMessage />

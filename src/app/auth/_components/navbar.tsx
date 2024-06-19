@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Github, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
@@ -31,44 +32,21 @@ export default function Navbar() {
           />
         </div>
         <div className="flex gap-4 items-center">
-          <div className="flex gap-2">
-            <div className="flex scale-0 dark:scale-100 absolute gap-4">
-              <button onClick={() => setTheme("light")}>
-                <Image
-                  src="/icons/light.svg"
-                  width={24}
-                  height={24}
-                  alt="light"
-                />
-              </button>
-              <a href="https://www.github.com/akishtp/purse">
-                <Image
-                  src="/logos/github-light.svg"
-                  width={24}
-                  height={24}
-                  alt="github"
-                />
-              </a>
-            </div>
-            <div className="scale-100 dark:scale-0 flex gap-4">
-              <button onClick={() => setTheme("dark")}>
-                <Image
-                  src="/icons/dark.svg"
-                  width={24}
-                  height={24}
-                  alt="dark"
-                />
-              </button>
-              <a href="https://www.github.com/akishtp/purse">
-                <Image
-                  src={"/logos/github-dark.svg"}
-                  width={24}
-                  height={24}
-                  alt="github"
-                />
-              </a>
-            </div>
-          </div>
+          <button
+            onClick={() => setTheme("light")}
+            className="absolute bg-neutral-900 h-12 md:h-10 rounded-lg flex items-center scale-0 dark:scale-100 justify-center md:justify-start"
+          >
+            <Sun className="h-6 w-6" />
+          </button>
+          <button
+            onClick={() => setTheme("dark")}
+            className="bg-neutral-100 h-12 md:h-10 rounded-lg flex items-center scale-100 dark:scale-0 justify-center md:justify-start"
+          >
+            <Moon className="h-6 w-6" />
+          </button>
+          <a href="https://www.github.com/akishtp/purse">
+            <Github className="h-6 w-6" />
+          </a>
           {pathname === "/auth/login" ? (
             <Button asChild>
               <Link href="/auth/signup">Signup</Link>

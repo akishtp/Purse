@@ -14,9 +14,11 @@ export type AccountActions = {
   edit: ({
     values,
     ogBalance,
+    ogName,
   }: {
     values: z.infer<typeof AccountSchema>;
     ogBalance: number;
+    ogName: string;
   }) => void;
   delete: (id: number) => void;
 };
@@ -68,11 +70,13 @@ export const createAccountStore = (
     edit: async ({
       values,
       ogBalance,
+      ogName,
     }: {
       values: z.infer<typeof AccountSchema>;
       ogBalance: number;
+      ogName: string;
     }) => {
-      const res = await editAccount({ values, ogBalance });
+      const res = await editAccount({ values, ogBalance, ogName });
       if (res.error) {
         toast({
           variant: "destructive",
