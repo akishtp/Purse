@@ -15,10 +15,22 @@ export default function Sidebar() {
       <div className="flex flex-col gap-2">
         <div className="h-12 md:h-44 bg-purple-700 rounded-xl flex items-center justify-center md:items-end md:pb-2">
           <div className="scale-0 md:scale-100">
-            <Image src="/logo-light.svg" alt="Purse" width={210} height={45} />
+            <Image
+              src="/logo-light.svg"
+              alt="Purse"
+              width={210}
+              height={45}
+              priority
+            />
           </div>
           <div className="absolute scale-100 md:scale-0">
-            <Image src="/icon-light.svg" alt="Purse" width={24} height={24} />
+            <Image
+              src="/icon-light.svg"
+              alt="Purse"
+              width={24}
+              height={24}
+              priority
+            />
           </div>
         </div>
 

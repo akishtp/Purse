@@ -28,6 +28,7 @@
 - [x] create a route to add accounts
 - [x] use state management (zustand)
 - [x] add a route to add transactions
+  - [x] update state with sort
 - [x] add a dashboard page
 - [x] add edit to accounts
   - [x] update account name in transactions
@@ -47,9 +48,11 @@
 
 - [ ] landing page
 - [ ] animations
-- [ ] fix docker db:push problem
-- [ ] connect to bank api
+- [ ] loading
+- [ ] track prices
 - [ ] add your own categories
 - [ ] display balance with each transaction
+- [ ] not found
 - [ ] track investments
-- [ ] track prices
+- [ ] connect to bank api
+- [ ] fix docker db:push problem

@@ -145,7 +145,6 @@ const EditTransactionForm = ({
 
   function onSubmit(values: z.infer<typeof TransactionSchema>) {
     values.dateTime = `${values.dateTime.toString().split("T")[0]}T${time}`;
-    console.log(values.dateTime);
 
     values.type = type;
     edit({
@@ -204,7 +203,7 @@ const EditTransactionForm = ({
                     <SelectContent>
                       {categories.map((category) => {
                         return (
-                          <SelectItem value={category.name}>
+                          <SelectItem value={category.name} key={category.name}>
                             {category.name}
                           </SelectItem>
                         );

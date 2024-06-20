@@ -56,7 +56,7 @@ export const addTransaction = async (
         note: transactionTable.note,
       });
 
-    await db
+    const updatedAccount = await db
       .update(accountTable)
       .set({
         balance:
@@ -64,11 +64,19 @@ export const addTransaction = async (
             ? account.balance - values.amount
             : account.balance + values.amount,
       })
-      .where(eq(accountTable.id, accountIdNum));
+      .where(eq(accountTable.id, accountIdNum))
+      .returning({
+        id: accountTable.id,
+        name: accountTable.name,
+        balance: accountTable.balance,
+        color: accountTable.color,
+        userId: accountTable.userId,
+      });
 
     return {
       success: "Transaction created successfully",
-      data: newTransaction,
+      transaction: newTransaction[0],
+      account: updatedAccount,
     };
   } catch (error: any) {
     return {

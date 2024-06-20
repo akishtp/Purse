@@ -143,8 +143,6 @@ export const logout = async () => {
       sessionCookie.attributes
     );
   } catch (error: any) {
-    console.log(error);
-
     return {
       error: error?.message,
     };

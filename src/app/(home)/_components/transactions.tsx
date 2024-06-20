@@ -74,7 +74,7 @@ export default function Transactions() {
                       -{transaction.amount}
                     </div>
                   )}
-                  <div className="text-xs">{"balance"}</div>
+                  {/* <div className="text-xs">{"balance"}</div> */}
                 </div>
               </div>
             );

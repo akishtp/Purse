@@ -71,9 +71,16 @@ export const createTransactionStore = (
           description: res.error,
         });
       } else if (res.success) {
-        set((state) => ({
-          transactions: [...state.transactions, ...res.data],
-        }));
+        set((state) => {
+          const newTransactions = [...state.transactions, res.transaction];
+          newTransactions.sort(
+            (a, b) =>
+              new Date(b.dateTime).valueOf() - new Date(a.dateTime).valueOf()
+          );
+          return {
+            transactions: newTransactions,
+          };
+        });
         toast({
           variant: "default",
           description: res.success,
