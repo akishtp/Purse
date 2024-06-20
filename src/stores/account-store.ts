@@ -21,6 +21,7 @@ export type AccountActions = {
     ogName: string;
   }) => void;
   delete: (id: number) => void;
+  updateAccount: (values: z.infer<typeof AccountSchema>) => void;
 };
 
 export type AccountStore = {
@@ -37,7 +38,7 @@ export const initAccountsStore = async (): Promise<{
       description: res.error,
     });
   } else if (res.success) {
-    return { accounts: res.data };
+    return { accounts: res.accounts };
   }
   return { accounts: [] };
 };
@@ -58,7 +59,7 @@ export const createAccountStore = (
         });
       } else if (res.success) {
         set((state) => ({
-          accounts: [...state.accounts, ...res.data],
+          accounts: [...state.accounts, res.account],
         }));
 
         toast({
@@ -105,11 +106,19 @@ export const createAccountStore = (
         set((state) => ({
           accounts: state.accounts.filter((account) => account.id !== id),
         }));
+
         toast({
           variant: "default",
           description: res.success,
         });
       }
+    },
+    updateAccount: (values: z.infer<typeof AccountSchema>) => {
+      set((state) => ({
+        accounts: state.accounts.map((account) =>
+          account.id === values.id ? values : account
+        ),
+      }));
     },
   }));
 };

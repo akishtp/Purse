@@ -76,7 +76,7 @@ export const addTransaction = async (
     return {
       success: "Transaction created successfully",
       transaction: newTransaction[0],
-      account: updatedAccount,
+      account: updatedAccount[0],
     };
   } catch (error: any) {
     return {
@@ -102,7 +102,7 @@ export const getTransactions = async () => {
 
     return {
       success: "Successfully fetched transactions",
-      data: transactions,
+      transactions: transactions,
     };
   } catch (error: any) {
     return {
@@ -140,7 +140,7 @@ export const editTransaction = async ({
   }
 
   try {
-    const updatedTransaction = await db
+    await db
       .update(transactionTable)
       .set({
         type: values.type,
@@ -191,14 +191,21 @@ export const editTransaction = async ({
           newBalance = account.balance - (ogAmount - values.amount);
       }
     }
-    await db
+    const updatedAccount = await db
       .update(accountTable)
       .set({ balance: newBalance })
-      .where(eq(accountTable.id, accountIdNum));
+      .where(eq(accountTable.id, accountIdNum))
+      .returning({
+        id: accountTable.id,
+        name: accountTable.name,
+        balance: accountTable.balance,
+        color: accountTable.color,
+        userId: accountTable.userId,
+      });
 
     return {
-      data: updatedTransaction,
       success: "Transaction updated successfully",
+      account: updatedAccount[0],
     };
   } catch (error: any) {
     return {
@@ -240,15 +247,23 @@ export const deleteTransaction = async (
     }
 
     await db.delete(transactionTable).where(eq(transactionTable.id, id));
-    await db
+    const updatedAccount = await db
       .update(accountTable)
       .set({
         balance,
       })
-      .where(eq(accountTable.id, accountId));
+      .where(eq(accountTable.id, accountId))
+      .returning({
+        id: accountTable.id,
+        name: accountTable.name,
+        balance: accountTable.balance,
+        color: accountTable.color,
+        userId: accountTable.userId,
+      });
 
     return {
       success: "Transaction deleted successfully",
+      account: updatedAccount[0],
     };
   } catch (error: any) {
     return {

@@ -85,7 +85,7 @@ function AddTransactionForm({
   };
 
   const { add, transactions } = useTransactionStore((state) => state);
-  const { accounts } = useAccountStore((state) => state);
+  const { accounts, updateAccount } = useAccountStore((state) => state);
 
   const form = useForm<z.infer<typeof AddTransactionSchema>>({
     resolver: zodResolver(AddTransactionSchema),
@@ -104,7 +104,7 @@ function AddTransactionForm({
     values.dateTime = `${values.dateTime.toString().split("T")[0]}T${time}`;
 
     values.type = type;
-    add(values);
+    add(values, updateAccount);
     setOpen(false);
   }
 
@@ -125,13 +125,13 @@ function AddTransactionForm({
           />
           <div
             onClick={() => setType("Expense")}
-            className="w-1/2 z-10 h-full flex items-center justify-center"
+            className="w-1/2 z-10 h-full flex items-center justify-center cursor-pointer"
           >
             Expense
           </div>
           <div
             onClick={() => setType("Income")}
-            className="w-1/2 z-10 h-full flex items-center justify-center"
+            className="w-1/2 z-10 h-full flex items-center justify-center cursor-pointer"
           >
             Income
           </div>

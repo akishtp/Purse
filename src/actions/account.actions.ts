@@ -37,7 +37,7 @@ export const addAccount = async (values: z.infer<typeof AddAccountSchema>) => {
 
     return {
       success: "Account created successfully",
-      data: newAccount,
+      account: newAccount[0],
     };
   } catch (error: any) {
     return {
@@ -63,7 +63,7 @@ export const getAccounts = async () => {
 
     return {
       success: "Successfully fetched accounts",
-      data: accounts,
+      accounts: accounts,
     };
   } catch (error: any) {
     return {

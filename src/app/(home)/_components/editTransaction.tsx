@@ -48,6 +48,7 @@ export default function EditTransaction({
 }) {
   const isDesktop = useMediaQuery("(min-width: 1024px)");
   const { delete: deleteTransaction } = useTransactionStore((state) => state);
+  const { updateAccount } = useAccountStore((state) => state);
 
   const handleDelete = () => {
     deleteTransaction({
@@ -55,6 +56,7 @@ export default function EditTransaction({
       accountId: selectedTransaction.accountId,
       type: selectedTransaction.type,
       amount: selectedTransaction.amount,
+      updateAccount,
     });
     setEditTransactionModal(false);
   };
@@ -125,7 +127,7 @@ const EditTransactionForm = ({
   };
 
   const { edit } = useTransactionStore((state) => state);
-  const { accounts } = useAccountStore((state) => state);
+  const { accounts, updateAccount } = useAccountStore((state) => state);
 
   const form = useForm<z.infer<typeof TransactionSchema>>({
     resolver: zodResolver(TransactionSchema),
@@ -151,6 +153,7 @@ const EditTransactionForm = ({
       values,
       ogAmount: selectedTransaction.amount,
       ogType: selectedTransaction.type,
+      updateAccount,
     });
     setOpen(false);
   }
@@ -172,13 +175,13 @@ const EditTransactionForm = ({
           />
           <div
             onClick={() => setType("Expense")}
-            className="w-1/2  z-10 h-full flex items-center justify-center"
+            className="w-1/2 z-10 h-full flex items-center justify-center cursor-pointer"
           >
             Expense
           </div>
           <div
             onClick={() => setType("Income")}
-            className="w-1/2 z-10 h-full flex items-center justify-center"
+            className="w-1/2 z-10 h-full flex items-center justify-center cursor-pointer"
           >
             Income
           </div>

@@ -3,6 +3,8 @@
 ## BREAKING
 
 - [ ] all sorts of updates and inserts. show it without refresh
+  - [x] for transactions
+  - [ ] for accounts
 
 ## TODO
 

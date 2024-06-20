@@ -45,7 +45,11 @@ export const AccountStoreProvider = ({
   }, []);
 
   if (!isInitialized) {
-    return <div>Fetching accounts...</div>;
+    return (
+      <div className="h-dvh flex items-center justify-center">
+        Fetching accounts...
+      </div>
+    );
   }
 
   if (!storeRef.current) {

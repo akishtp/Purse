@@ -44,7 +44,11 @@ export const TransactionStoreProvider = ({
   }, []);
 
   if (!isInitialized) {
-    return <div>Fetching transactions...</div>;
+    return (
+      <div className="h-dvh flex items-center justify-center">
+        Fetching transactions...
+      </div>
+    );
   }
 
   return (
