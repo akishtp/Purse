@@ -11,7 +11,7 @@ export default function QuickView() {
 
   useEffect(() => {
     const totalBalance = accounts.reduce(
-      (acc, account) => acc + account.balance,
+      (acc, account) => Number(acc) + Number(account.balance),
       0
     );
     setBalance(totalBalance);
@@ -26,9 +26,9 @@ export default function QuickView() {
       .filter((transaction) => new Date(transaction.dateTime) > thirtyDaysAgo)
       .reduce((acc, transaction) => {
         if (transaction.type === "Expense") {
-          return acc - transaction.amount;
+          return acc - Number(transaction.amount);
         } else if (transaction.type === "Income") {
-          return acc + transaction.amount;
+          return acc + Number(transaction.amount);
         }
         return acc;
       }, 0);

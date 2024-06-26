@@ -46,7 +46,7 @@ export const signup = async (values: z.infer<typeof SignupSchema>) => {
     await db.insert(accountTable).values({
       userId: userId,
       name: "CASH",
-      balance: 0,
+      balance: "0",
       color: "bg-[#2481de]",
       createdAt: new Date(),
     });

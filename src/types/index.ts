@@ -29,7 +29,7 @@ export const AddAccountSchema = z.object({
   name: z
     .string()
     .max(6, { message: "Account name can't be longer than 6 charecters" }),
-  balance: z.coerce.number(),
+  balance: z.string(),
   color: z.string(),
 });
 
@@ -38,7 +38,7 @@ export const AccountSchema = z.object({
   userId: z.string(),
 
   name: z.string(),
-  balance: z.coerce.number(),
+  balance: z.string(),
   color: z.string(),
 });
 
@@ -50,9 +50,7 @@ export const AddTransactionSchema = z.object({
   type: z
     .string()
     .min(3, { message: "Type must be atleast 3 charecters long" }),
-  amount: z.coerce
-    .number()
-    .min(1, { message: "Amount must be greater than 0" }),
+  amount: z.string().min(1, { message: "Amount must be greater than 0" }),
   category: z.string(),
   accountId: z.string(),
   dateTime: z.string(),
@@ -66,7 +64,7 @@ export const TransactionSchema = z.object({
   userId: z.string(),
 
   type: z.string(),
-  amount: z.coerce.number(),
+  amount: z.string(),
   category: z.string(),
   account: z.string(),
   accountId: z.number(),

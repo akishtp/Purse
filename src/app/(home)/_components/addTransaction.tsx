@@ -91,7 +91,7 @@ function AddTransactionForm({
     resolver: zodResolver(AddTransactionSchema),
     defaultValues: {
       type: transactions.length > 0 ? transactions[0].type : "Expense",
-      amount: 0,
+      amount: "0",
       category:
         transactions.length > 0 ? transactions[0].category : "Breakfast",
       accountId: accounts.length > 0 ? accounts[0].id.toString() : "",
@@ -272,7 +272,7 @@ function AddTransactionForm({
             control={form.control}
             name="note"
             render={({ field }) => (
-              <FormItem className="flex items-center my-2">
+              <FormItem className="my-2 text-end">
                 <FormControl>
                   <Textarea
                     placeholder="note (optional)"
@@ -285,7 +285,7 @@ function AddTransactionForm({
             )}
           />
 
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full ">
             Submit
           </Button>
         </div>

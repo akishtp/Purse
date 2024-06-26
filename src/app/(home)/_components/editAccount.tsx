@@ -108,7 +108,7 @@ function EditAccountForm({
   function onSubmit(values: z.infer<typeof AccountSchema>) {
     edit({
       values,
-      ogBalance: selectedAccount.balance,
+      ogBalance: Number(selectedAccount.balance),
       ogName: selectedAccount.name,
     });
     setOpen(false);

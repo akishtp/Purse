@@ -23,7 +23,6 @@ export default async function HomeLayout({
           <Sidebar />
 
           <div className="flex flex-1 py-2 px-1 ml-16 md:ml-60 lg:mr-[28rem] mr-1 flex-col gap-2">
-            {/* <div className="flex flex-col w-full rounded-2xl bg-neutral-100 p-4 border-2 dark:bg-neutral-900 gap-2"> */}
             <Accounts />
             {children}
           </div>

@@ -41,7 +41,7 @@ export default function SignupPage() {
     } else if (res.success) {
       toast({
         variant: "default",
-        description: "Account created successfully",
+        description: "User created successfully",
       });
       router.push("/");
     }

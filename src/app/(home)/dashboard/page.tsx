@@ -29,7 +29,7 @@ export default function DashboardPage() {
     const balances = [];
 
     let currentBalance = accounts.reduce(
-      (acc, account) => acc + account.balance,
+      (acc, account) => Number(acc) + Number(account.balance),
       0
     );
     let transactionIndex = 0;
@@ -48,9 +48,9 @@ export default function DashboardPage() {
       ) {
         const transaction = transactions[transactionIndex];
         if (transaction.type === "Expense") {
-          currentBalance += transaction.amount;
+          currentBalance = currentBalance + Number(transaction.amount);
         } else if (transaction.type === "Income") {
-          currentBalance -= transaction.amount;
+          currentBalance = currentBalance - Number(transaction.amount);
         }
         transactionIndex++;
       }

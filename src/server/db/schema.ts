@@ -1,4 +1,11 @@
-import { integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import {
+  integer,
+  numeric,
+  pgTable,
+  serial,
+  text,
+  timestamp,
+} from "drizzle-orm/pg-core";
 
 export const userTable = pgTable("users", {
   id: text("id").primaryKey(),
@@ -24,7 +31,7 @@ export const accountTable = pgTable("accounts", {
     .notNull(),
 
   name: text("name").notNull(),
-  balance: integer("balance").notNull(),
+  balance: numeric("balance").notNull(),
   color: text("color").notNull(),
   createdAt: timestamp("created_at", {
     withTimezone: true,
@@ -39,7 +46,7 @@ export const transactionTable = pgTable("transactions", {
     .notNull(),
 
   type: text("type").notNull(),
-  amount: integer("amount").notNull(),
+  amount: numeric("amount").notNull(),
   category: text("category").notNull(),
   account: text("account").notNull(),
   accountId: integer("accountId")

@@ -104,13 +104,13 @@ export const editAccount = async ({
       .set({ account: values.name })
       .where(eq(transactionTable.account, ogName));
 
-    if (values.balance !== ogBalance) {
-      if (values.balance > ogBalance) {
+    if (Number(values.balance) !== ogBalance) {
+      if (Number(values.balance) > ogBalance) {
         await db.insert(transactionTable).values({
           userId: user.id,
 
           type: "Income",
-          amount: values.balance - ogBalance,
+          amount: (Number(values.balance) - ogBalance).toString(),
           category: "Adjust Balance",
           account: values.name,
           accountId: values.id,
@@ -122,7 +122,7 @@ export const editAccount = async ({
           userId: user.id,
 
           type: "Expense",
-          amount: ogBalance - values.balance,
+          amount: (ogBalance - Number(values.balance)).toString(),
           category: "Adjust Balance",
           account: values.name,
           accountId: values.id,

@@ -1,12 +1,29 @@
 # purse
 
-## BREAKING
+## WORKING ON
+
+- [ ] display balance with each transaction
+
+## BREAKING / SHOULD DO
 
 - [ ] all sorts of updates and inserts. show it without refresh
   - [x] for transactions
   - [ ] for accounts
 
 ## TODO
+
+- [ ] landing page
+- [ ] animations
+- [ ] loading
+- [ ] track prices
+- [ ] add your own categories
+- [ ] not found
+- [ ] track investments
+- [ ] connect to bank api
+- [ ] fix docker db:push problem
+- [ ] find a way to host???
+
+## DONE
 
 - [x] add a login page
 - [x] create signup page
@@ -44,17 +61,4 @@
 - [x] make graphs
   - [x] balance record
 - [x] logo
-- [ ] find a way to host???
-
-## COULD DO
-
-- [ ] landing page
-- [ ] animations
-- [ ] loading
-- [ ] track prices
-- [ ] add your own categories
-- [ ] display balance with each transaction
-- [ ] not found
-- [ ] track investments
-- [ ] connect to bank api
-- [ ] fix docker db:push problem
+- [x] - Money can be paise/cents also

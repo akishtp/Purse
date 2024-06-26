@@ -84,7 +84,7 @@ function AddAccountForm({
     resolver: zodResolver(AddAccountSchema),
     defaultValues: {
       name: "",
-      balance: 0,
+      balance: "0",
       color: "bg-blue-500",
     },
   });

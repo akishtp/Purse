@@ -61,8 +61,8 @@ export const addTransaction = async (
       .set({
         balance:
           values.type === "Expense"
-            ? account.balance - values.amount
-            : account.balance + values.amount,
+            ? (Number(account.balance) - Number(values.amount)).toString()
+            : (Number(account.balance) + Number(values.amount)).toString(),
       })
       .where(eq(accountTable.id, accountIdNum))
       .returning({
@@ -165,35 +165,39 @@ export const editTransaction = async ({
         note: transactionTable.note,
       });
 
-    let newBalance = account.balance;
-    if (ogType !== values.type && ogAmount !== values.amount) {
+    let newBalance = Number(account.balance);
+    if (ogType !== values.type && ogAmount !== Number(values.amount)) {
       if (values.type == "Expense") {
-        newBalance = newBalance - (ogAmount + values.amount);
+        newBalance = newBalance - (ogAmount + Number(values.amount));
       } else if (values.type == "Income") {
-        newBalance = newBalance + (ogAmount + values.amount);
+        newBalance = newBalance + (ogAmount + Number(values.amount));
       }
-    } else if (ogType !== values.type && ogAmount === values.amount) {
+    } else if (ogType !== values.type && ogAmount === Number(values.amount)) {
       if (values.type == "Expense") {
-        newBalance -= 2 * values.amount;
+        newBalance -= 2 * Number(values.amount);
       } else if (values.type == "Income") {
-        newBalance += 2 * values.amount;
+        newBalance += 2 * Number(values.amount);
       }
-    } else if (ogType === values.type && ogAmount !== values.amount) {
-      if (values.amount > ogAmount) {
+    } else if (ogType === values.type && ogAmount !== Number(values.amount)) {
+      if (Number(values.amount) > ogAmount) {
         if (values.type == "Expense")
-          newBalance = account.balance - (values.amount - ogAmount);
+          newBalance =
+            Number(account.balance) - (Number(values.amount) - ogAmount);
         else if (values.type == "Income")
-          newBalance = account.balance + (values.amount - ogAmount);
+          newBalance =
+            Number(account.balance) + (Number(values.amount) - ogAmount);
       } else {
         if (values.type == "Expense")
-          newBalance = account.balance + (ogAmount - values.amount);
+          newBalance =
+            Number(account.balance) + (ogAmount - Number(values.amount));
         else if (values.type == "Income")
-          newBalance = account.balance - (ogAmount - values.amount);
+          newBalance =
+            Number(account.balance) - (ogAmount - Number(values.amount));
       }
     }
     const updatedAccount = await db
       .update(accountTable)
-      .set({ balance: newBalance })
+      .set({ balance: newBalance.toString() })
       .where(eq(accountTable.id, accountIdNum))
       .returning({
         id: accountTable.id,
@@ -239,7 +243,7 @@ export const deleteTransaction = async (
   }
 
   try {
-    let balance = account.balance;
+    let balance = Number(account.balance);
     if (type === "Expense") {
       balance += amount;
     } else if (type === "Income") {
@@ -250,7 +254,7 @@ export const deleteTransaction = async (
     const updatedAccount = await db
       .update(accountTable)
       .set({
-        balance,
+        balance: balance.toString(),
       })
       .where(eq(accountTable.id, accountId))
       .returning({

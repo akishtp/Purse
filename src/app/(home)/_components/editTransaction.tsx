@@ -55,7 +55,7 @@ export default function EditTransaction({
       id: selectedTransaction.id,
       accountId: selectedTransaction.accountId,
       type: selectedTransaction.type,
-      amount: selectedTransaction.amount,
+      amount: Number(selectedTransaction.amount),
       updateAccount,
     });
     setEditTransactionModal(false);
@@ -151,7 +151,7 @@ const EditTransactionForm = ({
     values.type = type;
     edit({
       values,
-      ogAmount: selectedTransaction.amount,
+      ogAmount: Number(selectedTransaction.amount),
       ogType: selectedTransaction.type,
       updateAccount,
     });
